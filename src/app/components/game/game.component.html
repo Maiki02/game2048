@@ -1,7 +1,8 @@
 <div class="container-game">
 
-    
-
+    <div class="row" *ngFor="let row of board">
+        <div class="col" *ngFor="let value of row">{{value}}</div>
+    </div>
 
 
 </div>

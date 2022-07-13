@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-
-  constructor() { }
+  private row=[0,0,0,0];
+  public board=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+  constructor() { 
+    console.log("CREANDO GAME")
+  }
 
   ngOnInit(): void {
   }

@@ -1,3 +1,17 @@
 .container-game{
     background:red;
+    max-width:400px;
+}
+
+.row{
+    background:green;
+    display:flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.col{
+    padding: 30px 45px;
+    border: 1px solid #dcdcdc;
 }
