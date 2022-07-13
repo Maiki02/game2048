@@ -1,8 +1,11 @@
 <div class="container-game">
 
-    <div class="row" *ngFor="let row of board">
+    <div class="row" *ngFor="let row of stats.board">
         <div class="col" *ngFor="let value of row">{{value}}</div>
     </div>
 
-
+    <button (click)="moveToDown()">Abajo</button>
+    <button (click)="moveToUp()">Arriba</button>
+    <button (click)="moveToLeft()">Izquierda</button>
+    <button (click)="moveToRight()">Derecha</button>
 </div>
