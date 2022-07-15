@@ -1,7 +1,7 @@
 <div class="container-game">
 
-    <div class="row" *ngFor="let row of stats.board">
-        <div class="col" *ngFor="let value of row">{{value}}</div>
+    <div class="row" *ngFor="let row of game.board; index as i">
+        <div class="col" *ngFor="let value of row; index as j" [ngClass]="{'cero': value==0, 'dos':value==2}" >{{value}}</div>
     </div>
 
     <button (click)="moveToDown()">Abajo</button>
