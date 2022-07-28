@@ -75,8 +75,24 @@ export class GameComponent implements OnInit {
     return arrayOfPositions;
   }
 
-  moveToDown() {}
-  moveToUp() {}
+  moveToDown() {
+    for(let i=0; i < this.game.numOfRows; i++){
+      let newColumn=this.getColumn(i)
+      this.addRightRow(newColumn);
+      this.setColumn(newColumn, i);
+    }
+    this.generateRandom();
+  }
+
+  moveToUp() {
+    for(let i=0; i < this.game.numOfRows; i++){
+      let newColumn=this.getColumn(i)
+      this.addLeftRow(newColumn);
+      this.setColumn(newColumn, i);
+    }
+    this.generateRandom();
+  }
+
   moveToLeft() {
     for(let i=0; i < this.game.numOfRows; i++){
       this.addLeftRow(this.game.board[i]);
@@ -89,10 +105,6 @@ export class GameComponent implements OnInit {
       this.addRightRow(this.game.board[i]);
     }
     this.generateRandom();
-  }
-
-  getFirstFreeColumnInRow(row: number[]) {
-    return row.indexOf(0);
   }
 
   addLeftRow(row: number[]) {
@@ -156,6 +168,20 @@ export class GameComponent implements OnInit {
       return false;
     } catch (error) {
       return true;
+    }
+  }
+
+  getColumn(indexCol: number){
+    let columnToReturn:number[]=ANY_ROW;
+    for (let i = 0; i < this.game.numOfCols; i++) {
+      columnToReturn[i]=this.game.board[i][indexCol]
+    }
+    return columnToReturn;
+  }
+
+  setColumn(column:number[], indexCol:number){
+    for (let i = 0; i < this.game.numOfCols; i++) {
+      this.game.board[i][indexCol]=column[i]
     }
   }
 }
