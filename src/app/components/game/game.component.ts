@@ -10,6 +10,12 @@ const BOARD_COMPLETE = [
   [0, 10, 11, 12],
   [0, 14, 15, 16],
 ];
+const BOARD_TESTING=[
+  [2, 2, 2, 2],
+  [4, 2, 2, 0],
+  [4, 4, 0, 0],
+  [4, 0, 4, 0],
+]
 const ANY_BOARD = [
   [0, 0, 0, 0],
   [0, 0, 0, 0],
@@ -40,14 +46,15 @@ export class GameComponent implements OnInit {
     this.game.numOfCols = numOfRows;
     this.game.numOfRows = numOfRows;
     this.game.board = this.createBoard(numOfRows);
-    this.generateRandom();
+    //this.generateRandom();
     console.log('BOARD:', this.game.board);
   }
 
   //Given a number that represents the number of rows and columns in the board,
   //create a board with its initial values set to 0.
   createBoard(numOfRows: number) {
-    return ANY_BOARD;
+    //return ANY_BOARD;
+    return BOARD_TESTING
   }
 
   generateRandom() {
@@ -76,43 +83,108 @@ export class GameComponent implements OnInit {
   }
 
   moveToDown() {
-    for(let i=0; i < this.game.numOfRows; i++){
-      let newColumn=this.getColumn(i)
-      this.addRightRow(newColumn);
-      this.setColumn(newColumn, i);
+    if(this.canMoveToDown()){
+      for(let i=0; i < this.game.numOfRows; i++){
+        let newColumn=this.getColumn(i)
+        this.addRightRow(newColumn);
+        this.setColumn(newColumn, i);
+      }
+      this.generateRandom();
     }
-    this.generateRandom();
   }
 
   moveToUp() {
-    for(let i=0; i < this.game.numOfRows; i++){
-      let newColumn=this.getColumn(i)
-      this.addLeftRow(newColumn);
-      this.setColumn(newColumn, i);
+    if(this.canMoveToUp()){
+      for(let i=0; i < this.game.numOfRows; i++){
+        let newColumn=this.getColumn(i)
+        this.addLeftRow(newColumn);
+        this.setColumn(newColumn, i);
+      }
+      this.generateRandom();
     }
-    this.generateRandom();
   }
 
   moveToLeft() {
-    for(let i=0; i < this.game.numOfRows; i++){
-      this.addLeftRow(this.game.board[i]);
+    if(this.canMoveToLeft()){
+      for(let i=0; i < this.game.numOfRows; i++){
+        this.addLeftRow(this.game.board[i]);
+      }
+      this.generateRandom();
     }
-    this.generateRandom();
   }
 
   moveToRight() {
-    for(let i=0; i < this.game.numOfRows; i++){
-      this.addRightRow(this.game.board[i]);
+    if(this.canMoveToRight()){
+      for(let i=0; i < this.game.numOfRows; i++){
+        this.addRightRow(this.game.board[i]);
+      }
+      this.generateRandom();
     }
-    this.generateRandom();
+  }
+  canMoveToRight():boolean {
+    try{
+      for(let i=0; i < this.game.numOfRows; i++){
+        if(this.canMoveRowToRight(this.game.board[i])) throw new Error();
+      }
+      return false;
+    } catch(error){
+      return true;
+    }
+  }
+
+  canMoveToLeft():boolean {
+    try{
+      for(let i=0; i < this.game.numOfRows; i++){
+        if(this.canMoveRowToLeft(this.game.board[i])) throw new Error();
+      }
+      return false;
+    } catch(error){
+      return true;
+    }
+  }
+
+  canMoveToDown():boolean {
+    try{
+      for(let i=0; i < this.game.numOfCols; i++){
+        let newColumn=this.getColumn(i)
+        if(this.canMoveRowToRight(newColumn)) throw new Error();
+      }
+      return false;
+    } catch(error){
+      return true;
+    }
+  }
+
+  canMoveToUp():boolean {
+    try{
+      for(let i=0; i < this.game.numOfCols; i++){
+        let newColumn=this.getColumn(i);
+        console.log(newColumn)
+        if(this.canMoveRowToLeft(newColumn)) throw new Error();
+      }
+      return false;
+    } catch(error){
+      return true;
+    }
+  }
+
+  haveTwoSameConsecutives(row:number[]){
+    try{
+      for (let i = 0; i < this.game.numOfCols - 1; i++) {
+        if (row[i]!=0 && row[i] == row[i+1] ) throw new Error()
+      }
+      return false;
+    } catch(error){
+      return true;
+    }
   }
 
   addLeftRow(row: number[]) {
     let aux;
     let haveSpace = true;
-
-    while (haveSpace) {
-      haveSpace = this.isHaveSpaceLeft(row);
+    let quantAdd= 0;
+    while (haveSpace && quantAdd < 2) {
+      haveSpace = this.canMoveRowToLeft(row);
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
         if (row[i] == 0) {
           aux = row[i];
@@ -123,7 +195,9 @@ export class GameComponent implements OnInit {
         if (row[i]!=0 && row[i] == row[i+1] ){
           row[i]= row[i] + row[i+1];
           row[i+1]=ANY_CELL;
-        }
+          quantAdd++;
+        }   
+        if(row[0]!=0) console.log(row);
       }
     }
   }
@@ -142,9 +216,10 @@ export class GameComponent implements OnInit {
   addRightRow(row: number[]) {
     let aux;
     let haveSpace = true;
+    let quantAdd= 0;
 
-    while (haveSpace) {
-      haveSpace = this.isHaveSpaceRight(row);
+    while (haveSpace && quantAdd < 2) {
+      haveSpace = this.canMoveRowToRight(row);
       for (let i = this.game.numOfCols; 0 < i; i--) {
         if (row[i] == 0) {
           aux = row[i];
@@ -155,6 +230,7 @@ export class GameComponent implements OnInit {
         if (row[i]!=0 && row[i] == row[i-1] ){
           row[i]= row[i] + row[i-1];
           row[i-1]=ANY_CELL;
+          quantAdd++;
         }
       }
     }
@@ -183,5 +259,12 @@ export class GameComponent implements OnInit {
     for (let i = 0; i < this.game.numOfCols; i++) {
       this.game.board[i][indexCol]=column[i]
     }
+  }
+
+  canMoveRowToLeft(row:number[]){
+    return this.isHaveSpaceLeft(row) || this.haveTwoSameConsecutives(row)
+  }
+  canMoveRowToRight(row:number[]){
+    return this.isHaveSpaceRight(row) || this.haveTwoSameConsecutives(row)
   }
 }
