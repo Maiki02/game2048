@@ -182,9 +182,8 @@ export class GameComponent implements OnInit {
   addLeftRow(row: number[]) {
     let aux;
     let haveSpace = true;
-    let quantAdd= 0;
-    while (haveSpace && quantAdd < 2) {
-      haveSpace = this.canMoveRowToLeft(row);
+    while (haveSpace) {
+      haveSpace = this.isHaveSpaceLeft(row);
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
         if (row[i] == 0) {
           aux = row[i];
@@ -192,14 +191,13 @@ export class GameComponent implements OnInit {
           row[i + 1] = aux;
         }
 
-        if (row[i]!=0 && row[i] == row[i+1] ){
-          row[i]= row[i] + row[i+1];
-          row[i+1]=ANY_CELL;
-          quantAdd++;
-        }   
+        
+      haveSpace = this.isHaveSpaceLeft(row);
         if(row[0]!=0) console.log(row);
       }
     }
+    
+
   }
 
   isHaveSpaceLeft(row: number[]): boolean {
