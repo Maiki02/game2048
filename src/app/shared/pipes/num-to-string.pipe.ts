@@ -8,9 +8,7 @@ export class NumToStringPipe implements PipeTransform {
   transform(value: number): string {
     switch(value){
       case 0: return 'cero'; break;
-      case 1: return 'uno'; break;
       case 2: return 'dos'; break;
-      case 3: return 'tres'; break;
       case 4: return 'cuatro'; break;
       case 8: return 'ocho'; break;
       case 16: return 'dieciseis'; break;
