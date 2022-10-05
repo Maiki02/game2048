@@ -1,9 +1,13 @@
-<div class="container-game">
-    <div class="row" *ngFor="let row of game.board; index as i">
-        <div class="col cell {{value | numToString}}" [ngClass]="{'first-row': i==0, 'final-row':i==game.board.length - 1, 'first-column': j==0, 'final-column': j==row.length -1}" *ngFor="let value of row; index as j">
-            
-            <span>{{value ==0? '': value}}</span>
-            <!--<span>{{i + " " +j}}</span>-->
+<section class="section">
+
+    <div class="container-game">
+        <div class="row" *ngFor="let row of game.board; index as i">
+            <div class="col cell {{value | numToString}}" [ngClass]="{'first-row': i==0, 'final-row':i==game.board.length - 1, 'first-column': j==0, 'final-column': j==row.length -1}" *ngFor="let value of row; index as j">
+                
+                <span class="value">{{value ==0? '': value}}</span>
+                <!--<span>{{i + " " +j}}</span>-->
+            </div>
         </div>
     </div>
-</div>
+
+</section>

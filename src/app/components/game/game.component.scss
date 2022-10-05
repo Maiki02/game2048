@@ -8,11 +8,16 @@ $BORDER_CELL:5px;
 $BORDER_RADIUS:10px;
 $MAX_WIDTH_CELL:130px;
 
-
+.section{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
 .container-game{
-    //background-color: $BACKGROUND_DEFAULT;
-    margin-left: 100px;
+    width: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
 }
 
 .row{
@@ -69,7 +74,5 @@ $MAX_WIDTH_CELL:130px;
 
 
 .cero{
-    background:$BACKGROUND_DEFAULT;
+    background:$BACKGROUND_DEFAULT !important;
 }
-
-

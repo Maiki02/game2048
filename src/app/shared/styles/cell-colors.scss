@@ -1,9 +1,27 @@
-
-
 $BACKGROUND_DEFAULT_2: #cfcfcf;
+/* --------------------------*/
+
+
+.value{
+    font-family: "Ubuntu", sans-serif;
+    font-size:24px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.value{
+    font-family: "Ubuntu", sans-serif;
+    font-size:24px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.dos .value, .cuatro .value{
+    color: #715151 !important;
+}
 
 .cero{
-    background:red !important;
+    background:$BACKGROUND_DEFAULT_2 !important;
 }
 
 .dos{

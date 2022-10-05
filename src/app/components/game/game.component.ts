@@ -11,6 +11,13 @@ const BOARD_COMPLETE = [
   [0, 14, 15, 16],
 ];
 const BOARD_TESTING=[
+  [5, 1, 4, 2],
+  [1, 2, 3, 6],
+  [3, 4, 1, 2],
+  [4, 6, 4, 2],
+]
+
+const BOARD_TESTING_3=[
   [0, 2, 0, 2],
   [0, 2, 2, 0],
   [0, 4, 0, 2],
