@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GameComponent } from './game.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 
 
@@ -12,6 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   imports: [
     CommonModule,
+    PipesModule,
     FormsModule
   ], exports: [
     GameComponent

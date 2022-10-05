@@ -1,24 +1,53 @@
+$BACKGROUND_DEFAULT: #cfcfcf;
+$BACKGROUND_BORDER: #b6b6b6;
+$BORDER_CELL:5px;
+$MAX_WIDTH_CELL:40px;
+
+
 .container-game{
-    background:red;
-    max-width:400px;
+    //background-color: $BACKGROUND_DEFAULT;
+    margin-left: 100px;
 }
 
 .row{
-    background:green;
     display:flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
+    border-radius: 16px;
 }
 
 .col{
-    padding: 30px 45px;
-    border: 1px solid #dcdcdc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: $MAX_WIDTH_CELL;
+    min-height: $MAX_WIDTH_CELL;
+    max-width: $MAX_WIDTH_CELL;
+    max-height: $MAX_WIDTH_CELL;
+    padding: 45px;
+    border: $BORDER_CELL solid $BACKGROUND_BORDER;
 }
 
+.first-row{
+    border-top: $BORDER_CELL*2 solid $BACKGROUND_BORDER;
+}
+
+.final-row{
+    border-bottom: $BORDER_CELL*2 solid $BACKGROUND_BORDER;
+}
+
+.first-column{
+    border-left: $BORDER_CELL*2 solid $BACKGROUND_BORDER;
+}
+
+.final-column{
+    border-right: $BORDER_CELL*2 solid $BACKGROUND_BORDER;
+}
 
 .cero{
-    background:#dcdcdc
+    background: $BACKGROUND_DEFAULT
 }
 
 .dos{

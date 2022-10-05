@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit } from '@angular/core';
 import { withLatestFrom } from 'rxjs';
 import { Game, Position } from 'src/app/shared/interfaces/game.interface';
 const ANY_CELL = 0;
@@ -11,6 +11,12 @@ const BOARD_COMPLETE = [
   [0, 14, 15, 16],
 ];
 const BOARD_TESTING=[
+  [0, 2, 0, 2],
+  [0, 2, 2, 0],
+  [0, 4, 0, 2],
+  [4, 0, 4, 2],
+]
+const BOARD_TESTING_2=[
   [2, 2, 2, 2],
   [4, 2, 2, 0],
   [4, 4, 0, 0],
@@ -86,7 +92,7 @@ export class GameComponent implements OnInit {
     if(this.canMoveToDown()){
       for(let i=0; i < this.game.numOfRows; i++){
         let newColumn=this.getColumn(i)
-        this.addRightRow(newColumn);
+        newColumn=this.addRightRow(newColumn);
         this.setColumn(newColumn, i);
       }
       this.generateRandom();
@@ -107,7 +113,10 @@ export class GameComponent implements OnInit {
   moveToLeft() {
     if(this.canMoveToLeft()){
       for(let i=0; i < this.game.numOfRows; i++){
+        console.log("FILA NUMERO: ", i+1);
+        console.log("FILA INICIO: ", this.game.board[i]);
         this.addLeftRow(this.game.board[i]);
+        console.log("FILA FIN: ", this.game.board[i]);
       }
       this.generateRandom();
     }
@@ -116,11 +125,12 @@ export class GameComponent implements OnInit {
   moveToRight() {
     if(this.canMoveToRight()){
       for(let i=0; i < this.game.numOfRows; i++){
-        this.addRightRow(this.game.board[i]);
+        this.game.board[i]= this.addRightRow(this.game.board[i]);
       }
       this.generateRandom();
     }
   }
+
   canMoveToRight():boolean {
     try{
       for(let i=0; i < this.game.numOfRows; i++){
@@ -179,45 +189,11 @@ export class GameComponent implements OnInit {
     }
   }
 
+  //Recrear movimiento a la izquierda en 2048
   addLeftRow(row: number[]) {
-    let aux;
-    let haveSpace = true;
-    while (haveSpace) {
-      haveSpace = this.isHaveSpaceLeft(row);
-      for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (row[i] == 0) {
-          aux = row[i];
-          row[i] = row[i + 1];
-          row[i + 1] = aux;
-        }
-
-        if ( row[i] == row[i+1]) {
-          row[i] = row[i]+row[i+1];
-          row[i + 1] = ANY_CELL;
-          i++;
-        }
-        
-      haveSpace = this.isHaveSpaceLeft(row);
-        if(row[0]!=0) console.log(row);
-      }
-    }
-
-    haveSpace=true;
-    while (haveSpace) {
-      haveSpace = this.isHaveSpaceLeft(row);
-      for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (row[i] == 0) {
-          aux = row[i];
-          row[i] = row[i + 1];
-          row[i + 1] = aux;
-        }
-
-        
-      haveSpace = this.isHaveSpaceLeft(row);
-        if(row[0]!=0) console.log(row);
-      }
-    }
-
+    this.quitarCeros(row);
+    this.sumarDosElementosIguales(row);
+    this.quitarCeros(row);
   }
 
   isHaveSpaceLeft(row: number[]): boolean {
@@ -232,43 +208,9 @@ export class GameComponent implements OnInit {
   }
 
   addRightRow(row: number[]) {
-    let aux;
-    let haveSpace = true;
-
-    while (haveSpace) {
-      haveSpace = this.isHaveSpaceRight(row);
-      for (let i = this.game.numOfCols; 0 < i; i--) {
-        if (row[i] == 0) {
-          aux = row[i];
-          row[i] = row[i - 1];
-          row[i - 1] = aux;
-        }
-
-        if (row[i]!=0 && row[i] == row[i-1] ){
-          row[i]= row[i] + row[i-1];
-          row[i-1]=ANY_CELL;
-          i++;
-        }
-        
-      haveSpace = this.isHaveSpaceRight(row);
-      if(row[0]!=0) console.log(row);
-      }
-    }
-
-    haveSpace=true;
-    while (haveSpace) {
-      haveSpace = this.isHaveSpaceRight(row);
-      for (let i = this.game.numOfCols; 0 < i; i--) {
-        if (row[i] == 0) {
-          aux = row[i];
-          row[i] = row[i - 1];
-          row[i - 1] = aux;
-        }
-        
-      haveSpace = this.isHaveSpaceRight(row);
-      if(row[0]!=0) console.log(row);
-      }
-    }
+    let rowAux=this.invertirArray(row);
+    this.addLeftRow(rowAux);
+    return this.invertirArray(rowAux)
   }
 
   isHaveSpaceRight(row: number[]): boolean {
@@ -301,5 +243,65 @@ export class GameComponent implements OnInit {
   }
   canMoveRowToRight(row:number[]){
     return this.isHaveSpaceRight(row) || this.haveTwoSameConsecutives(row)
+  }
+
+  /*Dado un array de numeros, recorre cada elemento y si uno es 0, lo reemplaza por el siguiente.
+  Hasta que no haya mas 0s*/
+  quitarCeros(row: number[]) {
+    let aux;
+    let haveSpace = true;
+    while (haveSpace) {
+      haveSpace = this.isHaveSpaceLeft(row);
+      for (let i = 0; i < this.game.numOfCols - 1; i++) {
+        if (row[i] == 0) {
+          aux = row[i];
+          row[i] = row[i + 1];
+          row[i + 1] = aux;
+        }
+      }
+    }
+  }
+
+
+  /*Dado un array de numeros, recorre cada elemento y si el elemento es igual al siguiente (controlando que no se salga del arreglo),
+  los suma, y el siguiente lo pone en 0. */
+  sumarDosElementosIguales(row: number[]) {
+    let haveSpace = true;
+    while (haveSpace) {
+      haveSpace = this.isHaveSpaceLeft(row);
+      for (let i = 0; i < this.game.numOfCols - 1; i++) {
+        if (row[i] == row[i + 1]) {
+          row[i] = row[i] + row[i + 1];
+          row[i + 1] = ANY_CELL;
+          i++;
+        }
+      }
+    }
+  }
+
+  /*Dado un array de numeros, lo retorna al revés*/
+  invertirArray(row: number[]) {
+    let aux;
+    let copyRow=JSON.parse(JSON.stringify(row));
+    let arrayToReturn=[];
+    const quantItems=copyRow.length;
+    for (let i = quantItems-1; i >= 0; i--) {
+      arrayToReturn.push(copyRow[i]);
+    }
+    return arrayToReturn;
+  }
+
+
+
+  @HostListener('document:keydown', ['$event'])
+  listenerKeyPress(event: KeyboardEvent){
+    console.log(event);
+    switch(event.key){
+      case 'ArrowLeft': this.moveToLeft(); break;
+      case 'ArrowRight': this.moveToRight(); break;
+      case 'ArrowUp': this.moveToUp(); break;
+      case 'ArrowDown': this.moveToDown(); break;
+      default: break;
+    }
   }
 }
