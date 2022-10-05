@@ -1,40 +1,7 @@
 import { HostListener, Component, OnInit } from '@angular/core';
-import { withLatestFrom } from 'rxjs';
+import { ANY_BOARD, ANY_CELL, ANY_ROW, BOARD_TESTING } from 'src/app/shared/const/const';
 import { Game, Position } from 'src/app/shared/interfaces/game.interface';
-const ANY_CELL = 0;
-const ANY_ROW = [ANY_CELL, ANY_CELL, ANY_CELL, ANY_CELL];
-const BOARD_INITIAL = [ANY_ROW, ANY_ROW, ANY_ROW, ANY_ROW];
-const BOARD_COMPLETE = [
-  [0, 2, 3, 4],
-  [0, 6, 7, 8],
-  [0, 10, 11, 12],
-  [0, 14, 15, 16],
-];
-const BOARD_TESTING=[
-  [5, 1, 4, 2],
-  [1, 2, 3, 6],
-  [3, 4, 1, 2],
-  [4, 6, 4, 2],
-]
 
-const BOARD_TESTING_3=[
-  [0, 2, 0, 2],
-  [0, 2, 2, 0],
-  [0, 4, 0, 2],
-  [4, 0, 4, 2],
-]
-const BOARD_TESTING_2=[
-  [2, 2, 2, 2],
-  [4, 2, 2, 0],
-  [4, 4, 0, 0],
-  [4, 0, 4, 0],
-]
-const ANY_BOARD = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-];
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -47,9 +14,9 @@ export class GameComponent implements OnInit {
     numOfCols: 0,
     numOfRows: 0,
     score: 0,
+    isFinished:false
   };
   constructor() {
-    console.log('CREANDO GAME');
     this.createGame(4);
   }
 
@@ -59,14 +26,14 @@ export class GameComponent implements OnInit {
     this.game.numOfCols = numOfRows;
     this.game.numOfRows = numOfRows;
     this.game.board = this.createBoard(numOfRows);
-    //this.generateRandom();
-    console.log('BOARD:', this.game.board);
+    this.generateRandom();
+    this.generateRandom();
   }
 
   //Given a number that represents the number of rows and columns in the board,
   //create a board with its initial values set to 0.
   createBoard(numOfRows: number) {
-    //return ANY_BOARD;
+    return ANY_BOARD;
     return BOARD_TESTING
   }
 
@@ -95,6 +62,17 @@ export class GameComponent implements OnInit {
     return arrayOfPositions;
   }
 
+  moveTo(direction:string){
+    switch(direction){
+      case 'up': this.moveToUp(); break;
+      case 'down': this.moveToDown();break;
+      case 'left': this.moveToLeft();break;
+      case 'right': this.moveToRight();break;
+      default: ;break;
+    }
+    this.generateRandom();
+  }
+
   moveToDown() {
     if(this.canMoveToDown()){
       for(let i=0; i < this.game.numOfRows; i++){
@@ -103,6 +81,8 @@ export class GameComponent implements OnInit {
         this.setColumn(newColumn, i);
       }
       this.generateRandom();
+      this.game.isFinished=this.canMove();
+
     }
   }
 
@@ -114,18 +94,19 @@ export class GameComponent implements OnInit {
         this.setColumn(newColumn, i);
       }
       this.generateRandom();
+      this.game.isFinished=this.canMove();
+
     }
   }
 
   moveToLeft() {
     if(this.canMoveToLeft()){
       for(let i=0; i < this.game.numOfRows; i++){
-        console.log("FILA NUMERO: ", i+1);
-        console.log("FILA INICIO: ", this.game.board[i]);
         this.addLeftRow(this.game.board[i]);
-        console.log("FILA FIN: ", this.game.board[i]);
       }
       this.generateRandom();
+      this.game.isFinished=this.canMove();
+
     }
   }
 
@@ -135,6 +116,7 @@ export class GameComponent implements OnInit {
         this.game.board[i]= this.addRightRow(this.game.board[i]);
       }
       this.generateRandom();
+      this.game.isFinished=this.canMove();
     }
   }
 
@@ -183,6 +165,11 @@ export class GameComponent implements OnInit {
     } catch(error){
       return true;
     }
+  }
+
+  /* Verifica si existe un movimiento en cualquiera de los 4 sentidos */
+  canMove():boolean{
+    return !this.canMoveToUp() || !this.canMoveToLeft() || !this.canMoveToRight() || !this.canMoveToDown();
   }
 
   haveTwoSameConsecutives(row:number[]){
