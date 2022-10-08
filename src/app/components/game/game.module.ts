@@ -4,6 +4,8 @@ import { GameComponent } from './game.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+import { BoardModule } from '../board/board.module';
+import { ActionsModule } from '../actions/actions.module';
 
 
 
@@ -14,7 +16,10 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
   imports: [
     CommonModule,
     PipesModule,
-    FormsModule
+    FormsModule,
+
+    BoardModule,
+    ActionsModule
   ], exports: [
     GameComponent
   ]

@@ -8,12 +8,12 @@ import { Game, Position } from 'src/app/shared/interfaces/game.interface';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  private row = [0, 0, 0, 0];
   public game: Game = {
     board: [],
     numOfCols: 0,
     numOfRows: 0,
     score: 0,
+    record: 0,
     isFinished:false
   };
   constructor() {

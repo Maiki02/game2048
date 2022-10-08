@@ -3,6 +3,7 @@ export interface Game {
     numOfRows: number,
     numOfCols: number,
     score: number,
+    record: number,
     isFinished:boolean
 }
 

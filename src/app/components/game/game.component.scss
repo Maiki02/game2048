@@ -76,22 +76,3 @@ $MAX_WIDTH_CELL: 130px;
   background: $BACKGROUND_DEFAULT !important;
 }
 
-.score {
-  background: $BACKGROUND_BORDER;
-  width: 200px;
-  height: auto;
-  gap: 12px;
-  padding: 16px;
-  border-radius: 16px;
-
-  span {
-    font-family: "Roboto", sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #000;
-  }
-
-  .points {
-    font-size: 22px;
-  }
-}
