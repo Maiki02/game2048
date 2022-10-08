@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setBoard, setGameStatus, setRecord, setScore } from 'src/app/redux/actions/game.action';
-import { ANY_BOARD } from 'src/app/shared/const/const';
+import { INITIAL_GAME_STATE } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game } from 'src/app/shared/interfaces/game.interface';
@@ -13,7 +13,7 @@ import { BoardComponent } from '../board/board.component';
   styleUrls: ['./actions.component.scss']
 })
 export class ActionsComponent implements OnInit {
-  @Input() game!: Game;
+  public game: Game= INITIAL_GAME_STATE;
 
   constructor(private store:Store<appState>) { 
     this.store.subscribe(state=>{

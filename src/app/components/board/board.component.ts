@@ -11,6 +11,7 @@ import {
   ANY_CELL,
   ANY_ROW,
   BOARD_TESTING,
+  INITIAL_GAME_STATE,
 } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
@@ -22,14 +23,7 @@ import { Game, Position } from 'src/app/shared/interfaces/game.interface';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  public game: Game = {
-    board: [],
-    numOfCols: 0,
-    numOfRows: 0,
-    score: 0,
-    record: 0,
-    isFinished: false,
-  };
+  public game: Game = INITIAL_GAME_STATE; 
   constructor(private store: Store<appState>) {
     this.store.subscribe((state) => {
       this.game = state.game;

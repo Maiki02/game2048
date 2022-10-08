@@ -1,15 +1,9 @@
 import { Action, createReducer, on } from "@ngrx/store";
+import { INITIAL_GAME_STATE } from "src/app/shared/const/const";
 import { Game } from "src/app/shared/interfaces/game.interface";
 import * as actions from '../actions/game.action';
 
-export const initialState: Game = {
-    board: [],
-    numOfCols: 0,
-    numOfRows: 0,
-    score: 0,
-    record: 0,
-    isFinished:false
-};
+export const initialState: Game = INITIAL_GAME_STATE
 
 const _gameReducer = createReducer(
     initialState,

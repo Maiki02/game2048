@@ -1,3 +1,15 @@
+import { Game } from "../interfaces/game.interface";
+
+export const INITIAL_GAME_STATE: Game ={
+    board: [],
+    numOfCols: 0,
+    numOfRows: 0,
+    score: 0,
+    record: 0,
+    isFinished: false,
+  };
+
+
 export const ANY_CELL = 0;
 export const ANY_ROW = [ANY_CELL, ANY_CELL, ANY_CELL, ANY_CELL];
 export const BOARD_INITIAL = [ANY_ROW, ANY_ROW, ANY_ROW, ANY_ROW];
