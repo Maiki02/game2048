@@ -31,3 +31,10 @@ $BACKGROUND_BORDER: #b6b6b6;
 .back, .restart{
   cursor: pointer;
 }
+
+.action.disabled{
+  background: #cfcfcf;
+  span{
+    color:#b6b6b6
+  }
+}

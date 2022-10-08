@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setBoard, setRecord, setScore } from 'src/app/redux/actions/game.action';
+import { setBoard, setGameStatus, setRecord, setScore } from 'src/app/redux/actions/game.action';
 import { ANY_BOARD } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
@@ -33,7 +33,32 @@ export class ActionsComponent implements OnInit {
   }
 
   goBack(){
+    let backStates:string | null=localStorage.getItem(LOCAL_STORAGE.BACK_STATES);
+    if(backStates){
+      const parseValue:Game[]=JSON.parse(backStates);
+      if(parseValue.length>0){
+        const lastState=parseValue[parseValue.length-1];
+        this.store.dispatch(setGameStatus({state: lastState}));
 
+        if(parseValue.length>1){
+          parseValue.pop();
+          localStorage.setItem(LOCAL_STORAGE.BACK_STATES, JSON.stringify(parseValue));
+        } else {
+          localStorage.removeItem(LOCAL_STORAGE.BACK_STATES);
+        }
+      }
+    }
+  }
+
+  isBackDisabled(){
+    let backStates:string | null=localStorage.getItem(LOCAL_STORAGE.BACK_STATES);
+    if(backStates){
+      const parseValue:Game[]=JSON.parse(backStates);
+      if(parseValue.length>0){
+        return false;
+      }
+    }
+    return true;
   }
 
   getScore():number{

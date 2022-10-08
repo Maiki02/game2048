@@ -12,6 +12,7 @@ import {
   ANY_ROW,
   BOARD_TESTING,
 } from 'src/app/shared/const/const';
+import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game, Position } from 'src/app/shared/interfaces/game.interface';
 
@@ -36,7 +37,12 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createGame(4);
+    const backState= this.getSaveState();
+    if(backState){
+      this.store.dispatch(setGameStatus({state: backState}));
+    } else {
+      this.createGame(4);
+    }
   }
 
   createGame(numOfRows: number) {
@@ -64,10 +70,8 @@ export class BoardComponent implements OnInit {
     const randomPosition = Math.floor(Math.random() * freePositions.length);
     const position = freePositions[randomPosition];
     const valueToSet = Math.random() > 0.04 ? 2 : 4;
-    console.log(this.game.board);
     let newBoard: any[] = JSON.parse(JSON.stringify(this.game.board));
     newBoard[position.X][position.Y] = valueToSet;
-    console.log(this.game.board);
 
     this.store.dispatch(setBoard({ board: newBoard }));
   }
@@ -90,6 +94,9 @@ export class BoardComponent implements OnInit {
     return arrayOfPositions;
   }
 
+
+  //------------------ MOVE TO ------------------//
+
   moveTo(direction: string) {
     let isMove: boolean = false;
     let backState: Game = JSON.parse(JSON.stringify(this.game));
@@ -109,7 +116,9 @@ export class BoardComponent implements OnInit {
 
     if (isMove) {
       this.generateRandom();
+      this.saveState(this.game);
       this.store.dispatch(setFinished({ isFinished: this.canMove() }));
+      this.saveBackState(backState);
     }
   }
 
@@ -147,6 +156,20 @@ export class BoardComponent implements OnInit {
         this.setRow(this.addRightRow(this.game.board[i]), i);
       }
     }
+  }
+
+  //----------------------------------------------//
+
+  // ------------------ CAN MOVE TO ------------------//
+  
+  /* Verifica si existe un movimiento en cualquiera de los 4 sentidos */
+  canMove(): boolean {
+    return (
+      !this.canMoveToUp() &&
+      !this.canMoveToLeft() &&
+      !this.canMoveToRight() &&
+      !this.canMoveToDown()
+    );
   }
 
   canMoveToRight(): boolean {
@@ -195,15 +218,7 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  /* Verifica si existe un movimiento en cualquiera de los 4 sentidos */
-  canMove(): boolean {
-    return (
-      !this.canMoveToUp() &&
-      !this.canMoveToLeft() &&
-      !this.canMoveToRight() &&
-      !this.canMoveToDown()
-    );
-  }
+
 
   haveTwoSameConsecutives(row: number[]) {
     try {
@@ -340,6 +355,56 @@ export class BoardComponent implements OnInit {
     }
     return arrayToReturn;
   }
+
+
+
+
+
+  //------------ SAVE STATES -----------------//
+
+  /* Dado un game de tipo Game, si el localStorage 'back-states' no existe, lo crea y guarda el game en el.
+  Si existe, lo recupera, lo parsea y:
+   - Verifica si tiene menos de 3 elementos, en ese caso utiliza el push
+   - Si tiene 3 elementos o más, utiliza el push y quita el primer elemento, posteriormente lo guarda. */
+  saveBackState(game: Game) {
+    let backStates = localStorage.getItem(LOCAL_STORAGE.BACK_STATES);
+    if (backStates) {
+      let backStatesParsed = JSON.parse(backStates);
+      backStatesParsed.push(game);
+      if (3 < backStatesParsed.length) { //Recordemos que va a tener el nuevo elemento guardado
+        backStatesParsed.shift();
+      }
+      localStorage.setItem(LOCAL_STORAGE.BACK_STATES, JSON.stringify(backStatesParsed));
+    } else {
+      localStorage.setItem(LOCAL_STORAGE.BACK_STATES, JSON.stringify([game]));
+    }
+  }
+
+  /*Verifica si existe el localStorage 'back-states', si existe, lo recupera, lo parsea y devuelve el último elemento.
+  si no existe, devuelve null */
+  getBackState() {
+    let backStates = localStorage.getItem(LOCAL_STORAGE.BACK_STATES);
+    if (backStates) {
+      let backStatesParsed = JSON.parse(backStates);
+      return backStatesParsed[backStatesParsed.length - 1];
+    } else {
+      return null;
+    }
+  }
+
+  saveState(game:Game){
+    localStorage.setItem(LOCAL_STORAGE.CURRENT_STATE, JSON.stringify(game));
+  }
+
+  getSaveState(){
+    let currentState = localStorage.getItem(LOCAL_STORAGE.CURRENT_STATE);
+    if(currentState){
+      return JSON.parse(currentState);
+    }
+    return null;
+  }
+
+  //---------------------------------------\\
 
   /*Escucha los enventos del teclado y ejecuta la acción correspondiente*/
   @HostListener('document:keydown', ['$event'])
