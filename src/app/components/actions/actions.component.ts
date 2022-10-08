@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setBoard, setGameStatus, setRecord, setScore } from 'src/app/redux/actions/game.action';
+import { setBoard, setGameStatus, setRecord, setRestartGame, setScore } from 'src/app/redux/actions/game.action';
 import { INITIAL_GAME_STATE } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
@@ -26,10 +26,7 @@ export class ActionsComponent implements OnInit {
   }
 
   restartGame(){
-    const board= new BoardComponent(this.store);
-    board.createGame(this.game.numOfCols);
-    this.store.dispatch(setBoard({board:board.game.board}));
-    this.store.dispatch(setScore({score:0}));
+    this.store.dispatch(setRestartGame({restartGame:true}));
   }
 
   goBack(){
@@ -46,7 +43,11 @@ export class ActionsComponent implements OnInit {
         } else {
           localStorage.removeItem(LOCAL_STORAGE.BACK_STATES);
         }
+
+        const game= new BoardComponent(this.store);
+        game.saveState(lastState);
       }
+
     }
   }
 

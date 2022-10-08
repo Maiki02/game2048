@@ -1,0 +1,13 @@
+.visible{
+    display:flex;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transition:.3s;
+}
+
+.invisible{
+    display:none;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition:.3s;
+}

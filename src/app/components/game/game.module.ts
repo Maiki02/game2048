@@ -6,6 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { BoardModule } from '../board/board.module';
 import { ActionsModule } from '../actions/actions.module';
+import { GameRestartModule } from '../modals/game-restart/game-restart.module';
+import { GameFinishedModule } from '../modals/game-finished/game-finished.module';
 
 
 
@@ -19,7 +21,11 @@ import { ActionsModule } from '../actions/actions.module';
     FormsModule,
 
     BoardModule,
-    ActionsModule
+    ActionsModule,
+
+    //Modals
+    GameRestartModule,
+    GameFinishedModule
   ], exports: [
     GameComponent
   ]

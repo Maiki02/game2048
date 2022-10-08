@@ -1,1 +1,18 @@
-<p>game-restart works!</p>
+<div class="background background-opaque" [ngClass]="{'invisible': !game.isRestart, 'visible': game.isRestart}"></div>
+<div class="background"  [ngClass]="{'invisible': !game.isRestart, 'visible': game.isRestart}">
+
+    <div class="card">
+
+        <span class="info">¿Desea reiniciar el juego?</span>
+
+        <div class="actions">
+
+            <button class="action restart" (click)="restartGame()">Reiniciar</button>
+
+            <button class="action cancel" (click)="cancelRestart()">Cancelar</button>
+
+        </div>
+        
+    </div>
+
+</div>

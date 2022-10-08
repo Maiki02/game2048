@@ -403,21 +403,24 @@ export class BoardComponent implements OnInit {
   /*Escucha los enventos del teclado y ejecuta la acción correspondiente*/
   @HostListener('document:keydown', ['$event'])
   listenerKeyPress(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'ArrowLeft':
-        this.moveTo('left');
-        break;
-      case 'ArrowRight':
-        this.moveTo('right');
-        break;
-      case 'ArrowUp':
-        this.moveTo('up');
-        break;
-      case 'ArrowDown':
-        this.moveTo('down');
-        break;
-      default:
-        break;
+
+    if(!this.game.isRestart){
+      switch (event.key) {
+        case 'ArrowLeft':
+          this.moveTo('left');
+          break;
+        case 'ArrowRight':
+          this.moveTo('right');
+          break;
+        case 'ArrowUp':
+          this.moveTo('up');
+          break;
+        case 'ArrowDown':
+          this.moveTo('down');
+          break;
+        default:
+          break;
+      }
     }
   }
 }

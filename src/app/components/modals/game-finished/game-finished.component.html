@@ -1,5 +1,5 @@
-<div class="background background-opaque"></div>
-<div class="background">
+<div class="background background-opaque" [ngClass]="{'invisible': !game.isFinished, 'visible': game.isFinished}"></div>
+<div class="background"  [ngClass]="{'invisible': !game.isFinished, 'visible': game.isFinished}">
 
     <div class="card">
 

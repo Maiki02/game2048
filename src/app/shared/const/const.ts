@@ -7,6 +7,7 @@ export const INITIAL_GAME_STATE: Game ={
     score: 0,
     record: 0,
     isFinished: false,
+    isRestart: false
   };
 
 

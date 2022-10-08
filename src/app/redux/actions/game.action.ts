@@ -20,3 +20,8 @@ export const setRecord = createAction('[GAME] Set Record',
 export const setFinished = createAction('[GAME] Set Finished',
     props<{ isFinished: boolean }>());
 
+
+//Restart Game
+export const setRestartGame = createAction('[GAME] Set Restart Game',
+    props<{ restartGame: boolean }>());
+    

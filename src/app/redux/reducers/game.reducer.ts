@@ -43,6 +43,13 @@ const _gameReducer = createReducer(
         };
     }),
 
+    //Restart Game
+    on(actions.setRestartGame, (state, action) => {
+        return {
+            ...state,
+            isRestart: action.restartGame
+        };
+    }),
    
 )
 
