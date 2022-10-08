@@ -4,6 +4,7 @@ export interface Game {
     numOfCols: number,
     score: number,
     record: number,
+    isWinner: number, //count of 2048
     isRestart:boolean,
     isFinished:boolean
 }

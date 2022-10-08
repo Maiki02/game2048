@@ -10,18 +10,21 @@ import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game } from 'src/app/shared/interfaces/game.interface';
 import { BoardComponent } from '../../board/board.component';
+import { Modal } from '../modal';
 
 @Component({
   selector: 'app-modal-restart',
   templateUrl: './game-restart.component.html',
   styleUrls: ['./../modals.scss'],
 })
-export class GameRestartComponent implements OnInit {
+export class GameRestartComponent extends Modal implements OnInit {
   public game!: Game;
 
   constructor(private store: Store<appState>) {
+    super();
     this.store.subscribe((state) => {
       this.game = state.game;
+      this.wasInside=state.game.isRestart;
       console.log(this.game);
     });
   }
@@ -42,7 +45,7 @@ export class GameRestartComponent implements OnInit {
     this.close();
   }
 
-  close() {
+  override close() {
     this.store.dispatch(setRestartGame({ restartGame: false }));
   }
 }

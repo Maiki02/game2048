@@ -1,4 +1,5 @@
 @import url("./../../shared/styles/visibility.scss");
+@import url("./../../shared/styles/flex.scss");
 
 .background{
     position:absolute;
@@ -6,10 +7,6 @@
     left:0;
     width: 100vw;
     height: 100vh;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .background-opaque{
@@ -17,9 +14,39 @@
 }
 
 .card{
-    width: 50%;
+    width: 40%;
     height: 50%;
     border-radius: 20px;
-    
+
     background:green;
+
+    .info{
+        margin-top:64px;
+        font-size: 32px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .actions{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 32px;
+        margin-top: 32px;
+
+        .action{
+            outline: none;
+            border: none;
+            background: #fff;
+            border-radius: 16px;
+            padding: 8px 16px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            cursor: pointer;
+        }
+    }
 }
+
+

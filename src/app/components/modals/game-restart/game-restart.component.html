@@ -1,11 +1,11 @@
 <div class="background background-opaque" [ngClass]="{'invisible': !game.isRestart, 'visible': game.isRestart}"></div>
-<div class="background"  [ngClass]="{'invisible': !game.isRestart, 'visible': game.isRestart}">
+<div class="background col-center"  [ngClass]="{'invisible': !game.isRestart, 'visible': game.isRestart}">
 
-    <div class="card">
+    <div class="card col-init in-card">
 
-        <span class="info">¿Desea reiniciar el juego?</span>
+        <span class="info in-card">¿Desea reiniciar el juego?</span>
 
-        <div class="actions">
+        <div class="actions row-center in-card">
 
             <button class="action restart" (click)="restartGame()">Reiniciar</button>
 

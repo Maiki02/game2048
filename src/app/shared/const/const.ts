@@ -6,9 +6,13 @@ export const INITIAL_GAME_STATE: Game ={
     numOfRows: 0,
     score: 0,
     record: 0,
-    isFinished: false,
-    isRestart: false
+    isWinner: 0, //Count of 2048
+    isFinished: false, //Only true when the player loses
+    isRestart: false //Only true when the player wants to restart the game
   };
+
+
+export const VALUE_TO_WIN=2048;
 
 
 export const ANY_CELL = 0;

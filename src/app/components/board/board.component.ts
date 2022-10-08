@@ -5,6 +5,7 @@ import {
   setFinished,
   setGameStatus,
   setScore,
+  setWinner,
 } from 'src/app/redux/actions/game.action';
 import {
   ANY_BOARD,
@@ -12,6 +13,7 @@ import {
   ANY_ROW,
   BOARD_TESTING,
   INITIAL_GAME_STATE,
+  VALUE_TO_WIN,
 } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
@@ -331,6 +333,9 @@ export class BoardComponent implements OnInit {
           newRow[i] = newRow[i] + newRow[i + 1];
           newRow[i + 1] = ANY_CELL;
           this.store.dispatch(setScore({ score: this.game.score + newRow[i] }));
+          if(newRow[i]==VALUE_TO_WIN){
+            this.store.dispatch(setWinner({isWinner:this.game.isWinner+1}));
+          }
           i++;
         }
       }

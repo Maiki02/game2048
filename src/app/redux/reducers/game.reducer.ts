@@ -50,6 +50,14 @@ const _gameReducer = createReducer(
             isRestart: action.restartGame
         };
     }),
+
+    //Winner
+    on(actions.setWinner, (state, action) => {
+        return {
+            ...state,
+            isWinner: action.isWinner
+        };
+    }),
    
 )
 

@@ -24,4 +24,7 @@ export const setFinished = createAction('[GAME] Set Finished',
 //Restart Game
 export const setRestartGame = createAction('[GAME] Set Restart Game',
     props<{ restartGame: boolean }>());
-    
+
+//Winner
+export const setWinner = createAction('[GAME] Set Winner',
+    props<{ isWinner: number }>());
