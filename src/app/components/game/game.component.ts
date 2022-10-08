@@ -169,7 +169,7 @@ export class GameComponent implements OnInit {
 
   /* Verifica si existe un movimiento en cualquiera de los 4 sentidos */
   canMove():boolean{
-    return !this.canMoveToUp() || !this.canMoveToLeft() || !this.canMoveToRight() || !this.canMoveToDown();
+    return !this.canMoveToUp() && !this.canMoveToLeft() && !this.canMoveToRight() && !this.canMoveToDown();
   }
 
   haveTwoSameConsecutives(row:number[]){
@@ -267,6 +267,7 @@ export class GameComponent implements OnInit {
         if (row[i] == row[i + 1]) {
           row[i] = row[i] + row[i + 1];
           row[i + 1] = ANY_CELL;
+          this.game.score+=row[i];
           i++;
         }
       }

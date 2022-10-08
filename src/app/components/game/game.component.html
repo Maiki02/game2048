@@ -10,9 +10,8 @@
         </div>
     </div>
 
-
-    <div class="score"> <p class="poitns">Puntuación: {{game.score}}
-    </p></div>
+    
+    <div class="score col-center"> <span class="score-text">Puntuación</span><span class="points">{{game.score}}</span></div>
     <div *ngIf="game.isFinished">Juego terminado</div>
 
 </section>
