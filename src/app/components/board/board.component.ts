@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { HostListener,Component, OnInit } from '@angular/core';
 import { ANY_BOARD, ANY_CELL, ANY_ROW, BOARD_TESTING } from 'src/app/shared/const/const';
 import { Game, Position } from 'src/app/shared/interfaces/game.interface';
 
@@ -285,4 +285,16 @@ export class BoardComponent implements OnInit {
     return arrayToReturn;
   }
 
+
+  @HostListener('document:keydown', ['$event'])
+  listenerKeyPress(event: KeyboardEvent){
+    console.log(event);
+    switch(event.key){
+      case 'ArrowLeft': this.moveToLeft(); break;
+      case 'ArrowRight': this.moveToRight(); break;
+      case 'ArrowUp': this.moveToUp(); break;
+      case 'ArrowDown': this.moveToDown(); break;
+      default: break;
+    }
+  }
 }

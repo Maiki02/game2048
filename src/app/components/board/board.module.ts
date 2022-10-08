@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardComponent } from './board.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 
 
@@ -9,7 +10,10 @@ import { BoardComponent } from './board.component';
     BoardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PipesModule
+  ], exports: [
+    BoardComponent
   ]
 })
 export class BoardModule { }

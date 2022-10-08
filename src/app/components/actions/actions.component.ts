@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { setRecord } from 'src/app/redux/actions/game.action';
 import { ANY_BOARD } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
+import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game } from 'src/app/shared/interfaces/game.interface';
 
 @Component({
@@ -11,7 +14,13 @@ import { Game } from 'src/app/shared/interfaces/game.interface';
 export class ActionsComponent implements OnInit {
   @Input() game!: Game;
 
-  constructor() { }
+  constructor(private store:Store<appState>) { 
+    this.store.subscribe(res=>{
+      console.log(res);
+      this.game=res.game;
+      
+    })
+  }
 
   ngOnInit(): void {
     this.rememberRecordInLocalStorage();
@@ -32,8 +41,8 @@ export class ActionsComponent implements OnInit {
 
   getRecord():number{
     if(this.game.score>this.game.record){
-      this.game.record=this.game.score;
-      this.setRecordInLocalStorage(this.game.record)
+      this.store.dispatch(setRecord({record:this.game.score}));
+      this.setRecordInLocalStorage(this.game.score);
       return this.getScore();
     } else {
       return this.game.record;
@@ -48,9 +57,9 @@ export class ActionsComponent implements OnInit {
     const recordStr=localStorage.getItem(LOCAL_STORAGE.RECORD);
     if(recordStr){
       const parseValue=JSON.parse(recordStr);
-      this.game.record=parseValue;
+      this.store.dispatch(setRecord({record:parseValue}));
     } else {
-      this.game.record=0;
+      this.store.dispatch(setRecord({record:0}));
     }
   }
 }

@@ -1,11 +1,18 @@
 import { createAction, props } from "@ngrx/store";
 
-//RememberDashboard
-export const rememberDashboardData = createAction('[GAME] Remember Data',
+//Game status
+export const setGameStatus = createAction('[GAME] Set Game Status',
     props<{ state: any }>());
 
-//Orders
-export const loadOrders = createAction('[DASHBOARD] Load Orders',
-    props<{ email: String, status: number }>());
-export const loadAllOrdersSuccess = createAction('[DASHBOARD] Load Orders All Success',
-    props<{ orderList: any }>());
+//Board
+export const setBoard = createAction('[GAME] Set Board',
+    props<{ board: any[] }>());
+
+//Score
+export const setScore = createAction('[GAME] Set Score',
+    props<{ score: number }>());
+
+//Record
+export const setRecord = createAction('[GAME] Set Record',
+    props<{ record: number }>());
+

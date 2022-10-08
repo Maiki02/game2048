@@ -1,33 +1,33 @@
 @import url("./../../shared/styles/flex.scss");
 
-
 $BACKGROUND_BORDER: #b6b6b6;
 
-.actions{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-
 .action {
-    background: $BACKGROUND_BORDER;
-    width: 200px;
-    height: 80px;
-    gap: 8px;
-    padding: 12px;
-    border-radius: 16px;
-    cursor: pointer;
-  
-    span {
-      font-family: "Roboto", sans-serif;
-      font-size: 18px;
-      font-weight: 500;
-      color: #000;
-    }
-  
-    .points {
-      font-size: 22px;
-    }
+  background: $BACKGROUND_BORDER;
+  width: 200px;
+  height: 80px;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 16px;
+
+  span {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
   }
-  
+
+  .points {
+    font-size: 22px;
+  }
+}
+
+.back, .restart{
+  cursor: pointer;
+}

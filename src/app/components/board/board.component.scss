@@ -1,0 +1,70 @@
+
+@import url("./../../shared/styles/cell-colors.scss");
+
+
+$BACKGROUND_DEFAULT: #cfcfcf;
+$BACKGROUND_BORDER: #b6b6b6;
+$BORDER_CELL: 5px;
+$BORDER_RADIUS: 10px;
+$MAX_WIDTH_CELL: 130px;
+
+.container-game {
+    width: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
+  }
+  
+  .row {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-radius: 16px;
+  }
+  
+  .col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: $MAX_WIDTH_CELL;
+    min-height: $MAX_WIDTH_CELL;
+    max-width: $MAX_WIDTH_CELL;
+    max-height: $MAX_WIDTH_CELL;
+    border: $BORDER_CELL solid $BACKGROUND_BORDER;
+  }
+  
+  .first-row {
+    border-top: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
+  }
+  
+  .final-row {
+    border-bottom: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
+  }
+  
+  .first-column {
+    border-left: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
+  }
+  
+  .final-column {
+    border-right: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
+  }
+  
+  .first-row.first-column {
+    border-top-left-radius: $BORDER_RADIUS;
+  }
+  
+  .first-row.final-column {
+    border-top-right-radius: $BORDER_RADIUS;
+  }
+  
+  .final-row.first-column {
+    border-bottom-left-radius: $BORDER_RADIUS;
+  }
+  
+  .final-row.final-column {
+    border-bottom-right-radius: $BORDER_RADIUS;
+  }
+  
+  .cero {
+    background: $BACKGROUND_DEFAULT !important;
+  }
+  
