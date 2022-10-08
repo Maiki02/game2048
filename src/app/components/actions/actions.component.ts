@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setRecord } from 'src/app/redux/actions/game.action';
+import { setBoard, setRecord, setScore } from 'src/app/redux/actions/game.action';
 import { ANY_BOARD } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game } from 'src/app/shared/interfaces/game.interface';
+import { BoardComponent } from '../board/board.component';
 
 @Component({
   selector: 'app-actions',
@@ -25,11 +26,13 @@ export class ActionsComponent implements OnInit {
   }
 
   restartGame(){
-    this.game.board=ANY_BOARD;
-    this.game.score=0;
+    const board= new BoardComponent(this.store);
+    board.createGame(this.game.numOfCols);
+    this.store.dispatch(setBoard({board:board.game.board}));
+    this.store.dispatch(setScore({score:0}));
   }
 
-  back(){
+  goBack(){
 
   }
 

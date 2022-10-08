@@ -1,14 +1,24 @@
-import { HostListener,Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setBoard, setFinished, setGameStatus, setScore } from 'src/app/redux/actions/game.action';
-import { ANY_BOARD, ANY_CELL, ANY_ROW, BOARD_TESTING } from 'src/app/shared/const/const';
+import {
+  setBoard,
+  setFinished,
+  setGameStatus,
+  setScore,
+} from 'src/app/redux/actions/game.action';
+import {
+  ANY_BOARD,
+  ANY_CELL,
+  ANY_ROW,
+  BOARD_TESTING,
+} from 'src/app/shared/const/const';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game, Position } from 'src/app/shared/interfaces/game.interface';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
   public game: Game = {
@@ -17,13 +27,12 @@ export class BoardComponent implements OnInit {
     numOfRows: 0,
     score: 0,
     record: 0,
-    isFinished:false
+    isFinished: false,
   };
   constructor(private store: Store<appState>) {
-
-    this.store.subscribe(state=>{
-      this.game=state.game;
-    })
+    this.store.subscribe((state) => {
+      this.game = state.game;
+    });
   }
 
   ngOnInit(): void {
@@ -31,12 +40,12 @@ export class BoardComponent implements OnInit {
   }
 
   createGame(numOfRows: number) {
-    let newGame:Game= JSON.parse(JSON.stringify(this.game));
+    let newGame: Game = JSON.parse(JSON.stringify(this.game));
     newGame.numOfCols = numOfRows;
     newGame.numOfRows = numOfRows;
     newGame.board = this.createBoard(numOfRows);
 
-    this.store.dispatch(setGameStatus({state: newGame}));
+    this.store.dispatch(setGameStatus({ state: newGame }));
 
     this.generateRandom();
     this.generateRandom();
@@ -46,19 +55,21 @@ export class BoardComponent implements OnInit {
   //create a board with its initial values set to 0.
   createBoard(numOfRows: number) {
     return ANY_BOARD;
-    return BOARD_TESTING
+    return BOARD_TESTING;
   }
 
   generateRandom() {
+    console.log(this.game.board);
     const freePositions = this.getFreePositions();
     const randomPosition = Math.floor(Math.random() * freePositions.length);
     const position = freePositions[randomPosition];
-    const valueToSet=Math.random() > 0.5 ? 2 : 4;
-    
-    let newBoard:any[]=JSON.parse(JSON.stringify(this.game.board));
-    newBoard[position.X][position.Y]=valueToSet;
-    
-    this.store.dispatch(setBoard({board: newBoard}));
+    const valueToSet = Math.random() > 0.04 ? 2 : 4;
+    console.log(this.game.board);
+    let newBoard: any[] = JSON.parse(JSON.stringify(this.game.board));
+    newBoard[position.X][position.Y] = valueToSet;
+    console.log(this.game.board);
+
+    this.store.dispatch(setBoard({ board: newBoard }));
   }
 
   getFreePositions() {
@@ -79,130 +90,136 @@ export class BoardComponent implements OnInit {
     return arrayOfPositions;
   }
 
-  moveTo(direction:string){
-    switch(direction){
-      case 'up': this.moveToUp(); break;
-      case 'down': this.moveToDown();break;
-      case 'left': this.moveToLeft();break;
-      case 'right': this.moveToRight();break;
-      default: ;break;
+  moveTo(direction: string) {
+    let isMove: boolean = false;
+    let backState: Game = JSON.parse(JSON.stringify(this.game));
+    if (direction == 'up' && this.canMoveToUp()) {
+      this.moveToUp();
+      isMove = true;
+    } else if (direction == 'down' && this.canMoveToDown()) {
+      this.moveToDown();
+      isMove = true;
+    } else if (direction == 'left' && this.canMoveToLeft()) {
+      this.moveToLeft();
+      isMove = true;
+    } else if (direction == 'right' && this.canMoveToRight()) {
+      this.moveToRight();
+      isMove = true;
     }
-    this.generateRandom();
+
+    if (isMove) {
+      this.generateRandom();
+      this.store.dispatch(setFinished({ isFinished: this.canMove() }));
+    }
   }
 
   moveToDown() {
-    if(this.canMoveToDown()){
-      for(let i=0; i < this.game.numOfRows; i++){
-        let newColumn=this.getColumn(i)
-        newColumn=this.addRightRow(newColumn);
+    if (this.canMoveToDown()) {
+      for (let i = 0; i < this.game.numOfRows; i++) {
+        let newColumn = this.getColumn(i);
+        newColumn = this.addRightRow(newColumn);
         this.setColumn(newColumn, i);
       }
-      this.generateRandom();
-      this.store.dispatch(setFinished({isFinished: this.canMove()}));
     }
   }
 
   moveToUp() {
-    if(this.canMoveToUp()){
-      for(let i=0; i < this.game.numOfRows; i++){
-        let newColumn=this.getColumn(i)
-        newColumn=this.addLeftRow(newColumn);
+    if (this.canMoveToUp()) {
+      for (let i = 0; i < this.game.numOfRows; i++) {
+        let newColumn = this.getColumn(i);
+        newColumn = this.addLeftRow(newColumn);
         this.setColumn(newColumn, i);
       }
-      this.generateRandom();
-      this.store.dispatch(setFinished({isFinished: this.canMove()}));
-
     }
   }
 
   moveToLeft() {
-    if(this.canMoveToLeft()){
-      for(let i=0; i < this.game.numOfRows; i++){
+    if (this.canMoveToLeft()) {
+      for (let i = 0; i < this.game.numOfRows; i++) {
         this.setRow(this.addLeftRow(this.game.board[i]), i);
       }
-      this.generateRandom();
-      this.store.dispatch(setFinished({isFinished: this.canMove()}));
-
     }
   }
 
   moveToRight() {
-    if(this.canMoveToRight()){
-      for(let i=0; i < this.game.numOfRows; i++){
+    if (this.canMoveToRight()) {
+      for (let i = 0; i < this.game.numOfRows; i++) {
         this.setRow(this.addRightRow(this.game.board[i]), i);
       }
-      this.generateRandom();
-      this.store.dispatch(setFinished({isFinished: this.canMove()}));
-      
     }
   }
 
-  canMoveToRight():boolean {
-    try{
-      for(let i=0; i < this.game.numOfRows; i++){
-        if(this.canMoveRowToRight(this.game.board[i])) throw new Error();
+  canMoveToRight(): boolean {
+    try {
+      for (let i = 0; i < this.game.numOfRows; i++) {
+        if (this.canMoveRowToRight(this.game.board[i])) throw new Error();
       }
       return false;
-    } catch(error){
+    } catch (error) {
       return true;
     }
   }
 
-  canMoveToLeft():boolean {
-    try{
-      for(let i=0; i < this.game.numOfRows; i++){
-        if(this.canMoveRowToLeft(this.game.board[i])) throw new Error();
+  canMoveToLeft(): boolean {
+    try {
+      for (let i = 0; i < this.game.numOfRows; i++) {
+        if (this.canMoveRowToLeft(this.game.board[i])) throw new Error();
       }
       return false;
-    } catch(error){
+    } catch (error) {
       return true;
     }
   }
 
-  canMoveToDown():boolean {
-    try{
-      for(let i=0; i < this.game.numOfCols; i++){
-        let newColumn=this.getColumn(i)
-        if(this.canMoveRowToRight(newColumn)) throw new Error();
+  canMoveToDown(): boolean {
+    try {
+      for (let i = 0; i < this.game.numOfCols; i++) {
+        let newColumn = this.getColumn(i);
+        if (this.canMoveRowToRight(newColumn)) throw new Error();
       }
       return false;
-    } catch(error){
+    } catch (error) {
       return true;
     }
   }
 
-  canMoveToUp():boolean {
-    try{
-      for(let i=0; i < this.game.numOfCols; i++){
-        let newColumn=this.getColumn(i);
-        if(this.canMoveRowToLeft(newColumn)) throw new Error();
+  canMoveToUp(): boolean {
+    try {
+      for (let i = 0; i < this.game.numOfCols; i++) {
+        let newColumn = this.getColumn(i);
+        if (this.canMoveRowToLeft(newColumn)) throw new Error();
       }
       return false;
-    } catch(error){
+    } catch (error) {
       return true;
     }
   }
 
   /* Verifica si existe un movimiento en cualquiera de los 4 sentidos */
-  canMove():boolean{
-    return !this.canMoveToUp() && !this.canMoveToLeft() && !this.canMoveToRight() && !this.canMoveToDown();
+  canMove(): boolean {
+    return (
+      !this.canMoveToUp() &&
+      !this.canMoveToLeft() &&
+      !this.canMoveToRight() &&
+      !this.canMoveToDown()
+    );
   }
 
-  haveTwoSameConsecutives(row:number[]){
-    try{
+  haveTwoSameConsecutives(row: number[]) {
+    try {
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (row[i]!=0 && row[i] == row[i+1] ) throw new Error()
+        if (row[i] != 0 && row[i] == row[i + 1]) throw new Error();
       }
       return false;
-    } catch(error){
+    } catch (error) {
       return true;
     }
   }
 
   //Recrear movimiento a la izquierda en 2048
   addLeftRow(row: number[]) {
-    let row1=this.quitarCeros(row);
-    let row2= this.sumarDosElementosIguales(row1);
+    let row1 = this.quitarCeros(row);
+    let row2 = this.sumarDosElementosIguales(row1);
     return this.quitarCeros(row2);
   }
 
@@ -218,9 +235,9 @@ export class BoardComponent implements OnInit {
   }
 
   addRightRow(row: number[]) {
-    let rowAux=this.invertirArray(row);
-    rowAux=this.addLeftRow(rowAux);
-    return this.invertirArray(rowAux)
+    let rowAux = this.invertirArray(row);
+    rowAux = this.addLeftRow(rowAux);
+    return this.invertirArray(rowAux);
   }
 
   isHaveSpaceRight(row: number[]): boolean {
@@ -234,43 +251,50 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  getColumn(indexCol: number){
-    let columnToReturn:number[]=ANY_ROW;
+  /*Devuelve un array con los elementos de la columna que se le pasa por parametro */
+  getColumn(indexCol: number) {
+    let columnToReturn: number[] = ANY_ROW;
     for (let i = 0; i < this.game.numOfCols; i++) {
-      columnToReturn[i]=this.game.board[i][indexCol]
+      columnToReturn[i] = this.game.board[i][indexCol];
     }
     return columnToReturn;
   }
 
-  setColumn(column:number[], indexCol:number){
-    let newBoard=JSON.parse(JSON.stringify(this.game.board));
+  /* Dada una columna y un indice, setea el valor en la columna */
+  setColumn(column: number[], indexCol: number) {
+    let newBoard = JSON.parse(JSON.stringify(this.game.board));
     for (let i = 0; i < this.game.numOfCols; i++) {
-      newBoard[i][indexCol]=column[i]
+      newBoard[i][indexCol] = column[i];
     }
-    this.store.dispatch(setBoard({board: newBoard}));
+    this.store.dispatch(setBoard({ board: newBoard }));
   }
 
-  getRow(indexRow: number){
+  /*Devuelve una row del board del game */
+  getRow(indexRow: number) {
     return this.game.board[indexRow];
   }
 
-  setRow(row:number[], indexRow:number){
-    let newBoard=JSON.parse(JSON.stringify(this.game.board));
-    newBoard[indexRow]=row;
-    this.store.dispatch(setBoard({board: newBoard}));
+  /*Dada una row y un indice, busca en el board del game y setea la row en el indice dado */
+  setRow(row: number[], indexRow: number) {
+    let newBoard = JSON.parse(JSON.stringify(this.game.board));
+    newBoard[indexRow] = row;
+    this.store.dispatch(setBoard({ board: newBoard }));
   }
 
-  canMoveRowToLeft(row:number[]){
-    return this.isHaveSpaceLeft(row) || this.haveTwoSameConsecutives(row)
+  /* Verifica si puede mover la fila a la izquierda */
+  canMoveRowToLeft(row: number[]) {
+    return this.isHaveSpaceLeft(row) || this.haveTwoSameConsecutives(row);
   }
-  canMoveRowToRight(row:number[]){
-    return this.isHaveSpaceRight(row) || this.haveTwoSameConsecutives(row)
+
+  /*Verifica si puede mover la fila a la derecha */
+  canMoveRowToRight(row: number[]) {
+    return this.isHaveSpaceRight(row) || this.haveTwoSameConsecutives(row);
   }
 
   /*Dado un array de numeros, recorre cada elemento y si uno es 0, lo reemplaza por el siguiente.
   Hasta que no haya mas 0s*/
   quitarCeros(row: number[]) {
-    let newRow=JSON.parse(JSON.stringify(row));
+    let newRow = JSON.parse(JSON.stringify(row));
     let aux;
     let haveSpace = true;
     while (haveSpace) {
@@ -289,7 +313,7 @@ export class BoardComponent implements OnInit {
   /*Dado un array de numeros, recorre cada elemento y si el elemento es igual al siguiente (controlando que no se salga del arreglo),
   los suma, y el siguiente lo pone en 0. */
   sumarDosElementosIguales(row: number[]) {
-    let newRow=JSON.parse(JSON.stringify(row));
+    let newRow = JSON.parse(JSON.stringify(row));
     let haveSpace = true;
     while (haveSpace) {
       haveSpace = this.isHaveSpaceLeft(row);
@@ -297,7 +321,7 @@ export class BoardComponent implements OnInit {
         if (newRow[i] == newRow[i + 1]) {
           newRow[i] = newRow[i] + newRow[i + 1];
           newRow[i + 1] = ANY_CELL;
-          this.store.dispatch(setScore({score: this.game.score+newRow[i]}));
+          this.store.dispatch(setScore({ score: this.game.score + newRow[i] }));
           i++;
         }
       }
@@ -308,25 +332,33 @@ export class BoardComponent implements OnInit {
   /*Dado un array de numeros, lo retorna al revés*/
   invertirArray(row: number[]) {
     let aux;
-    let copyRow=JSON.parse(JSON.stringify(row));
-    let arrayToReturn=[];
-    const quantItems=copyRow.length;
-    for (let i = quantItems-1; i >= 0; i--) {
+    let copyRow = JSON.parse(JSON.stringify(row));
+    let arrayToReturn = [];
+    const quantItems = copyRow.length;
+    for (let i = quantItems - 1; i >= 0; i--) {
       arrayToReturn.push(copyRow[i]);
     }
     return arrayToReturn;
   }
 
-
+  /*Escucha los enventos del teclado y ejecuta la acción correspondiente*/
   @HostListener('document:keydown', ['$event'])
-  listenerKeyPress(event: KeyboardEvent){
-    console.log(event);
-    switch(event.key){
-      case 'ArrowLeft': this.moveToLeft(); break;
-      case 'ArrowRight': this.moveToRight(); break;
-      case 'ArrowUp': this.moveToUp(); break;
-      case 'ArrowDown': this.moveToDown(); break;
-      default: break;
+  listenerKeyPress(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'ArrowLeft':
+        this.moveTo('left');
+        break;
+      case 'ArrowRight':
+        this.moveTo('right');
+        break;
+      case 'ArrowUp':
+        this.moveTo('up');
+        break;
+      case 'ArrowDown':
+        this.moveTo('down');
+        break;
+      default:
+        break;
     }
   }
 }
