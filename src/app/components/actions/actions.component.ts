@@ -15,10 +15,8 @@ export class ActionsComponent implements OnInit {
   @Input() game!: Game;
 
   constructor(private store:Store<appState>) { 
-    this.store.subscribe(res=>{
-      console.log(res);
-      this.game=res.game;
-      
+    this.store.subscribe(state=>{
+      this.game=state.game;
     })
   }
 

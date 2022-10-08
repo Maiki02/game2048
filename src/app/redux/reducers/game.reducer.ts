@@ -40,7 +40,15 @@ const _gameReducer = createReducer(
             record: action.record
         };
     }),
-    
+
+    //Finished
+    on(actions.setFinished, (state, action) => {
+        return {
+            ...state,
+            isFinished: action.isFinished
+        };
+    }),
+
    
 )
 

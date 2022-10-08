@@ -16,3 +16,7 @@ export const setScore = createAction('[GAME] Set Score',
 export const setRecord = createAction('[GAME] Set Record',
     props<{ record: number }>());
 
+//Finished
+export const setFinished = createAction('[GAME] Set Finished',
+    props<{ isFinished: boolean }>());
+

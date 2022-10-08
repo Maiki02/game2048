@@ -1,5 +1,8 @@
 import { HostListener,Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { setBoard, setFinished, setGameStatus, setScore } from 'src/app/redux/actions/game.action';
 import { ANY_BOARD, ANY_CELL, ANY_ROW, BOARD_TESTING } from 'src/app/shared/const/const';
+import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game, Position } from 'src/app/shared/interfaces/game.interface';
 
 @Component({
@@ -16,16 +19,25 @@ export class BoardComponent implements OnInit {
     record: 0,
     isFinished:false
   };
-  constructor() {
+  constructor(private store: Store<appState>) {
+
+    this.store.subscribe(state=>{
+      this.game=state.game;
+    })
+  }
+
+  ngOnInit(): void {
     this.createGame(4);
   }
 
-  ngOnInit(): void {}
-
   createGame(numOfRows: number) {
-    this.game.numOfCols = numOfRows;
-    this.game.numOfRows = numOfRows;
-    this.game.board = this.createBoard(numOfRows);
+    let newGame:Game= JSON.parse(JSON.stringify(this.game));
+    newGame.numOfCols = numOfRows;
+    newGame.numOfRows = numOfRows;
+    newGame.board = this.createBoard(numOfRows);
+
+    this.store.dispatch(setGameStatus({state: newGame}));
+
     this.generateRandom();
     this.generateRandom();
   }
@@ -41,7 +53,12 @@ export class BoardComponent implements OnInit {
     const freePositions = this.getFreePositions();
     const randomPosition = Math.floor(Math.random() * freePositions.length);
     const position = freePositions[randomPosition];
-    this.game.board[position.X][position.Y] = 2;
+    const valueToSet=Math.random() > 0.5 ? 2 : 4;
+    
+    let newBoard:any[]=JSON.parse(JSON.stringify(this.game.board));
+    newBoard[position.X][position.Y]=valueToSet;
+    
+    this.store.dispatch(setBoard({board: newBoard}));
   }
 
   getFreePositions() {
@@ -81,8 +98,7 @@ export class BoardComponent implements OnInit {
         this.setColumn(newColumn, i);
       }
       this.generateRandom();
-      this.game.isFinished=this.canMove();
-
+      this.store.dispatch(setFinished({isFinished: this.canMove()}));
     }
   }
 
@@ -90,11 +106,11 @@ export class BoardComponent implements OnInit {
     if(this.canMoveToUp()){
       for(let i=0; i < this.game.numOfRows; i++){
         let newColumn=this.getColumn(i)
-        this.addLeftRow(newColumn);
+        newColumn=this.addLeftRow(newColumn);
         this.setColumn(newColumn, i);
       }
       this.generateRandom();
-      this.game.isFinished=this.canMove();
+      this.store.dispatch(setFinished({isFinished: this.canMove()}));
 
     }
   }
@@ -102,10 +118,10 @@ export class BoardComponent implements OnInit {
   moveToLeft() {
     if(this.canMoveToLeft()){
       for(let i=0; i < this.game.numOfRows; i++){
-        this.addLeftRow(this.game.board[i]);
+        this.setRow(this.addLeftRow(this.game.board[i]), i);
       }
       this.generateRandom();
-      this.game.isFinished=this.canMove();
+      this.store.dispatch(setFinished({isFinished: this.canMove()}));
 
     }
   }
@@ -113,10 +129,11 @@ export class BoardComponent implements OnInit {
   moveToRight() {
     if(this.canMoveToRight()){
       for(let i=0; i < this.game.numOfRows; i++){
-        this.game.board[i]= this.addRightRow(this.game.board[i]);
+        this.setRow(this.addRightRow(this.game.board[i]), i);
       }
       this.generateRandom();
-      this.game.isFinished=this.canMove();
+      this.store.dispatch(setFinished({isFinished: this.canMove()}));
+      
     }
   }
 
@@ -158,7 +175,6 @@ export class BoardComponent implements OnInit {
     try{
       for(let i=0; i < this.game.numOfCols; i++){
         let newColumn=this.getColumn(i);
-        console.log(newColumn)
         if(this.canMoveRowToLeft(newColumn)) throw new Error();
       }
       return false;
@@ -185,9 +201,9 @@ export class BoardComponent implements OnInit {
 
   //Recrear movimiento a la izquierda en 2048
   addLeftRow(row: number[]) {
-    this.quitarCeros(row);
-    this.sumarDosElementosIguales(row);
-    this.quitarCeros(row);
+    let row1=this.quitarCeros(row);
+    let row2= this.sumarDosElementosIguales(row1);
+    return this.quitarCeros(row2);
   }
 
   isHaveSpaceLeft(row: number[]): boolean {
@@ -203,7 +219,7 @@ export class BoardComponent implements OnInit {
 
   addRightRow(row: number[]) {
     let rowAux=this.invertirArray(row);
-    this.addLeftRow(rowAux);
+    rowAux=this.addLeftRow(rowAux);
     return this.invertirArray(rowAux)
   }
 
@@ -227,9 +243,21 @@ export class BoardComponent implements OnInit {
   }
 
   setColumn(column:number[], indexCol:number){
+    let newBoard=JSON.parse(JSON.stringify(this.game.board));
     for (let i = 0; i < this.game.numOfCols; i++) {
-      this.game.board[i][indexCol]=column[i]
+      newBoard[i][indexCol]=column[i]
     }
+    this.store.dispatch(setBoard({board: newBoard}));
+  }
+
+  getRow(indexRow: number){
+    return this.game.board[indexRow];
+  }
+
+  setRow(row:number[], indexRow:number){
+    let newBoard=JSON.parse(JSON.stringify(this.game.board));
+    newBoard[indexRow]=row;
+    this.store.dispatch(setBoard({board: newBoard}));
   }
 
   canMoveRowToLeft(row:number[]){
@@ -242,35 +270,39 @@ export class BoardComponent implements OnInit {
   /*Dado un array de numeros, recorre cada elemento y si uno es 0, lo reemplaza por el siguiente.
   Hasta que no haya mas 0s*/
   quitarCeros(row: number[]) {
+    let newRow=JSON.parse(JSON.stringify(row));
     let aux;
     let haveSpace = true;
     while (haveSpace) {
-      haveSpace = this.isHaveSpaceLeft(row);
+      haveSpace = this.isHaveSpaceLeft(newRow);
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (row[i] == 0) {
-          aux = row[i];
-          row[i] = row[i + 1];
-          row[i + 1] = aux;
+        if (newRow[i] == 0) {
+          aux = newRow[i];
+          newRow[i] = newRow[i + 1];
+          newRow[i + 1] = aux;
         }
       }
     }
+    return newRow;
   }
 
   /*Dado un array de numeros, recorre cada elemento y si el elemento es igual al siguiente (controlando que no se salga del arreglo),
   los suma, y el siguiente lo pone en 0. */
   sumarDosElementosIguales(row: number[]) {
+    let newRow=JSON.parse(JSON.stringify(row));
     let haveSpace = true;
     while (haveSpace) {
       haveSpace = this.isHaveSpaceLeft(row);
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (row[i] == row[i + 1]) {
-          row[i] = row[i] + row[i + 1];
-          row[i + 1] = ANY_CELL;
-          this.game.score+=row[i];
+        if (newRow[i] == newRow[i + 1]) {
+          newRow[i] = newRow[i] + newRow[i + 1];
+          newRow[i + 1] = ANY_CELL;
+          this.store.dispatch(setScore({score: this.game.score+newRow[i]}));
           i++;
         }
       }
     }
+    return newRow;
   }
 
   /*Dado un array de numeros, lo retorna al revés*/
