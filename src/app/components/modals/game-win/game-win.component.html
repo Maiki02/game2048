@@ -1,1 +1,16 @@
-<p>game-win works!</p>
+<div class="background background-opaque" [ngClass]="{'invisible': game.isWinner!=1, 'visible': game.isWinner==1}"></div>
+<div class="background col-center"  [ngClass]="{'invisible': game.isWinner!=1, 'visible': game.isWinner==1}">
+
+    <div class="card col-init in-card">
+
+        <span class="info in-card">¡Ganaste!<br>Si desea seguir jugando, pulse continuar.</span>
+
+        <div class="actions row-center in-card">
+
+            <button class="action cancel" (click)="close()">Continuar</button>
+
+        </div>
+        
+    </div>
+
+</div>

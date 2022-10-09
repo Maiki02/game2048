@@ -61,7 +61,6 @@ export class BoardComponent implements OnInit {
   }
 
   generateRandom() {
-    console.log(this.game.board);
     const freePositions = this.getFreePositions();
     const randomPosition = Math.floor(Math.random() * freePositions.length);
     const position = freePositions[randomPosition];
@@ -334,7 +333,11 @@ export class BoardComponent implements OnInit {
           newRow[i + 1] = ANY_CELL;
           this.store.dispatch(setScore({ score: this.game.score + newRow[i] }));
           if(newRow[i]==VALUE_TO_WIN){
-            this.store.dispatch(setWinner({isWinner:this.game.isWinner+1}));
+            //Solo lo aumentamos cuando es distinto de 2,
+            //Porque si es 2, significa que cerró su modal de victoria.
+            if(this.game.board.length!=2){
+              this.store.dispatch(setWinner({isWinner:this.game.isWinner+1}));
+            }
           }
           i++;
         }

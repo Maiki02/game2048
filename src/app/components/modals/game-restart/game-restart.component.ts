@@ -1,11 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  setBoard,
-  setRestartGame,
-  setScore,
-} from 'src/app/redux/actions/game.action';
-import { INITIAL_GAME_STATE } from 'src/app/shared/const/const';
+import { setBoard, setRestartGame, setScore} from 'src/app/redux/actions/game.action';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game } from 'src/app/shared/interfaces/game.interface';
@@ -17,7 +12,7 @@ import { Modal } from '../modal';
   templateUrl: './game-restart.component.html',
   styleUrls: ['./../modals.scss'],
 })
-export class GameRestartComponent extends Modal implements OnInit {
+export class GameRestartComponent extends Modal {
   public game!: Game;
 
   constructor(private store: Store<appState>) {
@@ -25,11 +20,8 @@ export class GameRestartComponent extends Modal implements OnInit {
     this.store.subscribe((state) => {
       this.game = state.game;
       this.wasInside=state.game.isRestart;
-      console.log(this.game);
     });
   }
-
-  ngOnInit(): void {}
 
   restartGame() {
     const board = new BoardComponent(this.store);
@@ -41,11 +33,11 @@ export class GameRestartComponent extends Modal implements OnInit {
     this.close();
   }
 
-  cancelRestart() {
-    this.close();
-  }
-
   override close() {
     this.store.dispatch(setRestartGame({ restartGame: false }));
+  }
+
+  override getIsOpenWithButton(){
+    return this.count>1;
   }
 }

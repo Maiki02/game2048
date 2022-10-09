@@ -8,6 +8,7 @@ import { BoardModule } from '../board/board.module';
 import { ActionsModule } from '../actions/actions.module';
 import { GameRestartModule } from '../modals/game-restart/game-restart.module';
 import { GameFinishedModule } from '../modals/game-finished/game-finished.module';
+import { GameWinModule } from '../modals/game-win/game-win.module';
 
 
 
@@ -25,7 +26,8 @@ import { GameFinishedModule } from '../modals/game-finished/game-finished.module
 
     //Modals
     GameRestartModule,
-    GameFinishedModule
+    GameFinishedModule,
+    GameWinModule,
   ], exports: [
     GameComponent
   ]

@@ -10,6 +10,9 @@ import { GameWinComponent } from './game-win.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    GameWinComponent
   ]
 })
 export class GameWinModule { }
