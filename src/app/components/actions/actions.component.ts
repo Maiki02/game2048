@@ -7,6 +7,7 @@ import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game } from 'src/app/shared/interfaces/game.interface';
 import { BoardComponent } from '../board/board.component';
 
+
 @Component({
   selector: 'app-actions',
   templateUrl: './actions.component.html',

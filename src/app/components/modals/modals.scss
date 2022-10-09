@@ -11,7 +11,7 @@ $BACKGROUND_RESET: #d7d79e;
 $COLOR_LETTER_RESET: #4b4c2e;
 
 .background {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -24,8 +24,9 @@ $COLOR_LETTER_RESET: #4b4c2e;
 
 .card {
   width: 40%;
-  height: 50%;
+  height: auto;
   border-radius: 20px;
+  padding-bottom: 32px;
 
   .info {
     margin-top: 64px;

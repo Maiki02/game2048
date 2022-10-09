@@ -1,6 +1,7 @@
 @import url("./../../shared/styles/flex.scss");
+@import url("./../../shared/styles/shadows.scss");
 
-$BACKGROUND_BORDER: #b6b6b6;
+$BACKGROUND_BORDER: #909090;
 
 .actions {
   display: flex;
@@ -8,27 +9,32 @@ $BACKGROUND_BORDER: #b6b6b6;
   gap: 12px;
 }
 
+.icon{
+  width:44px;
+  height:44px;
+}
+
 .action {
   background: $BACKGROUND_BORDER;
-  width: 200px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   gap: 8px;
   padding: 12px;
   border-radius: 16px;
 
   span {
     font-family: "Roboto", sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
-    color: #000;
+    color: #fff;
   }
 
   .points {
-    font-size: 22px;
+    font-size: 18px;
   }
 }
 
-.back, .restart{
+.back, .restart, .config{
   cursor: pointer;
 }
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActionsComponent } from './actions.component';
+import { SvgModule } from 'src/app/shared/svg/svg.module';
 
 
 
@@ -9,7 +10,8 @@ import { ActionsComponent } from './actions.component';
     ActionsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SvgModule
   ], exports: [
     ActionsComponent
   ]

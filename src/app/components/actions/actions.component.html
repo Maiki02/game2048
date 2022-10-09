@@ -1,6 +1,22 @@
 <div class="actions">
-    <div class="action back col-center" [ngClass]="{'disabled': isBackDisabled()}" (click)="goBack()"> <span class="info back-text">Regresar hacia atrás</span></div>
-    <div class="action score col-center"> <span class="info score-text">Puntuación</span><span class="points">{{getScore()}}</span></div>
-    <div class="action restart col-center" (click)="restartGame()"> <span class="info restart-text">Reiniciar partida</span></div>
-    <div class="action score-record col-center"> <span class="info record-text">Record:</span><span class="points">{{getRecord()}}</span></div>
+    <div class="action box-shadow back col-center" [ngClass]="{'disabled': isBackDisabled()}" (click)="goBack()">
+        <back-arrow-svg class="icon"></back-arrow-svg>
+        <!--<span class="info back-text">Regresar hacia atrás</span>--></div>
+    <div class="action box-shadow score col-center"> 
+        <!--<span class="info score-text">Puntuación</span><span class="points">{{getScore()}}</span>-->
+        <score-svg></score-svg>
+        <span class="points">{{getScore()}}</span>
+    </div>
+    <div class="action box-shadow restart col-center" (click)="restartGame()">
+        <reset-arrow-svg class="icon"></reset-arrow-svg> 
+        <!--<span class="info restart-text">Reiniciar partida</span>--></div>
+    <div class="action box-shadow score-record col-center"> 
+        <!--<span class="info record-text">Record:</span><span class="points">{{getRecord()}}</span>-->
+        <medal-svg></medal-svg>
+        <span class="points">{{getRecord()}}</span>
+    </div>
+    <div class="action box-shadow config col-center"> 
+        <!--<span class="info record-text">Record:</span><span class="points">{{getRecord()}}</span>-->
+        <gear-svg class="icon"></gear-svg>
+    </div>
 </div>

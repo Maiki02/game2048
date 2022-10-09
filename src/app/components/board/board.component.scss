@@ -1,5 +1,6 @@
 
 @import url("./../../shared/styles/cell-colors.scss");
+@import url("./../../shared/styles/shadows.scss");
 
 
 $BACKGROUND_DEFAULT: #cfcfcf;
@@ -10,6 +11,7 @@ $MAX_WIDTH_CELL: 130px;
 
 .container-game {
     width: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
+    background:#ffffff00;
   }
   
   .row {
