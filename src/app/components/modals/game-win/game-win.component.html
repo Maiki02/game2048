@@ -1,13 +1,14 @@
 <div class="background background-opaque" [ngClass]="{'invisible': game.isWinner!=1, 'visible': game.isWinner==1}"></div>
 <div class="background col-center"  [ngClass]="{'invisible': game.isWinner!=1, 'visible': game.isWinner==1}">
 
-    <div class="card col-init in-card">
+    <div class="card win col-init in-card">
 
-        <span class="info in-card">¡Ganaste!<br>Si desea seguir jugando, pulse continuar.</span>
+        <span class="info in-card">¡Ganaste!</span>
+        <span class="more-info in-card">Si desea seguir jugando, pulse continuar.</span>
 
         <div class="actions row-center in-card">
 
-            <button class="action cancel" (click)="close()">Continuar</button>
+            <button class="action continue" (click)="close()">Continuar</button>
 
         </div>
         

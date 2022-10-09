@@ -1,9 +1,10 @@
 <div class="background background-opaque" [ngClass]="{'invisible': !game.isFinished, 'visible': game.isFinished}"></div>
 <div class="background col-center"  [ngClass]="{'invisible': !game.isFinished, 'visible': game.isFinished}">
 
-    <div class="card col-init in-card">
+    <div class="card finished col-init in-card">
 
-        <span class="info in-card">Juego finalizado.<br>No hay movimientos disponibles.</span>
+        <span class="info in-card">Juego finalizado.</span>
+        <span class="more-info in-card">No hay movimientos disponibles.</span>
 
         <div class="actions row-center in-card">
 

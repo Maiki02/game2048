@@ -1,52 +1,142 @@
 @import url("./../../shared/styles/visibility.scss");
 @import url("./../../shared/styles/flex.scss");
 
-.background{
-    position:absolute;
-    top:0;
-    left:0;
-    width: 100vw;
-    height: 100vh;
+$BACKGROUND_WINNER: #c4f7c4;
+$COLOR_LETTER_WIN: #334c2e;
+
+$BACKGROUND_FINISHED: #e0afaf;
+$COLOR_LETTER_FINISHED: #4c2e2e;
+
+$BACKGROUND_RESET: #d7d79e;
+$COLOR_LETTER_RESET: #4b4c2e;
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
-.background-opaque{
-    background: rgba(0, 0, 0, 0.5);
+.background-opaque {
+  background: rgba(0, 0, 0, 0.4);
 }
 
-.card{
-    width: 40%;
-    height: 50%;
-    border-radius: 20px;
+.card {
+  width: 40%;
+  height: 50%;
+  border-radius: 20px;
 
-    background:green;
+  .info {
+    margin-top: 64px;
+  }
 
-    .info{
-        margin-top:64px;
-        font-size: 32px;
-        font-weight: 600;
-        color: #fff;
+  .more-info {
+    margin-top: 16px;
+  }
+
+  .info,
+  .more-info {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    //color: $COLOR_LETTER_WIN;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 32px;
+    margin-top: 32px;
+
+    .action {
+      outline: none;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
     }
-
-    .actions{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        gap: 32px;
-        margin-top: 32px;
-
-        .action{
-            outline: none;
-            border: none;
-            background: #fff;
-            border-radius: 16px;
-            padding: 8px 16px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #000;
-            cursor: pointer;
-        }
-    }
+  }
 }
 
+.card.reset {
+  background: $BACKGROUND_RESET;
 
+  .info {
+    margin-top: 48px !important;
+    padding: 0 16px;
+    font-size: 44px !important;
+    color: $COLOR_LETTER_RESET;
+  }
+
+  .action {
+    margin-top: 48px;
+    background: $BACKGROUND_RESET;
+    color: $COLOR_LETTER_RESET;
+  }
+
+  .action:hover {
+    background: $COLOR_LETTER_RESET;
+    color: $BACKGROUND_RESET;
+  }
+}
+
+.card.finished {
+  background: $BACKGROUND_FINISHED;
+
+  .info {
+    margin-top: 48px !important;
+    padding: 0 16px;
+    font-size: 44px !important;
+    color: $COLOR_LETTER_FINISHED;
+  }
+
+  .more-info {
+    margin-top: 24px;
+    font-size: 24px !important;
+    color: $COLOR_LETTER_FINISHED;
+  }
+
+  .action {
+    margin-top: 48px;
+    background: $BACKGROUND_FINISHED;
+    color: $COLOR_LETTER_FINISHED;
+  }
+
+  .action:hover {
+    background: $COLOR_LETTER_FINISHED;
+    color: $BACKGROUND_FINISHED;
+  }
+}
+
+.card.win {
+  background: $BACKGROUND_WINNER;
+
+  .info {
+    margin-top: 48px !important;
+    font-size: 48px !important;
+    color: $COLOR_LETTER_WIN;
+  }
+
+  .more-info {
+    margin-top: 24px;
+    font-size: 24px !important;
+    color: $COLOR_LETTER_WIN;
+  }
+
+  .action {
+    margin-top: 48px;
+    background: $BACKGROUND_WINNER;
+    color: $COLOR_LETTER_WIN;
+  }
+
+  .action:hover {
+    background: $COLOR_LETTER_WIN;
+    color: $BACKGROUND_WINNER;
+  }
+}
