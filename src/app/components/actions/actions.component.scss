@@ -23,7 +23,6 @@ $BACKGROUND_BORDER: #909090;
   border-radius: 16px;
 
   span {
-    font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 500;
     color: #fff;
@@ -32,6 +31,10 @@ $BACKGROUND_BORDER: #909090;
   .points {
     font-size: 18px;
   }
+}
+
+.action:hover, .action:active{
+  background: #595959
 }
 
 .back, .restart, .config{

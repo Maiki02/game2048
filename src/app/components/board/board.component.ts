@@ -4,6 +4,7 @@ import {
   setBoard,
   setFinished,
   setGameStatus,
+  setRestartGame,
   setScore,
   setWinner,
 } from 'src/app/redux/actions/game.action';
@@ -18,6 +19,7 @@ import {
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Game, Position } from 'src/app/shared/interfaces/game.interface';
+import { ActionsComponent } from '../actions/actions.component';
 
 @Component({
   selector: 'app-board',
@@ -406,6 +408,34 @@ export class BoardComponent implements OnInit {
     return null;
   }
 
+  goBack(){
+    const actions= new ActionsComponent(this.store);
+    actions.goBack();
+  }
+
+  restart(){
+    const actions= new ActionsComponent(this.store);
+    actions.restartGame();
+  }
+
+  isModalOpen():boolean{
+    return this.game.isFinished || this.game.isWinner==1 || this.game.isRestart;
+  }
+
+  closeModals():void{
+    if(this.game.isFinished){
+      this.store.dispatch(setFinished({isFinished:false}));
+    }
+
+    if(this.game.isWinner==1){
+      this.store.dispatch(setWinner({isWinner:2}));
+    }
+
+    if(this.game.isRestart){
+      this.store.dispatch(setRestartGame({restartGame:false}));
+    }
+  }
+
   //---------------------------------------\\
 
   /*Escucha los enventos del teclado y ejecuta la acción correspondiente*/
@@ -413,21 +443,22 @@ export class BoardComponent implements OnInit {
   listenerKeyPress(event: KeyboardEvent) {
 
     if(!this.game.isRestart){
-      switch (event.key) {
-        case 'ArrowLeft':
-          this.moveTo('left');
-          break;
-        case 'ArrowRight':
-          this.moveTo('right');
-          break;
-        case 'ArrowUp':
-          this.moveTo('up');
-          break;
-        case 'ArrowDown':
-          this.moveTo('down');
-          break;
-        default:
-          break;
+      console.log(event.key)
+      switch (event.key.toLowerCase()) {
+        case 'arrowleft': this.moveTo('left'); break;
+        case 'arrowright': this.moveTo('right'); break;
+        case 'arrowup': this.moveTo('up'); break;
+        case 'arrowdown': this.moveTo('down'); break;
+        case 'backspace': this.goBack(); break;
+        case 'r': this.restart(); break;
+        
+        default: break;
+      }
+    } 
+    if(this.isModalOpen()){
+      switch(event.key.toLowerCase()){
+        case 'escape': this.closeModals(); break;
+        default: break;
       }
     }
   }
