@@ -17,6 +17,10 @@ export const VALUE_TO_WIN=2048;
 
 export const ANY_CELL = 0;
 export const ANY_ROW = [ANY_CELL, ANY_CELL, ANY_CELL, ANY_CELL];
+export const ROW_TESTING= [0,10,0,0]
+export const ROW_TESTING_FINISHED=[10,0,0,0];
+export const ROW_TESTING_2=[0,0,0,2];
+
 export const BOARD_INITIAL = [ANY_ROW, ANY_ROW, ANY_ROW, ANY_ROW];
 export const BOARD_COMPLETE = [
   [0, 2, 3, 4],
@@ -49,7 +53,13 @@ export const BOARD_TESTING_2=[
   [2, 2, 2, 2],
   [4, 2, 2, 0],
   [4, 4, 0, 0],
-  [4, 0, 4, 0],
+  [0, 2, 0, 0],
+]
+export const BOARD_TESTING_2_FINISHED=[
+  [4, 4, 0, 0],
+  [4, 4, 0, 0],
+  [8, 0, 0, 0],
+  [2, 0, 0, 0],
 ]
 export const ANY_BOARD = [
   [0, 0, 0, 0],

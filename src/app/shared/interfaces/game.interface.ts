@@ -13,3 +13,9 @@ export interface Position {
     X: number,
     Y: number
 }
+
+export interface Cell {
+    value: number,
+    position: Position
+    
+}

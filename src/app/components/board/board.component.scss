@@ -11,10 +11,12 @@ $MAX_WIDTH_CELL: 130px;
 
 .container-game {
     width: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
+    height: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
     background:#ffffff00;
   }
   
   .row {
+    position: relative;
     display: flex;
     align-items: flex-start;
     flex-direction: row;
@@ -22,7 +24,8 @@ $MAX_WIDTH_CELL: 130px;
     border-radius: 16px;
   }
   
-  .col {
+  .cell {
+    position:absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +36,6 @@ $MAX_WIDTH_CELL: 130px;
     max-height: $MAX_WIDTH_CELL;
     border: $BORDER_CELL solid $BACKGROUND_BORDER;
   }
-  
   .first-row {
     border-top: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
   }
@@ -70,3 +72,313 @@ $MAX_WIDTH_CELL: 130px;
     background: $BACKGROUND_DEFAULT !important;
   }
   
+  /*.container-game {
+    //width: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
+    //background:$BACKGROUND_DEFAULT;
+    //position:relative;
+    margin-top: 0;
+    position: relative;
+    padding: 15px;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -ms-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -ms-touch-action: none;
+    touch-action: none;
+    background: #bbada0;
+    border-radius: 6px;
+    width: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));;
+    height: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .board-container{
+    position: absolute;
+    z-index: 2;
+  }
+
+
+  .background-game{
+    position:absolute;
+    width: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
+    height: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
+    background:$BACKGROUND_DEFAULT;
+  }
+  
+  .row {
+    position:absolute;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-radius: 16px;
+    
+    min-height: $MAX_WIDTH_CELL;
+    max-height: $MAX_WIDTH_CELL;
+    left:0;
+    transition:.2s;
+  }
+
+  .cell, .cell-value{
+    
+    line-height: $MAX_WIDTH_CELL;
+    /*display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;*
+    min-width: $MAX_WIDTH_CELL;
+    min-height: $MAX_WIDTH_CELL;
+    max-width: $MAX_WIDTH_CELL;
+    max-height: $MAX_WIDTH_CELL;
+
+  }
+
+  .cell-value {
+    border-radius: 3px;
+    //background: #eee4da;
+    text-align: center;
+    font-weight: bold;
+    z-index: 10;
+    //font-size: 55px;
+  -webkit-animation: pop 200ms ease 100ms;
+  -moz-animation: pop 200ms ease 100ms;
+  animation: pop 200ms ease 100ms;
+  -webkit-animation-fill-mode: backwards;
+  -moz-animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
+}
+  
+  .cell {
+    
+    
+    position: absolute;
+    -webkit-transition: 100ms ease-in-out;
+    -moz-transition: 100ms ease-in-out;
+    transition: 100ms ease-in-out;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    //border: $BORDER_CELL solid $BACKGROUND_BORDER;
+  }
+
+  .is-new{
+    animation: example 0.2s forwards;
+    animation-delay: 0s;
+  }
+
+@keyframes example {
+  0%{
+    height: 0;
+    width: 0;
+    min-width: none;
+    max-width: none;
+    min-height: none;
+    max-height: none;
+  }
+  100% {
+    height: $MAX_WIDTH_CELL;
+    width: $MAX_WIDTH_CELL;
+    min-width: $MAX_WIDTH_CELL;
+    max-width: $MAX_WIDTH_CELL;
+    min-height: $MAX_WIDTH_CELL;
+    max-height: $MAX_WIDTH_CELL;
+  }
+}*/
+  .row-0{
+    top:0;
+  }
+
+  .row-1{
+    top:calc($MAX_WIDTH_CELL + $BORDER_RADIUS);
+  }
+
+  .row-2{
+    top:calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2);
+  }
+
+  .row-3{
+    top:calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3);
+  }
+
+  .c0-0{
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0,0);
+  }
+
+  .c0-1{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), 0);
+    -moz-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), 0);
+    -ms-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), 0);
+    transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS),0);
+  }
+
+  .c0-2{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), 0);
+    -moz-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), 0);
+    -ms-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), 0);
+    transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2),0);
+  }
+
+  .c0-3{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), 0);
+    -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), 0);
+    -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), 0);
+    transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),0);
+  }
+
+  .c1-0{
+    -webkit-transform: translate(0, calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    -moz-transform: translate(0, calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    -ms-transform: translate(0, calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    transform: translate(0,calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+  }
+
+  .c1-1{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS),calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+  }
+
+  .c1-2{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2),calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+  }
+
+  .c1-3{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+    transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
+  }
+
+  .c2-0{
+    -webkit-transform: translate(0, calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    -moz-transform: translate(0, calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    -ms-transform: translate(0, calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    transform: translate(0,calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+  }
+
+  .c2-1{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS),calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+  }
+
+  .c2-2{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2),calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+  }
+
+
+  .c2-3{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+    transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
+  }
+
+  .c3-0{
+    -webkit-transform: translate(0, calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    -moz-transform: translate(0, calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    -ms-transform: translate(0, calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    transform: translate(0,calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+  }
+
+  .c3-1{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS),calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+  }
+
+  .c3-2{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2),calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+  }
+
+  .c3-3{
+    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+    transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
+  }
+
+.block{
+  display:block;
+}
+
+/*
+@-webkit-keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1;
+  }
+  100% {
+    top: -50px;
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1;
+  }
+  100% {
+    top: -50px;
+    opacity: 0;
+  }
+}
+
+@keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1;
+  }
+  100% {
+    top: -50px;
+    opacity: 0;
+  }
+}
+
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}*/

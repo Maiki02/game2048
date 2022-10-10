@@ -1,8 +1,31 @@
+    
+
+<!--<div class="container-game box-shadow">
+
+    <div class="board-game-container">
+        <div class="grid-row" *ngFor="let row of ANY_BOARD; index as i">
+            <div class="grid-cell" *ngFor="let value of row; index as j">
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="board-container" >
+        <div #cell (change)="changeCell(cell)" class="cell {{cell.value | numToString}} {{'c'+cell.position.X+'-'+cell.position.Y}}" *ngFor="let cell of BOARD_GAME">
+            <div class="cell-value value">{{cell.value}}</div>
+        </div>
+    </div>
+</div>-->
+
+<div class="background-game"></div>
 <div class="container-game box-shadow">
-    <div class="row" *ngFor="let row of game.board; index as i">
-        <div class="col cell {{value | numToString}}" [ngClass]="{'first-row': i==0, 'final-row':i==game.board.length - 1, 'first-column': j==0, 'final-column': j==row.length -1}" *ngFor="let value of row; index as j">
+    <div class="row {{'row-'+i}}" *ngFor="let row of game.board; index as i">
+        <!-- {{value!=0?'c'+0+'-'+j:''}} -->
+        <div class="col cell {{value | numToString}} {{'c'+0+'-'+j}}" [ngClass]="{'first-row': i==0, 'final-row':i==game.board.length - 1, 'first-column': j==0, 'final-column': j==row.length -1, 'is-new': isNew(i,j)}" *ngFor="let value of row; index as j">
             <span class="value">{{value ==0? '': value}}</span>
             <!--<span>{{i + " " +j}}</span>-->
         </div>
     </div>
 </div>
+

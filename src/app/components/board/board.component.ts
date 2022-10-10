@@ -13,12 +13,18 @@ import {
   ANY_CELL,
   ANY_ROW,
   BOARD_TESTING,
+  BOARD_TESTING_2,
+  BOARD_TESTING_2_FINISHED,
+  BOARD_TESTING_3,
   INITIAL_GAME_STATE,
+  ROW_TESTING,
+  ROW_TESTING_2,
+  ROW_TESTING_FINISHED,
   VALUE_TO_WIN,
 } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
-import { Game, Position } from 'src/app/shared/interfaces/game.interface';
+import { Cell, Game, Position } from 'src/app/shared/interfaces/game.interface';
 import { ActionsComponent } from '../actions/actions.component';
 
 @Component({
@@ -27,10 +33,15 @@ import { ActionsComponent } from '../actions/actions.component';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  public game: Game = INITIAL_GAME_STATE; 
+  public game: Game = INITIAL_GAME_STATE;
+  public ANY_BOARD: any[] = ANY_BOARD;
+  public BOARD_GAME: Cell[] = [];
+
   constructor(private store: Store<appState>) {
     this.store.subscribe((state) => {
       this.game = state.game;
+      //this.setBoardGame();
+      console.log(this.game.board,this.BOARD_GAME)
     });
   }
 
@@ -112,6 +123,7 @@ export class BoardComponent implements OnInit {
     }
 
     if (isMove) {
+      this.BOARD_TEST= JSON.parse(JSON.stringify(this.game.board));
       this.generateRandom();
       this.saveState(this.game);
       this.store.dispatch(setFinished({ isFinished: this.canMove() }));
@@ -442,23 +454,74 @@ export class BoardComponent implements OnInit {
   @HostListener('document:keydown', ['$event'])
   listenerKeyPress(event: KeyboardEvent) {
 
-    if(!this.game.isRestart){
-      console.log(event.key)
+    if(!this.isModalOpen()){
       switch (event.key.toLowerCase()) {
         case 'arrowleft': this.moveTo('left'); break;
         case 'arrowright': this.moveTo('right'); break;
         case 'arrowup': this.moveTo('up'); break;
         case 'arrowdown': this.moveTo('down'); break;
+        case 'b':
         case 'backspace': this.goBack(); break;
         case 'r': this.restart(); break;
         
         default: break;
       }
-    } 
-    if(this.isModalOpen()){
+    } else {
       switch(event.key.toLowerCase()){
         case 'escape': this.closeModals(); break;
         default: break;
+      }
+    }
+  }
+
+
+  //TESTING
+  row: number[]= ROW_TESTING;
+  rowFin: number[] = ROW_TESTING_FINISHED;
+  row2: number[]= ROW_TESTING_2;
+  BOARD_TEST:number[][]=ANY_BOARD;
+  board: number[][] = BOARD_TESTING_2;
+  board2: number[][] = BOARD_TESTING_2_FINISHED;
+
+  changeBoard(){
+    if(this.board==BOARD_TESTING_2){
+      this.board=BOARD_TESTING_2_FINISHED;
+    } else {
+      this.board=BOARD_TESTING_2;
+    }
+  }
+
+  changeRow(){
+    if(this.row==ROW_TESTING){
+      this.row=ROW_TESTING_FINISHED;
+    } else {
+      this.row=ROW_TESTING;
+    }
+  }
+
+  isNew(i:number, j:number){
+    return this.game.board[i][j]!=this.BOARD_TEST[i][j];
+  }
+
+  changeCell(cell:any){
+    console.log("Change cell",cell);
+  }
+
+  setBoardGame(){
+    this.BOARD_GAME=[];
+    for(let i=0; i<this.game.board.length; i++){
+      for(let j=0; j<this.game.board[i].length; j++){
+        if(this.game.board[i][j]!=0){
+          let cell:Cell={
+            value:this.game.board[i][j],
+            //isNew:this.isNew(i,j),
+            position: {
+              X: i,
+              Y: j
+            }
+          }
+          this.BOARD_GAME.push(cell);
+        }
       }
     }
   }

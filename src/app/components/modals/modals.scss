@@ -16,10 +16,12 @@ $COLOR_LETTER_RESET: #4b4c2e;
   left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 999;
 }
 
 .background-opaque {
   background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
 }
 
 .card {
@@ -27,6 +29,7 @@ $COLOR_LETTER_RESET: #4b4c2e;
   height: auto;
   border-radius: 20px;
   padding-bottom: 32px;
+  z-index: 999;
 
   .info {
     margin-top: 64px;
