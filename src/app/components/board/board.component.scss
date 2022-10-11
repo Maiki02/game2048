@@ -77,6 +77,7 @@ $MAX_WIDTH_CELL: 130px;
     max-width: $MAX_WIDTH_CELL;
     max-height: $MAX_WIDTH_CELL;
     border: $BORDER_CELL solid $BACKGROUND_BORDER;
+    transition:.1s;
   }
   /*.first-row {
     border-top: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
@@ -249,7 +250,7 @@ $MAX_WIDTH_CELL: 130px;
     top:0;
   }
 
-  /*.c0-0{
+  .c0-0{
     -webkit-transform: translate(0, 0);
     -moz-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
@@ -360,9 +361,9 @@ $MAX_WIDTH_CELL: 130px;
     -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
     -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
     transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-  }*/
+  }
 
-  .c0-0{
+  /*.c0-0{
     top:0;
     left:0;
   }
@@ -442,7 +443,7 @@ $MAX_WIDTH_CELL: 130px;
     top:calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3);
     left:calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3);
   }
-
+*/
 
 
 .block{

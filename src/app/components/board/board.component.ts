@@ -356,21 +356,13 @@ export class BoardComponent implements OnInit {
 
   /* Verifica si puede mover la fila a la izquierda */
   canMoveRowToLeft(row: Cell[]) {
-    console.log("Can move to left", row);
-    console.log("Have space", this.isHaveSpaceLeft(row));
-    console.log("Two same consecutives", this.haveTwoSameConsecutives(row));
     return this.isHaveSpaceLeft(row) || this.haveTwoSameConsecutives(row);
   }
 
   /*Verifica si puede mover la fila a la derecha */
   canMoveRowToRight(row: Cell[]) {
     let invertRow= this.invertirArray(row);
-    return this.canMoveRowToLeft(invertRow);
-
-    console.log("Can move to right", row);
-    console.log("Have space", this.isHaveSpaceLeft(row));
-    console.log("Two same consecutives", this.haveTwoSameConsecutives(row));
-    return this.isHaveSpaceRight(row) || this.haveTwoSameConsecutives(row);
+    return this.canMoveRowToLeft(invertRow)
   }
 
   /*Dado un array de numeros, recorre cada elemento y si uno es 0, lo reemplaza por el siguiente.
@@ -598,12 +590,22 @@ export class BoardComponent implements OnInit {
         if(this.game.board[i][j].value!=0){
           let indexToEdit=this.idExistsOnBoard(this.game.board[i][j].id, this.BOARD_GAME);
           if(indexToEdit!= -1 ){
-            this.BOARD_GAME[indexToEdit] = { ...this.BOARD_GAME[indexToEdit], 
+            console.log("Arreglo", JSON.parse(JSON.stringify(this.BOARD_GAME)));
+            this.BOARD_GAME[indexToEdit].value= JSON.parse(JSON.stringify(this.game.board[i][j].value));
+            this.BOARD_GAME[indexToEdit].position.X= i;
+            this.BOARD_GAME[indexToEdit].position.Y= j;
+            console.log("Editamos elemento");
+            console.log("Arreglo editado", JSON.parse(JSON.stringify(this.BOARD_GAME)));
+            
+           /* = { ...this.BOARD_GAME[indexToEdit], 
               value: this.game.board[i][j].value,
               position: {X: i, Y: j}
-            }
+            }*/
           } else {
-            this.BOARD_GAME.push(this.game.board[i][j]);
+            console.log("Nuevo elemento");
+            const newItem=JSON.parse(JSON.stringify(this.game.board[i][j]));
+            this.BOARD_GAME.push(newItem);
+            console.log("Arreglo agregado",  JSON.parse(JSON.stringify(this.BOARD_GAME)));
           }
         }
       }
@@ -612,6 +614,7 @@ export class BoardComponent implements OnInit {
     let newBoard=this.transformBoard(this.game.board);
     for(let i=0; i<quantElements; i++){
       if(this.idExistsOnBoard(this.BOARD_GAME[i].id, newBoard)==-1){
+        console.log("Eliminamos elemento");
         this.BOARD_GAME.splice(i,1);
         quantElements--;
       }
