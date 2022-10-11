@@ -13,42 +13,14 @@ import {
   ANY_BOARD,
   ANY_BOARD_CELL,
   ANY_CELL,
-  ANY_ROW,
   ANY_ROW_CELL,
-  BOARD_TESTING,
-  BOARD_TESTING_2,
-  BOARD_TESTING_2_FINISHED,
-  BOARD_TESTING_3,
   INITIAL_GAME_STATE,
-  ROW_TESTING,
-  ROW_TESTING_2,
-  ROW_TESTING_FINISHED,
   VALUE_TO_WIN,
 } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Cell, Game, Position } from 'src/app/shared/interfaces/game.interface';
 import { ActionsComponent } from '../actions/actions.component';
-
-const rowCellFinishedConst=[{
-  id:1,
-  isNew: false,
-  value: 2,
-  position: {
-    X: 0,
-    Y: 0
-  }
-}]
-
-const rowCellInit=[{
-  id:1,
-  isNew: false,
-  value: 2,
-  position: {
-    X: 0,
-    Y: 1
-  }
-}]
 
 @Component({
   selector: 'app-board',
@@ -59,26 +31,13 @@ export class BoardComponent implements OnInit {
   public game: Game = INITIAL_GAME_STATE;
   public ANY_BOARD: any[] = ANY_BOARD;
   public BOARD_GAME: Cell[] = [];
+  private BOARD_PREVIUS_GENERATE: Cell[][] = [];
 
   constructor(private store: Store<appState>) {
     this.store.subscribe((state) => {
       this.game = state.game;
       this.setBoardGame();
-
-      this.imprimirTablero(this.game.board);
     });
-  }
-
-  imprimirTablero(board: Cell[][]){
-    console.log('Imprimir tablero');
-    for (let i = 0; i < this.game.numOfRows; i++) {
-      let row = this.getRow(i);
-      let rowConsole:any=[]
-      row.forEach(element =>{
-        rowConsole.push(element.value)
-      })
-      console.log(rowConsole);
-    }
   }
 
   ngOnInit(): void {
@@ -157,11 +116,8 @@ export class BoardComponent implements OnInit {
   //------------------ MOVE TO ------------------//
 
   moveTo(direction: string) {
-    console.log("Ingresa a move to");
     let isMove: boolean = false;
     let backState: Game = JSON.parse(JSON.stringify(this.game));
-    console.log("Parseamos back state")
-    console.log("Tablero ", this.game.board)
     if (direction == 'up' && this.canMoveToUp()) {
       this.moveToUp();
       isMove = true;
@@ -177,7 +133,7 @@ export class BoardComponent implements OnInit {
     }
 
     if (isMove) {
-      this.BOARD_TEST= JSON.parse(JSON.stringify(this.game.board));
+      this.BOARD_PREVIUS_GENERATE=JSON.parse(JSON.stringify(this.game.board));
       this.generateRandom();
       this.saveState(this.game);
       this.store.dispatch(setFinished({ isFinished: this.canMove() }));
@@ -397,6 +353,7 @@ export class BoardComponent implements OnInit {
           newRow[i + 1].value = ANY_CELL;
           newRow[i+1].id=ANY_CELL;
           this.store.dispatch(setScore({ score: this.game.score + newRow[i].value }));
+
           if(newRow[i].value==VALUE_TO_WIN){
             //Solo lo aumentamos cuando es distinto de 2,
             //Porque si es 2, significa que cerró su modal de victoria.
@@ -506,8 +463,6 @@ export class BoardComponent implements OnInit {
   listenerKeyPress(event: KeyboardEvent) {
 
     if(!this.isModalOpen()){
-      console.log("Se presiona la tecla")
-      console.log("Tecla presionada", event.key.toLowerCase())
       switch (event.key.toLowerCase()) {
         case 'arrowleft': this.moveTo('left'); break;
         case 'arrowright': this.moveTo('right'); break;
@@ -528,61 +483,14 @@ export class BoardComponent implements OnInit {
   }
 
 
-  //TESTING
-  row: number[]= ROW_TESTING;
-  rowFin: number[] = ROW_TESTING_FINISHED;
-  rowCell: Cell[]= rowCellInit;
-  rowCellFinished: Cell[]= rowCellFinishedConst;
-  row2: number[]= ROW_TESTING_2;
-  BOARD_TEST:number[][]=ANY_BOARD;
-  board: number[][] = BOARD_TESTING_2;
-  board2: number[][] = BOARD_TESTING_2_FINISHED;
-
-  changeBoard(){
-    if(this.board==BOARD_TESTING_2){
-      this.board=BOARD_TESTING_2_FINISHED;
-    } else {
-      this.board=BOARD_TESTING_2;
-    }
-  }
-
-  changeRow(){
-    console.log(this.rowCell);
-    if(this.row==ROW_TESTING){
-      this.row=ROW_TESTING_FINISHED;
-    } else {
-      this.row=ROW_TESTING;
-    }
-
-    console.log(JSON.stringify(this.rowCell)==JSON.stringify(rowCellFinishedConst))
-    /*if(JSON.stringify(this.rowCell)==JSON.stringify(rowCellFinishedConst)){
-      console.log("If", this.rowCell);
-      this.rowCell[0].position.Y=rowCellInit[0].position.Y;
-      this.rowCell[0].position.X=rowCellInit[0].position.X;
-      console.log("If despues del cambio", this.rowCell);
-    } else {
-      console.log("Else",this.rowCell)
-      this.rowCell[0].position.Y=rowCellFinishedConst[0].position.Y;
-      this.rowCell[0].position.X=rowCellFinishedConst[0].position.X;
-      console.log("Else despues del cambio", this.rowCell);
-    }*/
-    if(this.rowCell[0].position.Y==0){
-      this.rowCell[0].position.Y=1;
-    } else {
-      this.rowCell[0].position.Y=0;
-    }
-
-    console.log(this.rowCell);
-  }
-
   isNew(i:number, j:number){
-    return false;
-    //return this.game.board[i][j].value != this.BOARD_TEST[i][j].;
+    try{
+      return this.game.board[i][j].value != this.BOARD_PREVIUS_GENERATE[i][j].value;
+    } catch(e){
+      return false;
+    }
   }
 
-  changeCell(cell:any){
-    console.log("Change cell",cell);
-  }
 
   setBoardGame(){
     for(let i=0; i<this.game.board.length; i++){
@@ -590,22 +498,15 @@ export class BoardComponent implements OnInit {
         if(this.game.board[i][j].value!=0){
           let indexToEdit=this.idExistsOnBoard(this.game.board[i][j].id, this.BOARD_GAME);
           if(indexToEdit!= -1 ){
-            console.log("Arreglo", JSON.parse(JSON.stringify(this.BOARD_GAME)));
             this.BOARD_GAME[indexToEdit].value= JSON.parse(JSON.stringify(this.game.board[i][j].value));
             this.BOARD_GAME[indexToEdit].position.X= i;
             this.BOARD_GAME[indexToEdit].position.Y= j;
-            console.log("Editamos elemento");
-            console.log("Arreglo editado", JSON.parse(JSON.stringify(this.BOARD_GAME)));
-            
-           /* = { ...this.BOARD_GAME[indexToEdit], 
-              value: this.game.board[i][j].value,
-              position: {X: i, Y: j}
-            }*/
+            this.BOARD_GAME[indexToEdit].isNew= false;
+        
           } else {
-            console.log("Nuevo elemento");
-            const newItem=JSON.parse(JSON.stringify(this.game.board[i][j]));
+            let newItem:Cell=JSON.parse(JSON.stringify(this.game.board[i][j]));
+            newItem.isNew=true;
             this.BOARD_GAME.push(newItem);
-            console.log("Arreglo agregado",  JSON.parse(JSON.stringify(this.BOARD_GAME)));
           }
         }
       }
@@ -614,7 +515,6 @@ export class BoardComponent implements OnInit {
     let newBoard=this.transformBoard(this.game.board);
     for(let i=0; i<quantElements; i++){
       if(this.idExistsOnBoard(this.BOARD_GAME[i].id, newBoard)==-1){
-        console.log("Eliminamos elemento");
         this.BOARD_GAME.splice(i,1);
         quantElements--;
       }
