@@ -58,6 +58,13 @@ const _gameReducer = createReducer(
             isWinner: action.isWinner
         };
     }),
+
+    on(actions.setQuantMovements, (state, action) => {
+        return {
+            ...state,
+            quantMovements: action.quantMovements
+        };
+    }),
    
 )
 

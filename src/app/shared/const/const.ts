@@ -1,10 +1,11 @@
-import { Game } from "../interfaces/game.interface";
+import { Cell, Game } from "../interfaces/game.interface";
 
 export const INITIAL_GAME_STATE: Game ={
     board: [],
     numOfCols: 0,
     numOfRows: 0,
     score: 0,
+    quantMovements: 2, //Inicia con 2 porque se generan 2 numeros aleatorios por default
     record: 0,
     isWinner: 0, //Count of 2048
     isFinished: false, //Only true when the player loses
@@ -17,6 +18,16 @@ export const VALUE_TO_WIN=2048;
 
 export const ANY_CELL = 0;
 export const ANY_ROW = [ANY_CELL, ANY_CELL, ANY_CELL, ANY_CELL];
+
+export const ANY_ROW_CELL= [
+  { id: 0, value: ANY_CELL, position: { X: 0, Y: 0 }, isNew: false },
+  { id: 1, value: ANY_CELL, position: { X: 1, Y: 0 }, isNew: false },
+  { id: 2, value: ANY_CELL, position: { X: 2, Y: 0 }, isNew: false },
+  { id: 3, value: ANY_CELL, position: { X: 3, Y: 0 }, isNew: false }
+]
+
+
+
 export const ROW_TESTING= [0,10,0,0]
 export const ROW_TESTING_FINISHED=[10,0,0,0];
 export const ROW_TESTING_2=[0,0,0,2];
@@ -66,4 +77,31 @@ export const ANY_BOARD = [
   [0, 0, 0, 0],
   [0, 0, 0, 0],
   [0, 0, 0, 0],
+];
+
+export const ANY_BOARD_CELL:Cell[][] = [
+  [
+    { id: 0, value: 0, position: { X: 0, Y: 0 }, isNew: false },
+    { id: 0, value: 0, position: { X: 0, Y: 1 }, isNew: false },
+    { id: 0, value: 0, position: { X: 0, Y: 2 }, isNew: false },
+    { id: 0, value: 0, position: { X: 0, Y: 3 }, isNew: false },
+  ],
+  [
+    { id: 0, value: 0, position: { X: 1, Y: 0 }, isNew: false },
+    { id: 0, value: 0, position: { X: 1, Y: 1 }, isNew: false },
+    { id: 0, value: 0, position: { X: 1, Y: 2 }, isNew: false },
+    { id: 0, value: 0, position: { X: 1, Y: 3 }, isNew: false },
+  ],
+  [
+    { id: 0, value: 0, position: { X: 2, Y: 0 }, isNew: false },
+    { id: 0, value: 0, position: { X: 2, Y: 1 }, isNew: false },
+    { id: 0, value: 0, position: { X: 2, Y: 2 }, isNew: false },
+    { id: 0, value: 0, position: { X: 2, Y: 3 }, isNew: false },
+  ],
+  [
+    { id: 0, value: 0, position: { X: 3, Y: 0 }, isNew: false },
+    { id: 0, value: 0, position: { X: 3, Y: 1 }, isNew: false },
+    { id: 0, value: 0, position: { X: 3, Y: 2 }, isNew: false },
+    { id: 0, value: 0, position: { X: 3, Y: 3 }, isNew: false },
+  ],
 ];

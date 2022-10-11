@@ -18,14 +18,49 @@
     </div>
 </div>-->
 
+<!--<div class="container-game">
+    <div #cell (change)="changeCell(cell)" class="cell-testing {{cell.value | numToString}} {{'c'+cell.position.X+'-'+cell.position.Y}}" [ngClass]="{'is-new': cell.isNew}" *ngFor="let cell of BOARD_GAME">
+        <div class="cell-value value">{{cell.value}}</div>
+    </div>
+</div>-->
+
+<button (click)="changeRow()">Change ROW</button>
+
+<!-- Algo así funciona -->
+<!--<div class="container-game">
+    <div #cell (change)="changeCell(cell)" class="cell-testing {{cell | numToString}} {{'c'+0+'-'+j}}" [ngClass]="{'is-new': isNew(0,j)}" *ngFor="let cell of row; index as j">
+        <div class="cell-value value">{{cell}}</div>
+    </div>
+</div>-->
+<!--<div class="container-game">
+    <div #cell2 (change)="changeCell(cell2)" class="cell-testing {{cell.value| numToString}} {{'c'+cell.position.X+'-'+cell.position.Y}}" [ngClass]="{'is-new': cell.isNew}" *ngFor="let cell of rowCell; index as j">
+        <div class="cell-value value">{{cell.value}}</div>
+    </div>
+</div>-->
+
 <div class="background-game"></div>
-<div class="container-game box-shadow">
+<!--<div class="container-game box-shadow">
     <div class="row {{'row-'+i}}" *ngFor="let row of game.board; index as i">
-        <!-- {{value!=0?'c'+0+'-'+j:''}} -->
-        <div class="col cell {{value | numToString}} {{'c'+0+'-'+j}}" [ngClass]="{'first-row': i==0, 'final-row':i==game.board.length - 1, 'first-column': j==0, 'final-column': j==row.length -1, 'is-new': isNew(i,j)}" *ngFor="let value of row; index as j">
-            <span class="value">{{value ==0? '': value}}</span>
-            <!--<span>{{i + " " +j}}</span>-->
+        <!-- {{value!=0?'c'+0+'-'+j:''}} --
+        <div class="col cell {{cell.value| numToString}} {{'c'+cell.position.X+'-'+cell.position.Y}}" [ngClass]="{'first-row': i==0, 'final-row':i==game.board.length - 1, 'first-column': j==0, 'final-column': j==row.length -1, 'is-new': cell.isNew}" *ngFor="let cell of row; index as j">
+            <span class="value">{{cell.value ==0? '': cell.value}}</span>
+            
         </div>
     </div>
-</div>
+</div>-->
+<div class="container-game" >
+        <div #cell2 (change)="changeCell(cell2)" class="cell {{cell.value | numToString}} {{'c'+cell.position.X+'-'+cell.position.Y}}" *ngFor="let cell of BOARD_GAME">
+            <div class="cell-value value">{{cell.value}}</div>
+        </div>
+    </div>
 
+<!--<div class="container-game box-shadow">
+    <div class="row {{'row-'+i}}" *ngFor="let row of game.board; index as i">
+        <!-- {{value!=0?'c'+0+'-'+j:''}} --
+        <div class="col cell {{value | numToString}} {{'c'+0+'-'+j}}" [ngClass]="{'first-row': i==0, 'final-row':i==game.board.length - 1, 'first-column': j==0, 'final-column': j==row.length -1, 'is-new': isNew(i,j)}" *ngFor="let value of row; index as j">
+            <span class="value">{{value ==0? '': value}}</span>
+            
+        </div>
+    </div>
+</div>-->
+<!--<span>{{i + " " +j}}</span>-->

@@ -28,3 +28,6 @@ export const setRestartGame = createAction('[GAME] Set Restart Game',
 //Winner
 export const setWinner = createAction('[GAME] Set Winner',
     props<{ isWinner: number }>());
+
+export const setQuantMovements = createAction('[GAME] Set Quant Movements',
+    props<{ quantMovements: number }>());

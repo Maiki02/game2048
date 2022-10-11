@@ -4,14 +4,17 @@ import {
   setBoard,
   setFinished,
   setGameStatus,
+  setQuantMovements,
   setRestartGame,
   setScore,
   setWinner,
 } from 'src/app/redux/actions/game.action';
 import {
   ANY_BOARD,
+  ANY_BOARD_CELL,
   ANY_CELL,
   ANY_ROW,
+  ANY_ROW_CELL,
   BOARD_TESTING,
   BOARD_TESTING_2,
   BOARD_TESTING_2_FINISHED,
@@ -27,6 +30,26 @@ import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Cell, Game, Position } from 'src/app/shared/interfaces/game.interface';
 import { ActionsComponent } from '../actions/actions.component';
 
+const rowCellFinishedConst=[{
+  id:1,
+  isNew: false,
+  value: 2,
+  position: {
+    X: 0,
+    Y: 0
+  }
+}]
+
+const rowCellInit=[{
+  id:1,
+  isNew: false,
+  value: 2,
+  position: {
+    X: 0,
+    Y: 1
+  }
+}]
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -40,9 +63,22 @@ export class BoardComponent implements OnInit {
   constructor(private store: Store<appState>) {
     this.store.subscribe((state) => {
       this.game = state.game;
-      //this.setBoardGame();
-      console.log(this.game.board,this.BOARD_GAME)
+      this.setBoardGame();
+
+      this.imprimirTablero(this.game.board);
     });
+  }
+
+  imprimirTablero(board: Cell[][]){
+    console.log('Imprimir tablero');
+    for (let i = 0; i < this.game.numOfRows; i++) {
+      let row = this.getRow(i);
+      let rowConsole:any=[]
+      row.forEach(element =>{
+        rowConsole.push(element.value)
+      })
+      console.log(rowConsole);
+    }
   }
 
   ngOnInit(): void {
@@ -68,20 +104,31 @@ export class BoardComponent implements OnInit {
 
   //Given a number that represents the number of rows and columns in the board,
   //create a board with its initial values set to 0.
-  createBoard(numOfRows: number) {
-    return ANY_BOARD;
-    return BOARD_TESTING;
+  createBoard(numOfRows: number): Cell[][] {
+    return ANY_BOARD_CELL;
+    //return ANY_BOARD;
+    //return BOARD_TESTING;
   }
 
   generateRandom() {
     const freePositions = this.getFreePositions();
     const randomPosition = Math.floor(Math.random() * freePositions.length);
-    const position = freePositions[randomPosition];
-    const valueToSet = Math.random() > 0.04 ? 2 : 4;
-    let newBoard: any[] = JSON.parse(JSON.stringify(this.game.board));
-    newBoard[position.X][position.Y] = valueToSet;
+    const position:Position = freePositions[randomPosition];
+    const newCell:Cell= {
+      id: this.game.quantMovements,
+      isNew: true,
+      value: Math.random() > 0.04 ? 2 : 4,
+      position: {
+        X: position.X,
+        Y: position.Y,
+      },
+    }
+    //const valueToSet = Math.random() > 0.04 ? 2 : 4;
+    let newBoard: Cell[][] = JSON.parse(JSON.stringify(this.game.board));
+    newBoard[position.X][position.Y] = newCell;
 
     this.store.dispatch(setBoard({ board: newBoard }));
+    this.store.dispatch(setQuantMovements({quantMovements: this.game.quantMovements+1}))
   }
 
   getFreePositions() {
@@ -91,7 +138,7 @@ export class BoardComponent implements OnInit {
 
     for (let i = 0; i < cantRows; i++) {
       for (let j = 0; j < cantColumns; j++) {
-        if (this.game.board[i][j] == ANY_CELL) {
+        if (this.isAnyCell(this.game.board[i][j])) {
           arrayOfPositions.push({
             X: i,
             Y: j,
@@ -102,12 +149,19 @@ export class BoardComponent implements OnInit {
     return arrayOfPositions;
   }
 
+  isAnyCell(cell:Cell){
+    return cell.value==ANY_CELL;
+  }
+
 
   //------------------ MOVE TO ------------------//
 
   moveTo(direction: string) {
+    console.log("Ingresa a move to");
     let isMove: boolean = false;
     let backState: Game = JSON.parse(JSON.stringify(this.game));
+    console.log("Parseamos back state")
+    console.log("Tablero ", this.game.board)
     if (direction == 'up' && this.canMoveToUp()) {
       this.moveToUp();
       isMove = true;
@@ -144,7 +198,7 @@ export class BoardComponent implements OnInit {
   moveToUp() {
     if (this.canMoveToUp()) {
       for (let i = 0; i < this.game.numOfRows; i++) {
-        let newColumn = this.getColumn(i);
+        let newColumn:Cell[] = this.getColumn(i);
         newColumn = this.addLeftRow(newColumn);
         this.setColumn(newColumn, i);
       }
@@ -194,6 +248,7 @@ export class BoardComponent implements OnInit {
 
   canMoveToLeft(): boolean {
     try {
+      console.log(this.game.board);
       for (let i = 0; i < this.game.numOfRows; i++) {
         if (this.canMoveRowToLeft(this.game.board[i])) throw new Error();
       }
@@ -229,10 +284,10 @@ export class BoardComponent implements OnInit {
 
 
 
-  haveTwoSameConsecutives(row: number[]) {
+  haveTwoSameConsecutives(row: Cell[]) {
     try {
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (row[i] != 0 && row[i] == row[i + 1]) throw new Error();
+        if (row[i].value != ANY_CELL && row[i].value == row[i + 1].value) throw new Error();
       }
       return false;
     } catch (error) {
@@ -241,16 +296,16 @@ export class BoardComponent implements OnInit {
   }
 
   //Recrear movimiento a la izquierda en 2048
-  addLeftRow(row: number[]) {
-    let row1 = this.quitarCeros(row);
-    let row2 = this.sumarDosElementosIguales(row1);
+  addLeftRow(row: Cell[]):Cell[] {
+    let row1:Cell[] = this.quitarCeros(row);
+    let row2:Cell[] = this.sumarDosElementosIguales(row1);
     return this.quitarCeros(row2);
   }
 
-  isHaveSpaceLeft(row: number[]): boolean {
+  isHaveSpaceLeft(row: Cell[]): boolean {
     try {
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (row[i] == 0 && row[i + 1] != 0) throw new Error();
+        if (row[i].value == 0 && row[i + 1].value != 0) throw new Error();
       }
       return false;
     } catch (error) {
@@ -258,26 +313,20 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  addRightRow(row: number[]) {
+  addRightRow(row: Cell[]) {
     let rowAux = this.invertirArray(row);
     rowAux = this.addLeftRow(rowAux);
     return this.invertirArray(rowAux);
   }
 
-  isHaveSpaceRight(row: number[]): boolean {
-    try {
-      for (let i = this.game.numOfCols; 0 < i; i--) {
-        if (row[i] == 0 && row[i - 1] != 0) throw new Error();
-      }
-      return false;
-    } catch (error) {
-      return true;
-    }
+  isHaveSpaceRight(row: Cell[]): boolean {
+    let inverRow= this.invertirArray(row);
+    return this.isHaveSpaceLeft(inverRow);
   }
 
   /*Devuelve un array con los elementos de la columna que se le pasa por parametro */
   getColumn(indexCol: number) {
-    let columnToReturn: number[] = ANY_ROW;
+    let columnToReturn: Cell[] = ANY_ROW_CELL;
     for (let i = 0; i < this.game.numOfCols; i++) {
       columnToReturn[i] = this.game.board[i][indexCol];
     }
@@ -285,7 +334,7 @@ export class BoardComponent implements OnInit {
   }
 
   /* Dada una columna y un indice, setea el valor en la columna */
-  setColumn(column: number[], indexCol: number) {
+  setColumn(column: Cell[], indexCol: number) {
     let newBoard = JSON.parse(JSON.stringify(this.game.board));
     for (let i = 0; i < this.game.numOfCols; i++) {
       newBoard[i][indexCol] = column[i];
@@ -299,32 +348,41 @@ export class BoardComponent implements OnInit {
   }
 
   /*Dada una row y un indice, busca en el board del game y setea la row en el indice dado */
-  setRow(row: number[], indexRow: number) {
-    let newBoard = JSON.parse(JSON.stringify(this.game.board));
+  setRow(row: Cell[], indexRow: number) {
+    let newBoard:Cell[][] = JSON.parse(JSON.stringify(this.game.board));
     newBoard[indexRow] = row;
     this.store.dispatch(setBoard({ board: newBoard }));
   }
 
   /* Verifica si puede mover la fila a la izquierda */
-  canMoveRowToLeft(row: number[]) {
+  canMoveRowToLeft(row: Cell[]) {
+    console.log("Can move to left", row);
+    console.log("Have space", this.isHaveSpaceLeft(row));
+    console.log("Two same consecutives", this.haveTwoSameConsecutives(row));
     return this.isHaveSpaceLeft(row) || this.haveTwoSameConsecutives(row);
   }
 
   /*Verifica si puede mover la fila a la derecha */
-  canMoveRowToRight(row: number[]) {
+  canMoveRowToRight(row: Cell[]) {
+    let invertRow= this.invertirArray(row);
+    return this.canMoveRowToLeft(invertRow);
+
+    console.log("Can move to right", row);
+    console.log("Have space", this.isHaveSpaceLeft(row));
+    console.log("Two same consecutives", this.haveTwoSameConsecutives(row));
     return this.isHaveSpaceRight(row) || this.haveTwoSameConsecutives(row);
   }
 
   /*Dado un array de numeros, recorre cada elemento y si uno es 0, lo reemplaza por el siguiente.
   Hasta que no haya mas 0s*/
-  quitarCeros(row: number[]) {
-    let newRow = JSON.parse(JSON.stringify(row));
+  quitarCeros(row: Cell[]) {
+    let newRow:Cell[] = JSON.parse(JSON.stringify(row));
     let aux;
     let haveSpace = true;
     while (haveSpace) {
       haveSpace = this.isHaveSpaceLeft(newRow);
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (newRow[i] == 0) {
+        if (newRow[i].value == ANY_CELL) {
           aux = newRow[i];
           newRow[i] = newRow[i + 1];
           newRow[i + 1] = aux;
@@ -336,17 +394,18 @@ export class BoardComponent implements OnInit {
 
   /*Dado un array de numeros, recorre cada elemento y si el elemento es igual al siguiente (controlando que no se salga del arreglo),
   los suma, y el siguiente lo pone en 0. */
-  sumarDosElementosIguales(row: number[]) {
-    let newRow = JSON.parse(JSON.stringify(row));
+  sumarDosElementosIguales(row: Cell[]) {
+    let newRow:Cell[] = JSON.parse(JSON.stringify(row));
     let haveSpace = true;
     while (haveSpace) {
       haveSpace = this.isHaveSpaceLeft(row);
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
-        if (newRow[i] == newRow[i + 1]) {
-          newRow[i] = newRow[i] + newRow[i + 1];
-          newRow[i + 1] = ANY_CELL;
-          this.store.dispatch(setScore({ score: this.game.score + newRow[i] }));
-          if(newRow[i]==VALUE_TO_WIN){
+        if (newRow[i].value == newRow[i + 1].value) {
+          newRow[i].value = newRow[i].value + newRow[i + 1].value;
+          newRow[i + 1].value = ANY_CELL;
+          newRow[i+1].id=ANY_CELL;
+          this.store.dispatch(setScore({ score: this.game.score + newRow[i].value }));
+          if(newRow[i].value==VALUE_TO_WIN){
             //Solo lo aumentamos cuando es distinto de 2,
             //Porque si es 2, significa que cerró su modal de victoria.
             if(this.game.board.length!=2){
@@ -361,7 +420,7 @@ export class BoardComponent implements OnInit {
   }
 
   /*Dado un array de numeros, lo retorna al revés*/
-  invertirArray(row: number[]) {
+  invertirArray(row: any[]) {
     let aux;
     let copyRow = JSON.parse(JSON.stringify(row));
     let arrayToReturn = [];
@@ -455,6 +514,8 @@ export class BoardComponent implements OnInit {
   listenerKeyPress(event: KeyboardEvent) {
 
     if(!this.isModalOpen()){
+      console.log("Se presiona la tecla")
+      console.log("Tecla presionada", event.key.toLowerCase())
       switch (event.key.toLowerCase()) {
         case 'arrowleft': this.moveTo('left'); break;
         case 'arrowright': this.moveTo('right'); break;
@@ -478,6 +539,8 @@ export class BoardComponent implements OnInit {
   //TESTING
   row: number[]= ROW_TESTING;
   rowFin: number[] = ROW_TESTING_FINISHED;
+  rowCell: Cell[]= rowCellInit;
+  rowCellFinished: Cell[]= rowCellFinishedConst;
   row2: number[]= ROW_TESTING_2;
   BOARD_TEST:number[][]=ANY_BOARD;
   board: number[][] = BOARD_TESTING_2;
@@ -492,15 +555,37 @@ export class BoardComponent implements OnInit {
   }
 
   changeRow(){
+    console.log(this.rowCell);
     if(this.row==ROW_TESTING){
       this.row=ROW_TESTING_FINISHED;
     } else {
       this.row=ROW_TESTING;
     }
+
+    console.log(JSON.stringify(this.rowCell)==JSON.stringify(rowCellFinishedConst))
+    /*if(JSON.stringify(this.rowCell)==JSON.stringify(rowCellFinishedConst)){
+      console.log("If", this.rowCell);
+      this.rowCell[0].position.Y=rowCellInit[0].position.Y;
+      this.rowCell[0].position.X=rowCellInit[0].position.X;
+      console.log("If despues del cambio", this.rowCell);
+    } else {
+      console.log("Else",this.rowCell)
+      this.rowCell[0].position.Y=rowCellFinishedConst[0].position.Y;
+      this.rowCell[0].position.X=rowCellFinishedConst[0].position.X;
+      console.log("Else despues del cambio", this.rowCell);
+    }*/
+    if(this.rowCell[0].position.Y==0){
+      this.rowCell[0].position.Y=1;
+    } else {
+      this.rowCell[0].position.Y=0;
+    }
+
+    console.log(this.rowCell);
   }
 
   isNew(i:number, j:number){
-    return this.game.board[i][j]!=this.BOARD_TEST[i][j];
+    return false;
+    //return this.game.board[i][j].value != this.BOARD_TEST[i][j].;
   }
 
   changeCell(cell:any){
@@ -508,21 +593,52 @@ export class BoardComponent implements OnInit {
   }
 
   setBoardGame(){
-    this.BOARD_GAME=[];
     for(let i=0; i<this.game.board.length; i++){
       for(let j=0; j<this.game.board[i].length; j++){
-        if(this.game.board[i][j]!=0){
-          let cell:Cell={
-            value:this.game.board[i][j],
-            //isNew:this.isNew(i,j),
-            position: {
-              X: i,
-              Y: j
+        if(this.game.board[i][j].value!=0){
+          let indexToEdit=this.idExistsOnBoard(this.game.board[i][j].id, this.BOARD_GAME);
+          if(indexToEdit!= -1 ){
+            this.BOARD_GAME[indexToEdit] = { ...this.BOARD_GAME[indexToEdit], 
+              value: this.game.board[i][j].value,
+              position: {X: i, Y: j}
             }
+          } else {
+            this.BOARD_GAME.push(this.game.board[i][j]);
           }
-          this.BOARD_GAME.push(cell);
         }
       }
     }
+    let quantElements=this.BOARD_GAME.length;
+    let newBoard=this.transformBoard(this.game.board);
+    for(let i=0; i<quantElements; i++){
+      if(this.idExistsOnBoard(this.BOARD_GAME[i].id, newBoard)==-1){
+        this.BOARD_GAME.splice(i,1);
+        quantElements--;
+      }
+    }
+  }
+
+  transformBoard(board:Cell[][]):Cell[]{
+    let newBoard:Cell[]=[];
+    for(let i=0; i<board.length; i++){
+      newBoard= [...newBoard, ...board[i]];
+    }
+    return newBoard;
+  }
+  
+idExistsOnBoard(id:number, board:Cell[]):number{
+  let valueToReturn=-1;
+  try{
+    for(let i=0; i<board.length; i++){
+      if(board[i].id==id){
+        valueToReturn=i;
+        throw new Error();
+      }
+    }
+    return valueToReturn;
+  } catch(err){
+    return valueToReturn;
   }
 }
+}
+
