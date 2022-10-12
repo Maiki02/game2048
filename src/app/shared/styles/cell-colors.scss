@@ -7,7 +7,6 @@ $BACKGROUND_DEFAULT_2: #cfcfcf;
     font-size:40px;
     font-weight: 600;
     color: #ffffff;
-    transition: .2s;
 }
 
 .value{
@@ -17,59 +16,63 @@ $BACKGROUND_DEFAULT_2: #cfcfcf;
     color: #ffffff;
 }
 
-.dos .value, .cuatro .value{
+.cell{
+    background:#000000;
+}
+
+.cell-2 .value, .cell-4 .value{
     color: #715151 !important;
 }
 
-.cero{
+.cell-0{
     background:$BACKGROUND_DEFAULT_2 !important;
 }
 
-.dos{
+.cell-2{
     background:#fff8d8;
 }
 
-.cuatro{
+.cell-4{
     background:#ffea82;
 }
 
-.ocho{
+.cell-8{
     background:#ffe100
 }
 
-.dieciseis{
+.cell-16{
     background:#f99d1c
 }
 
-.treinta-y-dos{
+.cell-32{
     background:#a44118
 }
 
-.sesenta-y-cuatro{
+.cell-64{
     background:#55bfeb;
 }
 
-.ciento-veintiocho{
+.cell-128{
     background:#12959f;
 }
 
-.doscientos-cincuenta-y-seis{
+.cell-256{
     background:#233f83;
 }
 
-.quinientos-doce{
+.cell-512{
     background:#6950a1;
 }
 
-.mil-veinticuatro{
+.cell-1024{
     background:#ee3042;
 }
 
-.dos-mil-cuarenta-y-ocho{
+.cell-2048{
     background:#3ab03a;
 }
 
-.cuatro-mil-noventa-seis{
+.cell-4096{
     background:#e1058c;
 }
 

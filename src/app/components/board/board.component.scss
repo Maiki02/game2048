@@ -1,22 +1,43 @@
 
 @import url("./../../shared/styles/cell-colors.scss");
 @import url("./../../shared/styles/shadows.scss");
+@import url("./../../shared/styles/animations.scss");
+@import url("./../../shared/styles/positions.scss");
 
 
 $BACKGROUND_DEFAULT: #cfcfcf;
 $BACKGROUND_BORDER: #b6b6b6;
 $BORDER_CELL: 5px;
 $BORDER_RADIUS: 10px;
-$MAX_WIDTH_CELL: 130px;
+$MAX_WIDTH_CELL: 110px;
 
-  .container-game {
-    width: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
-    height: calc($MAX_WIDTH_CELL * 4 + $BORDER_RADIUS * (4 + 1));
-    background:#ffffff00;
-    position:relative;
-  }
-  
-  .cell-testing{
+
+.container-game{
+  position: relative;
+  padding: 15px;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -ms-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  background: #bbada0;
+  border-radius: 6px;
+  width: 500px;
+  height: 500px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.board-game-container{
+  position: absolute;
+  z-index: 2;
+}
+
+  .cell {
     position:absolute;
     display: flex;
     flex-direction: column;
@@ -24,222 +45,8 @@ $MAX_WIDTH_CELL: 130px;
     align-items: center;
     width: $MAX_WIDTH_CELL;
     height: $MAX_WIDTH_CELL;
-    /*min-width: $MAX_WIDTH_CELL;
-    min-height: $MAX_WIDTH_CELL;
-    max-width: $MAX_WIDTH_CELL;
-    max-height: $MAX_WIDTH_CELL;*/
-    border: $BORDER_CELL solid $BACKGROUND_BORDER;
-    transition: .2s;
-  }
-
-  .row {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    justify-content: flex-start;
-    border-radius: 16px;
-  }
-
-  
-  .cell {
-    position:absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: $MAX_WIDTH_CELL;
-    min-height: $MAX_WIDTH_CELL;
-    max-width: $MAX_WIDTH_CELL;
-    max-height: $MAX_WIDTH_CELL;
-    border: $BORDER_CELL solid $BACKGROUND_BORDER;
+    border-radius: 4px;;
     transition:.1s;
-  }
-   
-  .is-new{
-    position:absolute;
-    animation: example .1s forwards;
-    animation-delay: 0s;
-  }
-
-  
-@keyframes example {
-  0%{
-    scale: 0;
-  }
-  70%{
-    scale: 1.1;
-  }
-  100% {
-    scale: 1;
-  }
-}
-  /*.first-row {
-    border-top: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
-  }
-  
-  .final-row {
-    border-bottom: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
-  }
-  
-  .first-column {
-    border-left: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
-  }
-  
-  .final-column {
-    border-right: $BORDER_CELL * 2 solid $BACKGROUND_BORDER;
-  }
-  
-  .first-row.first-column {
-    border-top-left-radius: $BORDER_RADIUS;
-  }
-  
-  .first-row.final-column {
-    border-top-right-radius: $BORDER_RADIUS;
-  }
-  
-  .final-row.first-column {
-    border-bottom-left-radius: $BORDER_RADIUS;
-  }
-  
-  .final-row.final-column {
-    border-bottom-right-radius: $BORDER_RADIUS;
-  }*/
-  
-  .cero {
-    background: $BACKGROUND_DEFAULT !important;
-  }
-  
-  .row-0{
-    top:0;
-  }
-
-  .row-1{
-    top:calc($MAX_WIDTH_CELL + $BORDER_RADIUS);
-    top:0;
-  }
-
-  .row-2{
-    top:calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2);
-    top:0;
-  }
-
-  .row-3{
-    top:calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3);
-    top:0;
-  }
-
-  .c0-0{
-    -webkit-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    transform: translate(0,0);
-  }
-
-  .c0-1{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), 0);
-    -moz-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), 0);
-    -ms-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), 0);
-    transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS),0);
-  }
-
-  .c0-2{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), 0);
-    -moz-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), 0);
-    -ms-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), 0);
-    transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2),0);
-  }
-
-  .c0-3{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), 0);
-    -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), 0);
-    -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), 0);
-    transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),0);
-  }
-
-  .c1-0{
-    -webkit-transform: translate(0, calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    -moz-transform: translate(0, calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    -ms-transform: translate(0, calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    transform: translate(0,calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-  }
-
-  .c1-1{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS),calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-  }
-
-  .c1-2{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2),calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-  }
-
-  .c1-3{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-    transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),calc($MAX_WIDTH_CELL + $BORDER_RADIUS));
-  }
-
-  .c2-0{
-    -webkit-transform: translate(0, calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    -moz-transform: translate(0, calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    -ms-transform: translate(0, calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    transform: translate(0,calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-  }
-
-  .c2-1{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS),calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-  }
-
-  .c2-2{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2),calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-  }
-
-
-  .c2-3{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-    transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2));
-  }
-
-  .c3-0{
-    -webkit-transform: translate(0, calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    -moz-transform: translate(0, calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    -ms-transform: translate(0, calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    transform: translate(0,calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-  }
-
-  .c3-1{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    transform: translate(calc($MAX_WIDTH_CELL + $BORDER_RADIUS),calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-  }
-
-  .c3-2{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    transform: translate(calc($MAX_WIDTH_CELL * 2 + $BORDER_RADIUS * 2),calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-  }
-
-  .c3-3{
-    -webkit-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    -moz-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    -ms-transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3), calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
-    transform: translate(calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3),calc($MAX_WIDTH_CELL * 3 + $BORDER_RADIUS * 3));
   }
 
   /*.c0-0{

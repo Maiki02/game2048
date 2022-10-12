@@ -1,6 +1,6 @@
     
 
-<!--<div class="container-game box-shadow">
+<div class="container-game box-shadow">
 
     <div class="board-game-container">
         <div class="grid-row" *ngFor="let row of ANY_BOARD; index as i">
@@ -12,20 +12,21 @@
 
     
     <div class="board-container" >
-        <div #cell (change)="changeCell(cell)" class="cell {{cell.value | numToString}} {{'c'+cell.position.X+'-'+cell.position.Y}}" *ngFor="let cell of BOARD_GAME">
-            <div class="cell-value value">{{cell.value}}</div>
-        </div>
-    </div>
-</div>-->
-
-
-<div class="background-game"></div>
-<div class="container-game" >
-        <div class="cell {{cell.value | numToString}} {{'c'+cell.position.X+'-'+cell.position.Y}}"
+        <div class="cell {{'cell-'+cell.value}} {{'c'+cell.position.X+'-'+cell.position.Y}} box-shadow" 
         [ngClass]="{'is-new': isNew(cell.position.X, cell.position.Y)}" *ngFor="let cell of BOARD_GAME">
             <div class="cell-value value">{{cell.value}}</div>
         </div>
+    </div>
 </div>
+
+
+<!--<div class="background-game"></div>
+<div class="container-game" >
+        <div class="cell {{'cell-'+cell.value}} {{'c'+cell.position.X+'-'+cell.position.Y}}"
+        [ngClass]="{'is-new': isNew(cell.position.X, cell.position.Y)}" *ngFor="let cell of BOARD_GAME">
+            <div class="cell-value value">{{cell.value}}</div>
+        </div>
+</div>-->
 
 <!--<div class="container-game box-shadow">
     <div class="row {{'row-'+i}}" *ngFor="let row of game.board; index as i">
