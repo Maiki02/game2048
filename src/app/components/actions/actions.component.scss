@@ -74,3 +74,36 @@ $BACKGROUND_BORDER:#bbada0;
     }
   }
 }
+
+
+@media screen and (max-width:400px) {
+  .actions{
+    flex-wrap: wrap;
+  }
+
+  .actions {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .icon{
+    width:28px;
+    height:28px;
+  }
+
+  .action {
+    width: 40px;
+    height: 40px;
+    gap:4px;
+    padding: 8px;
+    border-radius: 12px;
+    span {
+      font-size: 12px;
+    }
+    .points {
+      font-size: 14px;
+    }
+  }
+
+
+}

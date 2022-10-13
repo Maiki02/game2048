@@ -72,9 +72,9 @@ $COLOR_LETTER_RESET: #4b4c2e;
   background: $BACKGROUND_RESET;
 
   .info {
-    margin-top: 48px !important;
+    margin-top: 48px;
     padding: 0 16px;
-    font-size: 44px !important;
+    font-size: 44px;
     color: $COLOR_LETTER_RESET;
   }
 
@@ -94,15 +94,15 @@ $COLOR_LETTER_RESET: #4b4c2e;
   background: $BACKGROUND_FINISHED;
 
   .info {
-    margin-top: 48px !important;
+    margin-top: 48px;
     padding: 0 16px;
-    font-size: 44px !important;
+    font-size: 44px;
     color: $COLOR_LETTER_FINISHED;
   }
 
   .more-info {
     margin-top: 24px;
-    font-size: 24px !important;
+    font-size: 24px;
     color: $COLOR_LETTER_FINISHED;
   }
 
@@ -122,14 +122,14 @@ $COLOR_LETTER_RESET: #4b4c2e;
   background: $BACKGROUND_WINNER;
 
   .info {
-    margin-top: 48px !important;
-    font-size: 48px !important;
+    margin-top: 48px;
+    font-size: 48px;
     color: $COLOR_LETTER_WIN;
   }
 
   .more-info {
     margin-top: 24px;
-    font-size: 24px !important;
+    font-size: 24px;
     color: $COLOR_LETTER_WIN;
   }
 
@@ -143,4 +143,29 @@ $COLOR_LETTER_RESET: #4b4c2e;
     background: $COLOR_LETTER_WIN;
     color: $BACKGROUND_WINNER;
   }
+}
+
+
+@media screen and (max-width: 500px) {
+  .card {
+    width: 80%;
+  }
+
+  .info {
+    margin-top: 32px;
+  }
+
+  .more-info {
+    margin-top: 8px;
+  }
+
+  .info {
+    font-size: 24px !important;
+  }
+
+  .more-info{
+    font-size: 18px !important;
+  }
+
+  
 }

@@ -79,3 +79,16 @@ $BACKGROUND_DEFAULT_2: #cfcfcf;
 .default{
     background:#000000;
 }
+
+
+@media screen and (max-width: 550px) {
+    .value{
+    font-size:36px;
+}
+}
+
+
+@media screen and (max-width: 400px) {.value{
+    font-size:32px;
+}
+}
