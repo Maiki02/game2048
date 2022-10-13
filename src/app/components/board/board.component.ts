@@ -20,7 +20,7 @@ import {
 } from 'src/app/shared/const/const';
 import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
-import { Cell, Game, Position } from 'src/app/shared/interfaces/game.interface';
+import { Cell, CellComplete, Game, Position } from 'src/app/shared/interfaces/game.interface';
 import { ActionsComponent } from '../actions/actions.component';
 
 @Component({
@@ -31,7 +31,7 @@ import { ActionsComponent } from '../actions/actions.component';
 export class BoardComponent implements OnInit {
   public game: Game = INITIAL_GAME_STATE;
   public ANY_BOARD: any[] = ANY_BOARD;
-  public BOARD_GAME: Cell[] = [];
+  public BOARD_GAME: CellComplete[] = [];
   private BOARD_PREVIUS_GENERATE: Cell[][] = [];
 
   private touchPrevius:any;
@@ -78,12 +78,8 @@ export class BoardComponent implements OnInit {
     const position:Position = freePositions[randomPosition];
     const newCell:Cell= {
       id: this.game.quantMovements,
-      isNew: true,
       value: Math.random() > 0.04 ? 2 : 4,
-      position: {
-        X: position.X,
-        Y: position.Y,
-      },
+      isAdd:false
     }
     //const valueToSet = Math.random() > 0.04 ? 2 : 4;
     let newBoard: Cell[][] = JSON.parse(JSON.stringify(this.game.board));
@@ -531,7 +527,7 @@ export class BoardComponent implements OnInit {
             this.BOARD_GAME[indexToEdit].isNew= false;
         
           } else {
-            let newItem:Cell=JSON.parse(JSON.stringify(this.game.board[i][j]));
+            let newItem:CellComplete=JSON.parse(JSON.stringify(this.game.board[i][j]));
             newItem.isNew=true;
             this.BOARD_GAME.push(newItem);
           }

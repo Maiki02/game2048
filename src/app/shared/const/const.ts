@@ -19,13 +19,13 @@ export const VALUE_TO_WIN=2048;
 export const ANY_CELL = 0;
 export const ANY_ROW = [ANY_CELL, ANY_CELL, ANY_CELL, ANY_CELL];
 
-export const ANY_ROW_CELL= [
-  { id: 0, value: ANY_CELL, position: { X: 0, Y: 0 }, isNew: false },
-  { id: 1, value: ANY_CELL, position: { X: 1, Y: 0 }, isNew: false },
-  { id: 2, value: ANY_CELL, position: { X: 2, Y: 0 }, isNew: false },
-  { id: 3, value: ANY_CELL, position: { X: 3, Y: 0 }, isNew: false }
-]
 
+export const ANY_ROW_CELL= [
+  { id: 0, value: ANY_CELL, isAdd: false },
+  { id: 1, value: ANY_CELL, isAdd: false },
+  { id: 2, value: ANY_CELL, isAdd: false },
+  { id: 3, value: ANY_CELL, isAdd: false }
+]
 
 
 export const ROW_TESTING= [0,10,0,0]
@@ -81,27 +81,27 @@ export const ANY_BOARD = [
 
 export const ANY_BOARD_CELL:Cell[][] = [
   [
-    { id: 0, value: 0, position: { X: 0, Y: 0 }, isNew: false },
-    { id: 0, value: 0, position: { X: 0, Y: 1 }, isNew: false },
-    { id: 0, value: 0, position: { X: 0, Y: 2 }, isNew: false },
-    { id: 0, value: 0, position: { X: 0, Y: 3 }, isNew: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
   ],
   [
-    { id: 0, value: 0, position: { X: 1, Y: 0 }, isNew: false },
-    { id: 0, value: 0, position: { X: 1, Y: 1 }, isNew: false },
-    { id: 0, value: 0, position: { X: 1, Y: 2 }, isNew: false },
-    { id: 0, value: 0, position: { X: 1, Y: 3 }, isNew: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
   ],
   [
-    { id: 0, value: 0, position: { X: 2, Y: 0 }, isNew: false },
-    { id: 0, value: 0, position: { X: 2, Y: 1 }, isNew: false },
-    { id: 0, value: 0, position: { X: 2, Y: 2 }, isNew: false },
-    { id: 0, value: 0, position: { X: 2, Y: 3 }, isNew: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
   ],
   [
-    { id: 0, value: 0, position: { X: 3, Y: 0 }, isNew: false },
-    { id: 0, value: 0, position: { X: 3, Y: 1 }, isNew: false },
-    { id: 0, value: 0, position: { X: 3, Y: 2 }, isNew: false },
-    { id: 0, value: 0, position: { X: 3, Y: 3 }, isNew: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
+    { id: 0, value: 0, isAdd: false },
   ],
 ];

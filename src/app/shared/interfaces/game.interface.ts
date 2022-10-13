@@ -20,11 +20,11 @@ export interface Position {
 export interface Cell {
     id: number,
     value: number,
-    position: Position,
-    isNew: boolean,
+    isAdd: boolean,
 }
 
-export interface CellPosition extends Cell{
-    position: Position   
+export interface CellComplete extends Cell{
+    position: Position,
+    isNew: boolean, 
 }
 
