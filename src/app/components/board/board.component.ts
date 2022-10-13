@@ -457,6 +457,7 @@ export class BoardComponent implements OnInit {
 
   //---------------------------------------\\
 
+
   /*Escucha los enventos del teclado y ejecuta la acción correspondiente*/
   @HostListener('document:keydown', ['$event'])
   listenerKeyPress(event: KeyboardEvent) {
@@ -475,6 +476,23 @@ export class BoardComponent implements OnInit {
       }
     }
   }
+
+  evento:any='hola a todos';
+    /*Escucha los enventos tactiles y ejecuta la acción correspondiente*/
+    @HostListener('document:touchmove', ['$event'])
+    listenerTouch(event: KeyboardEvent) {
+      console.log(event)
+      this.evento=event;
+      if(!this.isModalOpen()){
+        switch (event.key.toLowerCase()) {
+          case 'swipeleft': this.moveTo('left'); break;
+          case 'swiperight': this.moveTo('right'); break;
+          case 'swipeup': this.moveTo('up'); break;
+          case 'swipedown': this.moveTo('down'); break;
+          default: break;
+        }
+      }
+    }
 
 
   isNew(i:number, j:number){
