@@ -22,5 +22,9 @@ export interface Cell {
     value: number,
     position: Position,
     isNew: boolean,
-
 }
+
+export interface CellPosition extends Cell{
+    position: Position   
+}
+

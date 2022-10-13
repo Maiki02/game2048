@@ -444,20 +444,6 @@ export class BoardComponent implements OnInit {
     return this.game.isFinished || this.game.isWinner==1 || this.game.isRestart;
   }
 
-  closeModals():void{
-    if(this.game.isFinished){
-      this.store.dispatch(setFinished({isFinished:false}));
-    }
-
-    if(this.game.isWinner==1){
-      this.store.dispatch(setWinner({isWinner:2}));
-    }
-
-    if(this.game.isRestart){
-      this.store.dispatch(setRestartGame({restartGame:false}));
-    }
-  }
-
   //---------------------------------------\\
 
 
@@ -480,7 +466,7 @@ export class BoardComponent implements OnInit {
     }
   }
     /*Escucha los enventos tactiles y ejecuta la acción correspondiente*/
-    @HostListener('document:touchend', ['$event'])
+    @HostListener('touchend', ['$event'])
     listenerTouch(event: TouchEvent) {
       const newTouch= event.changedTouches[0];
       const direction=this.calculateDirection(this.touchPrevius,newTouch);
@@ -491,20 +477,23 @@ export class BoardComponent implements OnInit {
     }
 
     /*Escucha los enventos tactiles y ejecuta la acción correspondiente*/
-    @HostListener('document:touchstart', ['$event'])
+    @HostListener('touchstart', ['$event'])
     listenerTouchStart(event: TouchEvent) {
       this.touchPrevius=event.changedTouches[0];
     }
     
     calculateDirection(touch1:any, touch2:any){
-      console.log("Touch1",touch1)
-      console.log("Touch2",touch2)
       const x1=touch1.clientX;
       const y1=touch1.clientY;
       const x2=touch2.clientX;
       const y2=touch2.clientY;
       const xDiff=x2-x1;
       const yDiff=y2-y1;
+
+      if(xDiff==0 || yDiff==0){
+        return null;
+      }
+
       if(Math.abs(xDiff)>Math.abs(yDiff)){
         if(xDiff>0){
           return 'right';
@@ -558,6 +547,38 @@ export class BoardComponent implements OnInit {
       }
     }
   }
+  /*setBoardGame(){
+    //Transformarmos el board en un array unidimensional;
+    let boardReply= this.transformBoard(this.game.board);
+
+    //Recorremos el array unidimensional
+    for(let i=0; i<this.game.board.length; i++){
+      for(let j=0; j<this.game.board[i].length; j++){
+        if(this.game.board[i][j].value!=0){
+          let indexToEdit=this.idExistsOnBoard(this.game.board[i][j].id, this.BOARD_GAME);
+          if(indexToEdit!= -1 ){
+            this.BOARD_GAME[indexToEdit].value= JSON.parse(JSON.stringify(this.game.board[i][j].value));
+            this.BOARD_GAME[indexToEdit].position.X= i;
+            this.BOARD_GAME[indexToEdit].position.Y= j;
+            this.BOARD_GAME[indexToEdit].isNew= false;
+        
+          } else {
+            let newItem:Cell=JSON.parse(JSON.stringify(this.game.board[i][j]));
+            newItem.isNew=true;
+            this.BOARD_GAME.push(newItem);
+          }
+        }
+      }
+    }
+    //Quitamos los elementos de BOARD_GAME que no existan en el array unidimensional
+    let quantElements=this.BOARD_GAME.length;
+    for(let i=0; i<quantElements; i++){
+      if(this.idExistsOnBoard(this.BOARD_GAME[i].id, boardReply)==-1){
+        this.BOARD_GAME.splice(i,1);
+        quantElements--;
+      }
+    }
+  }*/
 
   transformBoard(board:Cell[][]):Cell[]{
     let newBoard:Cell[]=[];
