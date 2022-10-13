@@ -1,4 +1,5 @@
 import { HostListener, Component, OnInit } from '@angular/core';
+import { provideProtractorTestingSupport } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import {
   setBoard,
@@ -32,6 +33,8 @@ export class BoardComponent implements OnInit {
   public ANY_BOARD: any[] = ANY_BOARD;
   public BOARD_GAME: Cell[] = [];
   private BOARD_PREVIUS_GENERATE: Cell[][] = [];
+
+  private touchPrevius:any;
 
   constructor(private store: Store<appState>) {
     this.store.subscribe((state) => {
@@ -476,20 +479,43 @@ export class BoardComponent implements OnInit {
       }
     }
   }
-
-  evento:any='hola a todos';
     /*Escucha los enventos tactiles y ejecuta la acción correspondiente*/
-    @HostListener('document:touchmove', ['$event'])
-    listenerTouch(event: KeyboardEvent) {
-      console.log(event)
-      this.evento=event;
-      if(!this.isModalOpen()){
-        switch (event.key.toLowerCase()) {
-          case 'swipeleft': this.moveTo('left'); break;
-          case 'swiperight': this.moveTo('right'); break;
-          case 'swipeup': this.moveTo('up'); break;
-          case 'swipedown': this.moveTo('down'); break;
-          default: break;
+    @HostListener('document:touchend', ['$event'])
+    listenerTouch(event: TouchEvent) {
+      const newTouch= event.changedTouches[0];
+      const direction=this.calculateDirection(this.touchPrevius,newTouch);
+      if(direction){
+        this.moveTo(direction);
+        this.touchPrevius={};
+      }
+    }
+
+    /*Escucha los enventos tactiles y ejecuta la acción correspondiente*/
+    @HostListener('document:touchstart', ['$event'])
+    listenerTouchStart(event: TouchEvent) {
+      this.touchPrevius=event.changedTouches[0];
+    }
+    
+    calculateDirection(touch1:any, touch2:any){
+      console.log("Touch1",touch1)
+      console.log("Touch2",touch2)
+      const x1=touch1.clientX;
+      const y1=touch1.clientY;
+      const x2=touch2.clientX;
+      const y2=touch2.clientY;
+      const xDiff=x2-x1;
+      const yDiff=y2-y1;
+      if(Math.abs(xDiff)>Math.abs(yDiff)){
+        if(xDiff>0){
+          return 'right';
+        }else{
+          return 'left';
+        }
+      }else{
+        if(yDiff>0){
+          return 'down';
+        }else{
+          return 'up';
         }
       }
     }
