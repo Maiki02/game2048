@@ -204,7 +204,6 @@ export class BoardComponent implements OnInit {
 
   canMoveToLeft(): boolean {
     try {
-      console.log(this.game.board);
       for (let i = 0; i < this.game.numOfRows; i++) {
         if (this.canMoveRowToLeft(this.game.board[i])) throw new Error();
       }
@@ -472,11 +471,6 @@ export class BoardComponent implements OnInit {
         case 'backspace': this.goBack(); break;
         case 'r': this.restart(); break;
         
-        default: break;
-      }
-    } else {
-      switch(event.key.toLowerCase()){
-        case 'escape': this.closeModals(); break;
         default: break;
       }
     }

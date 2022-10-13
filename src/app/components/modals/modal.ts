@@ -11,6 +11,10 @@ export class Modal {
     }
 
     close(){}
+
+    pressButton(){
+      this.close();
+    }
     
     //Como se cierra al detectar los click
     //El que se abre con click es el 'restart game'.
@@ -35,4 +39,18 @@ export class Modal {
       console.error('Este es el error', err);
     }
   }
+
+    /*Escucha los enventos del teclado y ejecuta la acción correspondiente*/
+    @HostListener('document:keydown', ['$event'])
+    listenerKeyPress(event: KeyboardEvent) {
+  
+      if(this.wasInside){
+        switch(event.key.toLowerCase()){
+          case 'escape': this.close(); break;
+          case 'enter': this.pressButton(); break;
+          default: break;
+        }
+      }
+    }
 }
+

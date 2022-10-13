@@ -38,6 +38,10 @@ export class GameRestartComponent extends Modal {
     this.store.dispatch(setRestartGame({ restartGame: false }));
   }
 
+  override pressButton(): void {
+    this.restartGame(); 
+  }
+
   override getIsOpenWithButton(){
     return this.count>1;
   }

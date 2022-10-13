@@ -25,4 +25,5 @@ export class GameWinComponent extends Modal {
     this.store.dispatch(setWinner({isWinner: this.game.isWinner+1}));
   }
 
+
 }
