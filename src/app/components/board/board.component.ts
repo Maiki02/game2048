@@ -464,9 +464,9 @@ export class BoardComponent implements OnInit {
     }
   }
     /*Escucha los enventos tactiles y ejecuta la acción correspondiente*/
-    @HostListener('touchend', ['$event'])
+    @HostListener('document:touchend', ['$event'])
     listenerTouch(event: TouchEvent) {
-      const newTouch= event.changedTouches[0];
+      const newTouch=this.getTouch(event);
       const direction=this.calculateDirection(this.touchPrevius,newTouch);
       if(direction){
         this.moveTo(direction);
@@ -475,12 +475,24 @@ export class BoardComponent implements OnInit {
     }
 
     /*Escucha los enventos tactiles y ejecuta la acción correspondiente*/
-    @HostListener('touchstart', ['$event'])
+    @HostListener('document:touchstart', ['$event'])
     listenerTouchStart(event: TouchEvent) {
-      this.touchPrevius=event.changedTouches[0];
+      this.touchPrevius=this.getTouch(event);
+    }
+
+    getTouch(event:TouchEvent){
+      const eventAny:any=event;
+      const classList:DOMTokenList=eventAny.target.classList;
+      console.log(classList);
+      console.log(!classList.contains('in-actions'))
+      if(!classList.contains('in-actions')){
+        return event.changedTouches[0];
+      }
+      return null;
     }
     
     calculateDirection(touch1:any, touch2:any){
+      if(!touch1 || !touch2) return null;
       const x1=touch1.clientX;
       const y1=touch1.clientY;
       const x2=touch2.clientX;
@@ -488,9 +500,7 @@ export class BoardComponent implements OnInit {
       const xDiff=x2-x1;
       const yDiff=y2-y1;
 
-      if(xDiff==0 || yDiff==0){
-        return null;
-      }
+      if(xDiff==0 || yDiff==0) return null;
 
       if(Math.abs(xDiff)>Math.abs(yDiff)){
         if(xDiff>0){
