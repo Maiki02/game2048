@@ -3,12 +3,12 @@
       -webkit-animation: rebound 200ms ease 100ms !important;
       -moz-animation: rebound 200ms ease 100ms !important;
       animation: rebound 200ms ease 100ms !important;
-      -webkit-animation-fill-mode: backwards !important;
-      -moz-animation-fill-mode: backwards !important;
-      animation-fill-mode: backwards !important;
+      -webkit-animation-fill-mode: ease-in-out !important;
+      -moz-animation-fill-mode: ease-in-out !important;
+      animation-fill-mode: ease-in-out !important;
 
       .value{
-        animation: amount .2s forwards !important;
+        animation: amount .2s ease-in-out !important;
       }
 }
 
@@ -26,18 +26,12 @@
 
 @keyframes rebound {
    0%{
-    opacity: 0;
-   }
-
-   50%{
-    opacity: .7;
    }
 
     70%{
-      opacity: .8;
       scale: 1.05;
     }
-    82%{
+    95%{
       scale: 0.97;
     }
     100% {
