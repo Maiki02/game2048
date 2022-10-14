@@ -6,7 +6,6 @@ $BACKGROUND_BORDER:#bbada0;
 
 .actions-container{
   z-index:100;
-  width:100vw;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -61,6 +60,10 @@ $BACKGROUND_BORDER:#bbada0;
 }
 
 @media screen and (max-width:700px) {
+  .actions-container{
+  width:100vw;
+  }
+
   .actions {
     flex-direction: row;
     gap: 12px;
