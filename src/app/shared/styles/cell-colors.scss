@@ -2,93 +2,129 @@ $BACKGROUND_DEFAULT_2: #cfcfcf;
 /* --------------------------*/
 
 
-.value{
+.value {
     font-family: "Roboto", sans-serif;
-    font-size:40px;
+    font-size: 40px;
     font-weight: 600;
     color: #ffffff;
 }
 
-.value{
+.value {
     font-family: "Ubuntu", sans-serif;
-    font-size:40px;
+    font-size: 40px;
     font-weight: 600;
     color: #ffffff;
 }
 
-.cell{
-    background:#000000;
+.cell {
+    background: #000000;
 }
 
-.cell-2 .value, .cell-4 .value{
+.cell-2 .value,
+.cell-4 .value {
     color: #715151 !important;
 }
 
-.cell-0{
-    background:$BACKGROUND_DEFAULT_2 !important;
+.cell-0 {
+    background: $BACKGROUND_DEFAULT_2 !important;
 }
 
-.cell-2{
-    background:#fff8d8;
+.cell-2 {
+    background: #fff8d8;
 }
 
-.cell-4{
-    background:#ffea82;
+.cell-4 {
+    background: #ffea82;
 }
 
-.cell-8{
-    background:#ffe100
+.cell-8 {
+    background: #ffe100
 }
 
-.cell-16{
-    background:#f99d1c
+.cell-16 {
+    background: #f99d1c
 }
 
-.cell-32{
-    background:#a44118
+.cell-32 {
+    background: #a44118
 }
 
-.cell-64{
-    background:#55bfeb;
+.cell-64 {
+    background: #55bfeb;
 }
 
-.cell-128{
-    background:#12959f;
+.cell-128 {
+    background: #12959f;
 }
 
-.cell-256{
-    background:#233f83;
+.cell-256 {
+    background: #233f83;
 }
 
-.cell-512{
-    background:#6950a1;
+.cell-512 {
+    background: #6950a1;
 }
 
-.cell-1024{
-    background:#ee3042;
+.cell-1024 {
+    background: #ee3042;
 }
 
-.cell-2048{
-    background:#3ab03a;
+.cell-2048 {
+    background: #3ab03a;
 }
 
-.cell-4096{
-    background:#e1058c;
+.cell-4096 {
+    background: #e1058c;
 }
 
-.default{
-    background:#000000;
+.default {
+    background: #000000;
 }
 
 
 @media screen and (max-width: 550px) {
-    .value{
-    font-size:36px;
-}
+    .value {
+        font-size: 36px;
+    }
 }
 
 
-@media screen and (max-width: 400px) {.value{
-    font-size:23px;
+@media screen and (max-width: 400px) {
+    .value {
+        font-size: 23px;
+    }
 }
+
+
+/*@mixin is-add($color, $color2) {
+
+    @keyframes add {
+        0% {
+            background: $color;
+        }
+
+        100% {
+            background: $color2;
+        }
+    }
+}*/
+
+/*
+.is-add {
+    animation: add 0.2s backwards;
+    animation-delay: .0s;
 }
+
+@keyframes add {
+    0% {
+        width: 0px;
+    }
+
+    50%{
+        width: 80px;
+    }
+
+    100% {
+        width: 100px;
+    }
+} */

@@ -6,7 +6,6 @@ import {
   setFinished,
   setGameStatus,
   setQuantMovements,
-  setRestartGame,
   setScore,
   setWinner,
 } from 'src/app/redux/actions/game.action';
@@ -33,6 +32,7 @@ export class BoardComponent implements OnInit {
   public ANY_BOARD: any[] = ANY_BOARD;
   public BOARD_GAME: CellComplete[] = [];
   private BOARD_PREVIUS_GENERATE: Cell[][] = [];
+  private BOARD_PREVIUS_MOVE: Cell[][] = [];
 
   private touchPrevius:any;
 
@@ -348,6 +348,8 @@ export class BoardComponent implements OnInit {
       for (let i = 0; i < this.game.numOfCols - 1; i++) {
         if (newRow[i].value == newRow[i + 1].value) {
           newRow[i].value = newRow[i].value + newRow[i + 1].value;
+          newRow[i].isAdd=true;
+
           newRow[i + 1].value = ANY_CELL;
           newRow[i+1].id=ANY_CELL;
           this.store.dispatch(setScore({ score: this.game.score + newRow[i].value }));
@@ -506,9 +508,28 @@ export class BoardComponent implements OnInit {
     }
 
 
-  isNew(i:number, j:number){
+  isNew(i:number, j:number):boolean{
     try{
       return this.game.board[i][j].value != this.BOARD_PREVIUS_GENERATE[i][j].value;
+    } catch(e){
+      return false;
+    }
+  }
+
+  isAdd(cell:CellComplete):boolean{
+    try{
+        //Buscamos el anterior estado del board.
+        const transformBoard=this.transformBoard(this.getBackState().board);
+
+        //Si la celda existe
+        const index=this.idExistsOnBoard(cell.id,transformBoard);
+        if(index!=-1){
+          //Y tiene distinto valor que antes, entonces es una nueva
+          const previusCell=transformBoard[index];
+          return previusCell.value!=cell.value;
+        }
+      
+      return false;
     } catch(e){
       return false;
     }
@@ -524,11 +545,22 @@ export class BoardComponent implements OnInit {
             this.BOARD_GAME[indexToEdit].value= JSON.parse(JSON.stringify(this.game.board[i][j].value));
             this.BOARD_GAME[indexToEdit].position.X= i;
             this.BOARD_GAME[indexToEdit].position.Y= j;
-            this.BOARD_GAME[indexToEdit].isNew= false;
+            //this.BOARD_GAME[indexToEdit].isNew= false;
+
         
           } else {
-            let newItem:CellComplete=JSON.parse(JSON.stringify(this.game.board[i][j]));
-            newItem.isNew=true;
+            let previusCell=JSON.parse(JSON.stringify(this.game.board[i][j]));
+
+            let newItem:CellComplete={
+              id: previusCell.id,
+              value: previusCell.value,
+              position: {
+                X: i,
+                Y: j
+              },
+              isNew: true,
+              isAdd: previusCell.isAdd
+            }
             this.BOARD_GAME.push(newItem);
           }
         }

@@ -1,16 +1,18 @@
 .is-new{
     //animation: rebound .24s backwards;
-      -webkit-animation: rebound 200ms ease 100ms;
-      -moz-animation: rebound 200ms ease 100ms;
-      animation: rebound 200ms ease 100ms;
-      -webkit-animation-fill-mode: backwards;
-      -moz-animation-fill-mode: backwards;
-      animation-fill-mode: backwards;
+      -webkit-animation: rebound 200ms ease 100ms !important;
+      -moz-animation: rebound 200ms ease 100ms !important;
+      animation: rebound 200ms ease 100ms !important;
+      -webkit-animation-fill-mode: backwards !important;
+      -moz-animation-fill-mode: backwards !important;
+      animation-fill-mode: backwards !important;
 
       .value{
-        animation: amount .2s forwards;
+        animation: amount .2s forwards !important;
       }
 }
+
+
 
 @keyframes amount {
   0%{
@@ -73,3 +75,4 @@
     transform: scale(1);
 }
 }
+
