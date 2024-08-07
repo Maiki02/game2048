@@ -1,0 +1,352 @@
+$MARGIN_CELL: 12px;
+$SIZE_CELL: 110px;
+
+.c0-0 {
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.c0-1 {
+    -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+    -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+    -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+    transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+}
+
+.c0-2 {
+    -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+    -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+    -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+    transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+}
+
+.c0-3 {
+    -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+    -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+    -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+    transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+}
+
+.c1-0 {
+    -webkit-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+    -moz-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+    -ms-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+    transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+}
+
+.c1-1 {
+    -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+    -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+    -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+    transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+}
+
+.c1-2 {
+    -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+    -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+    -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+    transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+}
+
+.c1-3 {
+    -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+    -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+    -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+    transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+}
+
+.c2-0 {
+    -webkit-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -moz-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -ms-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+}
+
+.c2-1 {
+    -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+}
+
+.c2-2 {
+    -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+}
+
+
+.c2-3 {
+    -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+}
+
+.c3-0 {
+    -webkit-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -moz-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -ms-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+}
+
+.c3-1 {
+    -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+}
+
+.c3-2 {
+    -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+}
+
+.c3-3 {
+    -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+}
+
+@media screen and (max-width: 550px) {
+    $MARGIN_CELL: 7px;
+    $SIZE_CELL: 88px;
+
+    .c0-0 {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    .c0-1 {
+        -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+        -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+        -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+        transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+    }
+
+    .c0-2 {
+        -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+        -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+        -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+        transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+    }
+
+    .c0-3 {
+        -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+        -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+        -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+        transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+    }
+
+    .c1-0 {
+        -webkit-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+        -moz-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+        -ms-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+        transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+    }
+
+    .c1-1 {
+        -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+        -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+        -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+        transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+    }
+
+    .c1-2 {
+        -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+        -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+        -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+        transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+    }
+
+    .c1-3 {
+        -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+        -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+        -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+        transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+    }
+
+    .c2-0 {
+        -webkit-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        -moz-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        -ms-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    }
+
+    .c2-1 {
+        -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    }
+
+    .c2-2 {
+        -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    }
+
+
+    .c2-3 {
+        -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+        transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    }
+
+    .c3-0 {
+        -webkit-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        -moz-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        -ms-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    }
+
+    .c3-1 {
+        -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    }
+
+    .c3-2 {
+        -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    }
+
+    .c3-3 {
+        -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+        transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    }
+
+}
+
+@media screen and (max-width:400px) {
+    $MARGIN_CELL: 5px;
+$SIZE_CELL: 65px;
+
+.c0-0 {
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.c0-1 {
+    -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+    -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+    -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+    transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), 0);
+}
+
+.c0-2 {
+    -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+    -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+    -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+    transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), 0);
+}
+
+.c0-3 {
+    -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+    -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+    -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+    transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), 0);
+}
+
+.c1-0 {
+    -webkit-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+    -moz-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+    -ms-transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+    transform: translate(0, calc($SIZE_CELL + $MARGIN_CELL ));
+}
+
+.c1-1 {
+    -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+    -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+    -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+    transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL + $MARGIN_CELL ));
+}
+
+.c1-2 {
+    -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+    -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+    -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+    transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL + $MARGIN_CELL ));
+}
+
+.c1-3 {
+    -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+    -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+    -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+    transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL + $MARGIN_CELL ));
+}
+
+.c2-0 {
+    -webkit-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -moz-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -ms-transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    transform: translate(0, calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+}
+
+.c2-1 {
+    -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+}
+
+.c2-2 {
+    -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+}
+
+
+.c2-3 {
+    -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+    transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 2 + $MARGIN_CELL * 2));
+}
+
+.c3-0 {
+    -webkit-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -moz-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -ms-transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    transform: translate(0, calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+}
+
+.c3-1 {
+    -webkit-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -moz-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -ms-transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    transform: translate(calc($SIZE_CELL + $MARGIN_CELL ), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+}
+
+.c3-2 {
+    -webkit-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -moz-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -ms-transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    transform: translate(calc($SIZE_CELL * 2 + $MARGIN_CELL * 2), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+}
+
+.c3-3 {
+    -webkit-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -moz-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    -ms-transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+    transform: translate(calc($SIZE_CELL * 3 + $MARGIN_CELL * 3), calc($SIZE_CELL * 3 + $MARGIN_CELL * 3));
+} 
+}

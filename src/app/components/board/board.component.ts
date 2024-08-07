@@ -1,5 +1,4 @@
 import { HostListener, Component, OnInit } from '@angular/core';
-import { provideProtractorTestingSupport } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import {
   setBoard,
@@ -22,6 +21,14 @@ import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Cell, CellComplete, Game, Position } from 'src/app/shared/interfaces/game.interface';
 import { ActionsComponent } from '../actions/actions.component';
 
+const MARGIN_CELL=10;
+const SIZE_CELL=110;
+
+const MARGIN_CELL_TABLET=7
+const SIZE_CELL_TABLET=88;
+
+const MARGIN_CELL_MOBILE=7
+const SIZE_CELL_MOBILE=65;
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -640,5 +647,10 @@ idExistsOnBoard(id:number, board:Cell[]):number{
     return valueToReturn;
   }
 }
+
+getPositionInBoard(cell:CellComplete){
+  return 'c'+cell.position.X+ '-'+cell.position.Y
+}
+
 }
 
