@@ -12,6 +12,25 @@
       }
 }
 
+@media screen and (max-width: 400px) {
+  .is-new{
+
+      .value{
+        animation: amount-small .2s ease-in-out !important;
+      }
+}
+}
+
+
+@keyframes amount-small {
+  0%{
+    font-size:40px;
+  }
+
+  100%{
+    font-size:28px;
+  }
+}
 
 
 @keyframes amount {

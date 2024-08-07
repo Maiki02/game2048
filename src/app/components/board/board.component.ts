@@ -490,9 +490,8 @@ export class BoardComponent implements OnInit {
     getTouch(event:TouchEvent){
       const eventAny:any=event;
       const classList:DOMTokenList=eventAny.target.classList;
-      console.log(classList);
-      console.log(!classList.contains('in-actions'))
-      if(!classList.contains('in-actions')){
+      
+      if(classList.contains('container-game') || classList.contains('cell')){
         return event.changedTouches[0];
       }
       return null;
