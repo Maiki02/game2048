@@ -52,6 +52,10 @@ export class ActionsComponent implements OnInit {
     }
   }
 
+  activateIA(){
+    
+  }
+
   isBackDisabled(){
     let backStates:string | null=localStorage.getItem(LOCAL_STORAGE.BACK_STATES);
     if(backStates){

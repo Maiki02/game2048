@@ -1,21 +1,27 @@
 <div class="actions-container in-actions">
-    <div class="actions in-actions">
-        <div class="action box-shadow back col-center in-actions" [ngClass]="{'disabled': isBackDisabled()}" (click)="goBack()">
-            <back-arrow-svg class="icon in-actions"></back-arrow-svg>
-            <!--<span class="info back-text">Regresar hacia atrás</span>--></div>
         <div class="action box-shadow score col-center in-actions"> 
-            <span class="info score-text">Score</span>
+            <span class="info title score-text">Score</span>
             <span class="points in-actions" >{{getScore()}}</span>
         </div>
-        <div class="action box-shadow restart col-center in-actions" (click)="restartGame()">
-            <reset-arrow-svg class="icon in-actions"></reset-arrow-svg> 
-            <!--<span class="info restart-text">Reiniciar partida</span>--></div>
+        
         <div class="action box-shadow score-record col-center in-actions"> 
-            <span class="info record-text">Record</span>
+            <span class="info title record-text">Record</span>
             <span class="points ">{{getRecord()}}</span>
+        </div>
+        <div class="action box-shadow back col-center in-actions" [ngClass]="{'disabled': isBackDisabled()}" (click)="goBack()">
+            <span class="info back-text">Back</span>
+            <!--<span class="info back-text">Regresar hacia atrás</span>-->
+        </div>
+
+        <div class="action box-shadow ia col-center in-actions" (click)="activateIA()">
+            <span class="info ia-text">IA</span>
+        </div>
+        
+        <div class="action box-shadow restart col-center in-actions" (click)="restartGame()">
+            <!--<reset-arrow-svg class="icon in-actions"></reset-arrow-svg>-->
+            <span class="info restart-text">New game</span>
         </div>
         <!--<div class="action box-shadow config col-center"> 
             <gear-svg class="icon"></gear-svg>
         </div>-->
-    </div>
 </div>
