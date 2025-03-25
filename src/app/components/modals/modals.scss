@@ -1,17 +1,41 @@
 @import url("./../../shared/styles/visibility.scss");
 @import url("./../../shared/styles/flex.scss");
 
-$BACKGROUND_WINNER: #c4f7c4;
-$COLOR_LETTER_WIN: #334c2e;
+// Color Variables
+$themes: (
+  reset: (#d7d79e, #4b4c2e),
+  finished: (#e0afaf, #4c2e2e),
+  win: (#c4f7c4, #334c2e),
+  how-to-play: (#afd7e0, #2e4c4c)
+);
 
-$BACKGROUND_FINISHED: #e0afaf;
-$COLOR_LETTER_FINISHED: #4c2e2e;
+// Mixin for card styles
+@mixin card-theme($background, $color) {
+  background: $background;
 
-$BACKGROUND_RESET: #d7d79e;
-$COLOR_LETTER_RESET: #4b4c2e;
+  .info {
+    margin-top: 48px;
+    padding: 0 16px;
+    font-size: 44px;
+    color: $color;
+  }
 
-$BACKGROUND_HOW_TO_PLAY: #afd7e0;
-$COLOR_LETTER_HOW_TO_PLAY: #2e4c4c;
+  .more-info {
+    margin-top: 24px;
+    color: $color;
+  }
+
+  .action {
+    margin-top: 48px;
+    background: $background;
+    color: $color;
+
+    &:hover {
+      background: $color;
+      color: $background;
+    }
+  }
+}
 
 .background {
   position: fixed;
@@ -20,11 +44,11 @@ $COLOR_LETTER_HOW_TO_PLAY: #2e4c4c;
   width: 100vw;
   height: 100vh;
   z-index: 999;
-}
 
-.background-opaque {
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 999;
+  &-opaque {
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
 }
 
 .card {
@@ -36,30 +60,28 @@ $COLOR_LETTER_HOW_TO_PLAY: #2e4c4c;
   z-index: 999;
 
   .info {
-    margin-top: 64px;
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
   }
 
   .more-info {
-    margin-top: 16px;
-  }
-
-  .info,
-  .more-info {
-    font-size: 32px;
+    font-size: 1.25rem;
     font-weight: 600;
     text-align: center;
-    //color: $COLOR_LETTER_WIN;
   }
+
 
   .actions {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    gap: 32px;
-    margin-top: 32px;
+    gap: 2rem;
+    margin-top: 2rem;
 
     .action {
+      width: min(200px, 40%);
       outline: none;
       border: none;
       border-radius: 8px;
@@ -72,110 +94,11 @@ $COLOR_LETTER_HOW_TO_PLAY: #2e4c4c;
   }
 }
 
-.card.reset {
-  background: $BACKGROUND_RESET;
-
-  .info {
-    margin-top: 48px;
-    padding: 0 16px;
-    font-size: 44px;
-    color: $COLOR_LETTER_RESET;
+// Generate theme classes dynamically
+@each $theme, $colors in $themes {
+  .card.#{$theme} {
+    @include card-theme(nth($colors, 1), nth($colors, 2));
   }
-
-  .action {
-    margin-top: 48px;
-    background: $BACKGROUND_RESET;
-    color: $COLOR_LETTER_RESET;
-  }
-
-  .action:hover {
-    background: $COLOR_LETTER_RESET;
-    color: $BACKGROUND_RESET;
-  }
-}
-
-.card.finished {
-  background: $BACKGROUND_FINISHED;
-
-  .info {
-    margin-top: 48px;
-    padding: 0 16px;
-    font-size: 44px;
-    color: $COLOR_LETTER_FINISHED;
-  }
-
-  .more-info {
-    margin-top: 24px;
-    font-size: 24px;
-    color: $COLOR_LETTER_FINISHED;
-  }
-
-  .action {
-    margin-top: 48px;
-    background: $BACKGROUND_FINISHED;
-    color: $COLOR_LETTER_FINISHED;
-  }
-
-  .action:hover {
-    background: $COLOR_LETTER_FINISHED;
-    color: $BACKGROUND_FINISHED;
-  }
-}
-
-.card.win {
-  background: $BACKGROUND_WINNER;
-
-  .info {
-    margin-top: 48px;
-    font-size: 48px;
-    color: $COLOR_LETTER_WIN;
-  }
-
-  .more-info {
-    margin-top: 24px;
-    font-size: 24px;
-    color: $COLOR_LETTER_WIN;
-  }
-
-  .action {
-    margin-top: 48px;
-    background: $BACKGROUND_WINNER;
-    color: $COLOR_LETTER_WIN;
-  }
-
-  .action:hover {
-    background: $COLOR_LETTER_WIN;
-    color: $BACKGROUND_WINNER;
-  }
-}
-
-.card.how-to-play {
-  background: $BACKGROUND_HOW_TO_PLAY;
-
-  .info {
-    margin-top: 48px;
-    padding: 0 16px;
-    font-size: 44px;
-    color: $COLOR_LETTER_HOW_TO_PLAY;
-  }
-
-  .more-info {
-    margin-top: 24px;
-    font-size: 24px;
-    color: $COLOR_LETTER_HOW_TO_PLAY;
-  }
-
-  .action {
-    margin-top: 48px;
-    background: $BACKGROUND_HOW_TO_PLAY;
-    color: $COLOR_LETTER_HOW_TO_PLAY;
-  }
-
-  .action:hover {
-    background: $COLOR_LETTER_HOW_TO_PLAY;
-    color: $BACKGROUND_HOW_TO_PLAY;
-  }
-
 }
 
 
