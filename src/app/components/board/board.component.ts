@@ -455,7 +455,8 @@ export class BoardComponent implements OnInit {
   /*Escucha los enventos del teclado y ejecuta la acción correspondiente*/
   @HostListener('document:keydown', ['$event'])
   listenerKeyPress(event: KeyboardEvent) {
-
+    event.preventDefault();
+    
     if(!this.isModalOpen()){
       switch (event.key.toLowerCase()) {
         case 'arrowleft': this.moveTo('left'); break;
