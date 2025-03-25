@@ -9,7 +9,6 @@ import { ActionsModule } from '../actions/actions.module';
 import { GameRestartModule } from '../modals/game-restart/game-restart.module';
 import { GameFinishedModule } from '../modals/game-finished/game-finished.module';
 import { GameWinModule } from '../modals/game-win/game-win.module';
-import { HowToPlayModule } from '../how-to-play/how-to-play.module';
 import { HowToPlayModalModalModule } from '../modals/how-to-play/how-to-play.module';
 
 
@@ -25,7 +24,6 @@ import { HowToPlayModalModalModule } from '../modals/how-to-play/how-to-play.mod
 
     BoardModule,
     ActionsModule,
-    HowToPlayModule,
 
     //Modals
     GameRestartModule,
