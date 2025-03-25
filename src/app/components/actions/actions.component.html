@@ -4,15 +4,14 @@
             <back-arrow-svg class="icon in-actions"></back-arrow-svg>
             <!--<span class="info back-text">Regresar hacia atrás</span>--></div>
         <div class="action box-shadow score col-center in-actions"> 
-            <!--<span class="info score-text">Puntuación</span><span class="points">{{getScore()}}</span>-->
-            <score-svg class="in-actions"></score-svg>
+            <span class="info score-text">Score</span>
             <span class="points in-actions" >{{getScore()}}</span>
         </div>
         <div class="action box-shadow restart col-center in-actions" (click)="restartGame()">
             <reset-arrow-svg class="icon in-actions"></reset-arrow-svg> 
             <!--<span class="info restart-text">Reiniciar partida</span>--></div>
         <div class="action box-shadow score-record col-center in-actions"> 
-            <medal-svg class="in-actions"></medal-svg>
+            <span class="info record-text">Record</span>
             <span class="points ">{{getRecord()}}</span>
         </div>
         <!--<div class="action box-shadow config col-center"> 
