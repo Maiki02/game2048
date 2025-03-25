@@ -651,5 +651,19 @@ getPositionInBoard(cell:CellComplete){
   return 'c'+cell.position.X+ '-'+cell.position.Y
 }
 
+adjustFontSize(value: number): string {
+  const length = value.toString().length;
+  const width = window.innerWidth;
+
+  if (length <= 3) {
+    if (width > 550) return "48px";
+    if (width > 400) return "40px";
+    return "30px";
+  } 
+  if (length === 4) return width > 550 ? "40px" : width > 400 ? "32px" : "24px";
+  if (length === 5) return width > 550 ? "32px" : width > 400 ? "26px" : "20px";
+  return width > 550 ? "26px" : width > 400 ? "22px" : "18px"; // 6 dígitos o más
+}
+
 }
 

@@ -15,7 +15,7 @@
         <div class="cell {{getPositionInBoard(cell)}} {{'cell-'+cell.value}} box-shadow" 
         [ngClass]="{'is-new': isNew(cell.position.X, cell.position.Y)}" *ngFor="let cell of BOARD_GAME"> 
         <!-- [ngStyle]="getStyleFromCell(cell.position.X, cell.position.Y)", 'is-add': isAdd(cell)  -->
-            <div class="cell-value value">{{cell.value}}</div>
+            <div class="cell-value value" [ngStyle]="{'font-size': adjustFontSize(cell.value)}">{{cell.value}}</div>
         </div>
     </div>
 </div>

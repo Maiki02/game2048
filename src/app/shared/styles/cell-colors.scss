@@ -3,13 +3,13 @@ $BACKGROUND_DEFAULT_2: #cfcfcf;
 
 
 .value {
-    font-size: 40px;
+    //font-size: 48px;
     font-weight: 600;
     color: #ffffff;
 }
 
 .value {
-    font-size: 40px;
+    //font-size: 48px;
     font-weight: 600;
     color: #ffffff;
 }
@@ -80,18 +80,18 @@ $BACKGROUND_DEFAULT_2: #cfcfcf;
 }
 
 
-@media screen and (max-width: 550px) {
+/*@media screen and (max-width: 550px) {
     .value {
-        font-size: 36px;
+        font-size: 40px;
     }
 }
 
 
 @media screen and (max-width: 400px) {
     .value {
-        font-size: 23px;
+        font-size: 30px;
     }
-}
+}*/
 
 
 /*@mixin is-add($color, $color2) {
