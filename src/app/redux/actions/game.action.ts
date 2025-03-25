@@ -29,5 +29,9 @@ export const setRestartGame = createAction('[GAME] Set Restart Game',
 export const setWinner = createAction('[GAME] Set Winner',
     props<{ isWinner: number }>());
 
+//Show How To Play
+export const setShowHowToPlay = createAction('[GAME] Set Show How To Play',
+    props<{ isShowHowToPlay: boolean }>());
+
 export const setQuantMovements = createAction('[GAME] Set Quant Movements',
     props<{ quantMovements: number }>());

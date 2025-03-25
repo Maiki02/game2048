@@ -7,7 +7,8 @@ export interface Game {
     quantMovements: number,
     isWinner: number, //count of 2048
     isRestart:boolean,
-    isFinished:boolean
+    isFinished:boolean,
+    isShowHowToPlay:boolean,
 }
 
 

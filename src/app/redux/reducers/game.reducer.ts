@@ -59,6 +59,14 @@ const _gameReducer = createReducer(
         };
     }),
 
+    //How to play
+    on(actions.setShowHowToPlay, (state, action) => {
+        return {
+            ...state,
+            isShowHowToPlay: action.isShowHowToPlay
+        };
+    }),
+
     on(actions.setQuantMovements, (state, action) => {
         return {
             ...state,

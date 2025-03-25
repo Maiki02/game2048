@@ -1,0 +1,17 @@
+<div class="background background-opaque" [ngClass]="{'invisible': !wasInside, 'visible': wasInside}"></div>
+<div class="background col-center"  [ngClass]="{'invisible': !wasInside, 'visible': wasInside}">
+
+    <div class="card how-to-play col-init in-card">
+
+        <span class="info in-card">How to play?</span>
+        <span class="more-info in-card">Swipe or use the arrow keys to move the tiles. When two tiles with the same number collide, they merge into one! Reach 2048 to win!</span>
+
+        <div class="actions row-center in-card">
+
+            <button class="action cancel" (click)="close()">Close</button>
+
+        </div>
+        
+    </div>
+
+</div>

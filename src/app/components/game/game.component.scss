@@ -1,8 +1,8 @@
-@import url("./../../shared/styles/flex.scss");
+@import "./../../shared/styles/flex.scss";
 //@import url("./../../shared/styles/vars.scss");
 
 
-.section {
+.section, .footer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,21 +11,35 @@
   margin-top:40px;
 }
 
+.footer{
+  margin-top: 0;
+
+  p{
+    margin:0;
+  }
+}
+
 .container{
   display: flex;
   flex-direction: row;
-  align-items: center;
+  gap: 2rem;
+  width: min(730px, 100%);
 }
 
+
+  .title{
+    color: #b6b6b6;
+    font-size: 4rem;
+    margin: 0;
+    text-align: center;
+  }
+
+/*
 .actions{
   margin-left: 32px;
 }
 
-.title{
-  color: #b6b6b6;
-  font-size: 4rem;
-  margin: 0;
-}
+
 
 
 $GAP_MOBILE: 1rem;
@@ -55,4 +69,4 @@ $GAP_MOBILE: 1rem;
   .section{
     margin-top: 0 !important;
   }
-}
+}*/

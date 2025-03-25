@@ -10,6 +10,9 @@ $COLOR_LETTER_FINISHED: #4c2e2e;
 $BACKGROUND_RESET: #d7d79e;
 $COLOR_LETTER_RESET: #4b4c2e;
 
+$BACKGROUND_HOW_TO_PLAY: #afd7e0;
+$COLOR_LETTER_HOW_TO_PLAY: #2e4c4c;
+
 .background {
   position: fixed;
   top: 0;
@@ -144,6 +147,35 @@ $COLOR_LETTER_RESET: #4b4c2e;
     background: $COLOR_LETTER_WIN;
     color: $BACKGROUND_WINNER;
   }
+}
+
+.card.how-to-play {
+  background: $BACKGROUND_HOW_TO_PLAY;
+
+  .info {
+    margin-top: 48px;
+    padding: 0 16px;
+    font-size: 44px;
+    color: $COLOR_LETTER_HOW_TO_PLAY;
+  }
+
+  .more-info {
+    margin-top: 24px;
+    font-size: 24px;
+    color: $COLOR_LETTER_HOW_TO_PLAY;
+  }
+
+  .action {
+    margin-top: 48px;
+    background: $BACKGROUND_HOW_TO_PLAY;
+    color: $COLOR_LETTER_HOW_TO_PLAY;
+  }
+
+  .action:hover {
+    background: $COLOR_LETTER_HOW_TO_PLAY;
+    color: $BACKGROUND_HOW_TO_PLAY;
+  }
+
 }
 
 
