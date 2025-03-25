@@ -21,17 +21,33 @@
   margin-left: 32px;
 }
 
+.title{
+  color: #b6b6b6;
+  font-size: 4rem;
+  margin: 0;
+}
+
+
+$GAP_MOBILE: 1rem;
+
 @media screen and (max-width:700px){
   .section{
-    margin-top:64px;
+    margin-top:0;
+    height: 100vh;
+    display:flex;
     flex-direction: column;
+    gap: $GAP_MOBILE;
+    margin-bottom: 2rem;
   }
   .container{
+    gap: $GAP_MOBILE;
+    height: 100%;
     flex-direction: column-reverse;
+    justify-content: flex-end;
   }
   .actions{
     margin-left: 0px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
   }
 }
 

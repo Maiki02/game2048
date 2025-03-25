@@ -8,3 +8,13 @@
 body{
     background: #f5f6d7;
 }
+
+.show-on-mobile{
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+    .show-on-mobile{
+        display: flex;
+    }
+}
