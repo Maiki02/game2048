@@ -1,4 +1,4 @@
-import { HostListener, Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   setBoard,
@@ -20,6 +20,7 @@ import { LOCAL_STORAGE } from 'src/app/shared/const/localStorage';
 import { appState } from 'src/app/shared/interfaces/appState.interface';
 import { Cell, CellComplete, Game, Position } from 'src/app/shared/interfaces/game.interface';
 import { ActionsComponent } from '../actions/actions.component';
+import { Subscription } from 'rxjs';
 
 const MARGIN_CELL=10;
 const SIZE_CELL=110;
@@ -34,7 +35,7 @@ const SIZE_CELL_MOBILE=65;
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   public game: Game = INITIAL_GAME_STATE;
   public ANY_BOARD: any[] = ANY_BOARD;
   public BOARD_GAME: CellComplete[] = [];
@@ -43,9 +44,15 @@ export class BoardComponent implements OnInit {
 
   private touchPrevius:any;
 
+  private game$!: Subscription;
+  private board$!: Subscription;
+
   constructor(private store: Store<appState>) {
-    this.store.subscribe((state) => {
-      this.game = state.game;
+    this.game$= this.store.select('game').subscribe((game) => {
+      this.game = game;
+    });
+
+    this.board$= this.store.select('game', 'board').subscribe((board) => {
       this.setBoardGame();
     });
   }
@@ -57,6 +64,11 @@ export class BoardComponent implements OnInit {
     } else {
       this.createGame(4);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.game$?.unsubscribe();
+    this.board$?.unsubscribe();
   }
 
   createGame(numOfRows: number) {
@@ -121,7 +133,9 @@ export class BoardComponent implements OnInit {
 
   //------------------ MOVE TO ------------------//
 
-  moveTo(direction: string) {
+  moveTo(direction: string, event?: KeyboardEvent) {
+    if(event) event.preventDefault();
+
     let isMove: boolean = false;
     let backState: Game = JSON.parse(JSON.stringify(this.game));
     if (direction == 'up' && this.canMoveToUp()) {
@@ -455,14 +469,13 @@ export class BoardComponent implements OnInit {
   /*Escucha los enventos del teclado y ejecuta la acción correspondiente*/
   @HostListener('document:keydown', ['$event'])
   listenerKeyPress(event: KeyboardEvent) {
-    event.preventDefault();
     
     if(!this.isModalOpen()){
       switch (event.key.toLowerCase()) {
-        case 'arrowleft': this.moveTo('left'); break;
-        case 'arrowright': this.moveTo('right'); break;
-        case 'arrowup': this.moveTo('up'); break;
-        case 'arrowdown': this.moveTo('down'); break;
+        case 'arrowleft': this.moveTo('left', event); break;
+        case 'arrowright': this.moveTo('right', event); break;
+        case 'arrowup': this.moveTo('up', event); break;
+        case 'arrowdown': this.moveTo('down', event); break;
         case 'b':
         case 'backspace': this.goBack(); break;
         case 'r': this.restart(); break;
